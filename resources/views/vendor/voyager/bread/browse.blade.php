@@ -8,7 +8,7 @@
             <i class="{{ $dataType->icon }}"></i> {{ $dataType->getTranslatedAttribute('display_name_plural') }}
         </h1>
         @can('add', app($dataType->model_name))
-            <a href="{{ route('voyager.'.$dataType->slug.'.create') }}" class="btn btn-success btn-add-new">
+            <a href="{{ route('voyager.'.$dataType->slug.'.create') }}" class="btn btn-primary btn-add-new">
                 <i class="voyager-plus"></i> <span>{{ __('voyager::generic.add_new') }}</span>
             </a>
         @endcan
@@ -75,7 +75,7 @@
                             </form>
                         @endif
                         <div class="table-responsive">
-                            <table id="dataTable" class="table table-hover">
+                            <table id="dataTable" class="table table-hover ">
                                 <thead>
                                     <tr>
                                         @if($showCheckboxColumn)
@@ -378,11 +378,30 @@
                 var table = $('#dataTable').DataTable({!! json_encode(
                     array_merge([
                         "order" => $orderColumn,
+                        // "responsive"=> true,
                         "language" => __('voyager::datatable'),
                         "columnDefs" => [
                             ['targets' => 'dt-not-orderable', 'searchable' =>  false, 'orderable' => false],
                         ],
-                        "buttons"=> ["excel",  "print","colvis"]
+                        "buttons"=> [
+                            [
+                                'extend'=> 'excelHtml5',
+                                'exportOptions'=> [
+                                    'columns'=> ':visible'
+                                ]
+                            ],
+                            [
+                                'extend'=> 'print',
+                                'exportOptions'=> [
+                                    'columns'=> ':visible'
+                                ]
+                            ],
+                            [
+                                'extend'=> 'colvis',
+                                                                
+                            ],
+                            
+                        ]
                             
                         
    

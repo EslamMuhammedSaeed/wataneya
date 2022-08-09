@@ -15,6 +15,12 @@ use TCG\Voyager\Http\Controllers\Traits\BreadRelationshipParser;
 class NewsletterController extends \TCG\Voyager\Http\Controllers\VoyagerBaseController
 {
     //
+    public function store_user(Request $request){
+        if ( ! Newsletter::isSubscribed($request->email) ) {
+            Newsletter::subscribe($request->email,['FNAME'=>$request->first_name, 'LNAME'=>$request->last_name], 'subscribers');
+        }
+        return redirect()->back();
+    }
     public function store(Request $request)
     {
         if ( ! Newsletter::isSubscribed($request->email) ) {
@@ -31,7 +37,7 @@ class NewsletterController extends \TCG\Voyager\Http\Controllers\VoyagerBaseCont
         $val = $this->validateBread($request->all(), $dataType->addRows);
 
         if ($val->fails()) {
-            return response()->json(['errors' => $val->messages()]);
+            return back()->with(['errors' => $val->messages()]);
         }
 
         if (!$request->has('_validate')) {
@@ -90,10 +96,24 @@ class NewsletterController extends \TCG\Voyager\Http\Controllers\VoyagerBaseCont
     }
     public function destroy(Request $request, $id)
     {
-        $subscriber = \App\Models\Newsletter::where('id',$id)->first();
-        if (  Newsletter::isSubscribed($subscriber->email) ) {
-            Newsletter::unsubscribe($subscriber->email, 'subscribers');
+        // dd($request->ids);
+        if($request->ids){
+            $ids = explode(',',$request->ids);
+            foreach($ids as $element){
+                $subscriber = \App\Models\Newsletter::where('id',$element)->first();
+                if (  Newsletter::isSubscribed($subscriber->email) ) {
+                    Newsletter::unsubscribe($subscriber->email, 'subscribers');
+                }
+            }
+           
+
+        }else{
+            $subscriber = \App\Models\Newsletter::where('id',$id)->first();
+            if (  Newsletter::isSubscribed($subscriber->email) ) {
+                Newsletter::unsubscribe($subscriber->email, 'subscribers');
+            }
         }
+        
         $slug = $this->getSlug($request);
 
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();

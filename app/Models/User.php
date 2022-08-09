@@ -10,8 +10,9 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Organisation;
 
-class User extends \TCG\Voyager\Models\User
+class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
 {
     use HasApiTokens;
     use HasFactory;
@@ -26,7 +27,7 @@ class User extends \TCG\Voyager\Models\User
      * @var string[]
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','category','documented_at','role_id'
     ];
 
     /**
@@ -58,4 +59,17 @@ class User extends \TCG\Voyager\Models\User
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function organisation()
+    {
+        return $this->hasOne(Organisation::class);
+    }
+    public function individual()
+    {
+        return $this->hasOne(Individual::class);
+    }
+    public function orphanage()
+    {
+        return $this->hasOne(Orphanage::class);
+    }
 }
