@@ -78,8 +78,8 @@ Route::prefix('users')->middleware(['auth:sanctum', 'verified'])->name('users.')
 
     Route::get('/orphanage/create',[App\Http\Controllers\Users\OrphanageController::class,'create'])->name('orphanage.create');
     Route::post('/orphanage/store',[App\Http\Controllers\Users\OrphanageController::class,'store'])->name('orphanage.store');
-  
- 
+
+
     Route::get('/orphanage/edit',[App\Http\Controllers\Users\OrphanageController::class,'edit'])->name('orphanage.edit');
     Route::put('/orphanage/update',[App\Http\Controllers\Users\OrphanageController::class,'update'])->name('orphanage.update');
 
@@ -101,10 +101,18 @@ Route::prefix('users')->middleware(['auth:sanctum', 'verified'])->name('users.')
         }else if(Auth::user()->category == 'organization'){
             return redirect()->route('users.organisation.edit');
         }else{
-            return redirect()->route('dashboard');  
+            return redirect()->route('dashboard');
         }
     })->name('edit');
-    
+
+    Route::get('/consultation',function() {
+        return view('users.consultation_main');
+    });
+    Route::get('/consultation/chat',function() {
+        return view('users.consultation_chat');
+    });
+
+
 });
 
 

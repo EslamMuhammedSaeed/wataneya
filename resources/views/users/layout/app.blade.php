@@ -28,7 +28,7 @@
       <link href="https://fonts.googleapis.com/css?family=Cairo:400,700" rel="stylesheet">
       <link rel="stylesheet" href="{{asset('dist/css/adminlte_rtl.min.css')}}">
       <link rel="stylesheet" href="{{asset('plugins/bs-stepper/css/bs-stepper.min.css')}}">
-
+      <link rel="stylesheet" href="{{asset('css/all.min.css')}}">
 
       {{-- <link rel="stylesheet" href="{{ voyager_asset('css/app.css') }}">
       <link rel="stylesheet" href="{{ voyager_asset('css/rtl.css') }}"> --}}
@@ -51,7 +51,7 @@
               margin: 0 10px;
               text-align: center;
           }
-        } 
+        }
         @media (max-width:766px){
           .br-img{
             height: 40px;
@@ -120,10 +120,10 @@
           align-items: center;
         }
         .user-name{
-          
+
             font-family: 'Almarai', sans-serif !important;
             /* font-size: 1rem;*/
-            font-weight: bold; 
+            font-weight: bold;
 
         }
         .nav-treeview a{
@@ -136,12 +136,11 @@
           margin-top: 10px;
         }
 
-        
+
       </style>
-  
+
   @yield('css')
-      
-  
+
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -161,7 +160,7 @@
           <a class="nav-link d-flex align-items-center justify-content-center" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars" style="font-size: 20px;"></i></a>
         </li>
         <li class="nav-item">
-          <a href="{{url(/)}}">
+          <a href="{{url('/')}}">
             <img src="{{asset('img/wataneya_logo_middle.png')}}"   class="brand-image br-img">
             {{-- <span class="tx-sm" style="font-weight: 700">--}}
           </a>
@@ -169,8 +168,8 @@
       </ul>
 
       <!-- Right navbar links -->
-      <ul class="navbar-nav nav-end-items">   
-      
+      <ul class="navbar-nav nav-end-items">
+
 
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">
@@ -179,8 +178,8 @@
             {{-- <span class="badge badge-warning navbar-badge" style="background-color: #79d700;color:white;font-size:11px">15</span> --}}
           </a>
           <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-            
-            
+
+
             <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
           </div>
         </li>
@@ -201,10 +200,10 @@
                   @csrf
                   <div class="input-logout text-white " id="navbardrop"  >
                     <input type="submit" value="تسجيل الخروج" style="color :rgb(133, 133, 133) ; border:0;font-size:15px;width:100%">
-                    
+
                   </div>
                 </form>
-                
+
               </div>
             </li>
             <div class="container-fluid  mx-0 nav-header text-right text-white">
@@ -212,21 +211,21 @@
                  <p class="ml-2 user-name" style="">{{Auth::user()->name}}</p>
               </a> --}}
               <img class="mb-0 mb-lg-0" width="50px" height="50px" src="{{ filter_var(Auth::user()->avatar, FILTER_VALIDATE_URL) ? Auth::user()->avatar : Voyager::image( Auth::user()->avatar ) }}" alt="" style="border-radius:50%; border: 2px solid #71b7c0">
-    
+
             </div>
-           
+
           </ul>
         </li>
-        
+
       </ul>
     </nav>
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
 
-  
+
       @include('users.layout.inc._sidebar_rtl')
-    
+
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -240,8 +239,8 @@
     </aside>
     <!-- /.control-sidebar -->
 
-  
-    
+
+
   </div>
 <!-- ./wrapper -->
   {{-- <script type="text/javascript" src="{{ voyager_asset('js/app.js') }}"></script> --}}
