@@ -13,6 +13,11 @@ section .chat-box {
     width: 100%;
     margin-bottom: 30px;
 }
+section .chat-box .image {
+    display: block;
+    width: 70px;
+    text-align: center;
+}
 section .chat-box .image img {
     width: 50px;
     border-radius: 50%;
@@ -20,8 +25,6 @@ section .chat-box .image img {
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
-    display: block;
-    margin: 0 auto;
 }
 section .chat-box .image {
     margin-right: 15px;

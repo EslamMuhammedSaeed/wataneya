@@ -13,15 +13,18 @@ section .chat-box {
     width: 100%;
     margin-bottom: 30px;
 }
+section .chat-box .image {
+    display: block;
+    width: 70px;
+    text-align: center;
+}
 section .chat-box .image img {
     width: 50px;
     border-radius: 50%;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
-    -o-border-radius: 50%;
-    display: block;
-    margin: 0 auto;
+    -o-border-radius: 50%
 }
 section .chat-box .image {
     margin-right: 15px;
@@ -33,7 +36,8 @@ section .chat-box .image span {
     font-size: 14px;
     font-weight: 400;
     text-align: center;
-    display: block;
+    display: flex;
+    justify-content: center;
 }
 section .chat-box .text-box {
     width: 799px;

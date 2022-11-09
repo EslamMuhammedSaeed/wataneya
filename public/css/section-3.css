@@ -3,10 +3,8 @@
     --main-width: 1035px;
 }
 .content-wrapper {
-    margin: 0;  
     background-color: var(--main-color);
-    height: calc(100vh - 77px);
-    padding: 35px 150px 50px 30px;
+    padding: 35px 200px 50px 0;
 }
 .content-wrapper .container {
     direction: ltr;
@@ -143,13 +141,10 @@
 .evaluation table {
     height: calc(95% - 37px);
     width: 100%;
-    direction: rtl;
-    position: relative;
     border-bottom: 2px solid #C4C4C4;
 }
 .evaluation table thead {
     border-bottom: 2px solid #C4C4C4;
-    direction: rtl;
 }
 .evaluation table thead tr td {
     font-size: 15px;
@@ -179,6 +174,27 @@
     font-weight: 400;
     line-height: 20.58px;
 }
+.evaluation table tbody tr td:nth-child(2) div {
+    display: flex;
+    justify-content: center;
+}
+.evaluation table tbody tr td:nth-child(2) div div {
+    width: 17px;
+    height: 17px;
+    border-radius: 1.42px;
+    -webkit-border-radius: 1.42px;
+    -moz-border-radius: 1.42px;
+    -ms-border-radius: 1.42px;
+    -o-border-radius: 1.42px;
+    background-color: #333333;
+    margin-right: 10px;
+}
+.evaluation table tbody tr td:nth-child(2) div span {
+    font-weight: 400;
+    font-size: 14.24px;
+    line-height: 14.24px;
+    letter-spacing: 0.14px;
+}
 .evaluation table tbody tr .second {
     text-align: center;
     flex: 2;
@@ -191,10 +207,12 @@
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
     -o-border-radius: 2px;
-    font-size: 9px;
+    font-size: 14px;
     font-weight: 400;
     border: none;
     padding: 0;
+    line-height: 20px;
+    letter-spacing: 0.2px;
     box-shadow: 0 4px 0 rgba(69,69,69,.11);
     color: white;
 }
@@ -206,7 +224,7 @@
     background-color: #F61212;
 }
 .evaluation table tbody tr .second button:last-child i {
-    margin-right: 5px;
+    margin: 0 0 0 10px;
 }
 .evaluation table tbody tr td:last-child {
     border-left: 1px solid #C4C4C4;
@@ -219,16 +237,17 @@
 .new-evaluation button {
     color: white;
     box-shadow: 0 4px 0 rgba(69,69,69,.11);
-    background-color: #41B669;
+    background-color: #DBB128;
     border-radius: 4px;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     -ms-border-radius: 4px;
     -o-border-radius: 4px;
-    width: 200px;
+    width: 263px;
     height: 42px;
-    font-size: 12px;
+    font-size: 18px;
     line-height: 20px;
+    font-weight: 400;
     border: none;
     padding: 0;
 }

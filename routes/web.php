@@ -111,6 +111,16 @@ Route::prefix('users')->middleware(['auth:sanctum', 'verified'])->name('users.')
     Route::get('/consultation/chat',function() {
         return view('users.consultation_chat');
     });
+    Route::get('/consultation/en',function() {
+        return view('users.consultation_en');
+    });
+    Route::get('/consultation/admin',function() {
+        return view('users.consultation_admin');
+    });
+    Route::get('/consultation/admin/chat',function() {
+        return view('users.consultation_admin_chat');
+    });
+
 
 
 });
