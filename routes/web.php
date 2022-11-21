@@ -120,9 +120,15 @@ Route::prefix('users')->middleware(['auth:sanctum', 'verified'])->name('users.')
     Route::get('/consultation/admin/chat',function() {
         return view('users.consultation_admin_chat');
     });
-
-
-
+    Route::get('/consultation/about',function() {
+        return view('users.consultation_about');
+    });
+    Route::get('/consultation/request',function() {
+        return view('users.consultation_request');
+    });
+    Route::get('/consultation/stepper',function() {
+        return view('users.consultation_stepper');
+    });
 });
 
 
