@@ -161,7 +161,7 @@
           <a class="nav-link d-flex align-items-center justify-content-center" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars" style="font-size: 20px;"></i></a>
         </li>
         <li class="nav-item">
-          <a href="{{url(/)}}">
+          <a href="{{url('/')}}">
             <img src="{{asset('img/wataneya_logo_middle.png')}}"   class="brand-image br-img">
             {{-- <span class="tx-sm" style="font-weight: 700">--}}
           </a>

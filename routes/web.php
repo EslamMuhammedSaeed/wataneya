@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\ConsultationController;
+use App\Models\Consultation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -106,6 +108,17 @@ Route::prefix('users')->middleware(['auth:sanctum', 'verified'])->name('users.')
     })->name('edit');
     
 });
+
+Route::get('admin/consultations/new',[ConsultationController::class,'new'])->name('admin.consultations.new');
+Route::get('admin/consultations/rejected',[ConsultationController::class,'rejected'])->name('admin.consultations.rejected');
+Route::get('admin/consultations/assigned',[ConsultationController::class,'assigned'])->name('admin.consultations.assigned');
+
+
+Route::get('admin/consultations/{consultation}/consultants',[ConsultationController::class,'consultants'])->name('admin.consultations.consultants');
+Route::get('admin/consultations/{consultation}/consultants/assign/{consultant}',[ConsultationController::class,'assignConsultant'])->name('admin.consultations.consultants.assign');
+Route::post('admin/consultations/{consultation}/reject',[ConsultationController::class,'reject'])->name('admin.consultations.reject');
+Route::get('admin/consultations/{consultation}/close',[ConsultationController::class,'close'])->name('admin.consultations.close');
+Route::get('admin/consultations/{consultation}/manage',[ConsultationController::class,'manage'])->name('admin.consultations.manage');
 
 
 Route::group(['prefix' => 'admin'], function () {

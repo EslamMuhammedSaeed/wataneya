@@ -186,6 +186,19 @@
         .voyager .breadcrumb a{
             color:#22A7F0;
         }
+        .app-container .content-container .side-menu .navbar-nav li.dropdown ul li a {
+            height: 44px;
+            line-height: 44px;
+            vertical-align: middle;
+            padding: 0 1.2em;
+            padding: 0;
+        }
+        .ps--focus>.ps__rail-x, .ps--focus>.ps__rail-y, .ps--scrolling-x>.ps__rail-x, .ps--scrolling-y>.ps__rail-y, .ps:hover>.ps__rail-x, .ps:hover>.ps__rail-y {
+            opacity: .6;
+            display: block !important;
+            left : 0 !important;
+            right: 234px !important;
+        }
     </style>
 
     @if(!empty(config('voyager.additional_css')))<!-- Additional CSS -->

@@ -59,43 +59,89 @@
 
 @section('content')
     <div class="page-content">
-        <h4 class='ml-4 mb-4' style="color:#555;">أعداد المستخدمين</h4>
-        <div class="col-lg-4 col-12">
-            <div class="small-box bg-primary">
-                <div class="inner">
-                    <h3>{{App\Models\Individual::count()}}</h3>
-                    <p>أفراد</p>
+        <div style="background: white;border-radius:5px;padding:25px 20px 0px 20px;box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);margin-bottom:15px">
+            <h4 class='ml-4 mb-4' style="color:#555;">أعداد المستخدمين</h4>
+            <div class="row" style="margin: 30px 10px 0px 10px;">
+                <div class="col-lg-4 col-12">
+                    <div class="small-box bg-primary">
+                        <div class="inner">
+                            <h3>{{App\Models\Individual::count()}}</h3>
+                            <p>أفراد</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-person-add"></i>
+                        </div>
+                        <a href="{{url('admin/individuals')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-left"></i></a>
+                    </div>
                 </div>
-                <div class="icon">
-                    <i class="ion ion-person-add"></i>
+                <div class="col-lg-4 col-12">
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>{{App\Models\Organisation::count()}}</h3>
+                            <p>مؤسسات</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <a href="{{url('admin/organisations')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-left"></i></a>
+                    </div>
                 </div>
-                <a href="{{url('admin/individuals')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-left"></i></a>
+                <div class="col-lg-4 col-12">
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3>{{App\Models\Orphanage::count()}}</h3>
+                            <p>دور رعاية</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-home"></i>
+                        </div>
+                        <a href="{{url('admin/orphanages')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-left"></i></a>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-lg-4 col-12">
-            <div class="small-box bg-success">
-                <div class="inner">
-                    <h3>{{App\Models\Organisation::count()}}</h3>
-                    <p>مؤسسات</p>
+        <div style="background: white;border-radius:5px;padding:25px 20px 0px 20px;box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);">
+            <h4 class='ml-4 mb-4' style="color:#555;">الاستشارات</h4>
+            <div class="row" style="margin: 30px 10px;">
+                <div class="col-lg-4 col-12">
+                    <div class="small-box bg-primary">
+                        <div class="inner">
+                            <h3>{{App\Models\Consultation::whereNull('admin_rejected_at')->whereNull('admin_approved_at')->orWhere('consultant_id',null)->count()}}</h3>
+                            <p>استشارات جديدة</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-plus-circle"></i>
+                        </div>
+                        <a href="{{route('admin.consultations.new')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-left"></i></a>
+                    </div>
                 </div>
-                <div class="icon">
-                    <i class="fas fa-building"></i>
+                <div class="col-lg-4 col-12">
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>{{App\Models\Consultation::whereNull('admin_rejected_at')->whereNotNull('admin_approved_at')->whereNotNull('consultant_id')->where('status','!=','closed')->count()}}</h3>
+                            <p>استشارات جارية</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <a href="{{route('admin.consultations.assigned')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-left"></i></a>
+                    </div>
                 </div>
-                <a href="{{url('admin/organisations')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-left"></i></a>
+                <div class="col-lg-4 col-12">
+                    <div class="small-box bg-danger">
+                        <div class="inner">
+                            <h3>{{App\Models\Consultation::whereNotNull('admin_rejected_at')->orWhere('consultant_rejected_at','!=',null)->count()}}</h3>
+                            <p>استشارات مرفوضة</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-trash"></i>
+                        </div>
+                        <a href="{{route('admin.consultations.rejected')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-left"></i></a>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-lg-4 col-12">
-            <div class="small-box bg-warning">
-                <div class="inner">
-                    <h3>{{App\Models\Orphanage::count()}}</h3>
-                    <p>دور رعاية</p>
-                </div>
-                <div class="icon">
-                    <i class="ion ion-home"></i>
-                </div>
-                <a href="{{url('admin/orphanages')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-left"></i></a>
-            </div>
-        </div>
+        
         {{-- @include('voyager::alerts')
         @include('voyager::dimmers') --}}
         {{-- <div class="analytics-container">
