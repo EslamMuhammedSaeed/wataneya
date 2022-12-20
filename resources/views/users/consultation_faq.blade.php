@@ -1,11 +1,12 @@
 @extends('users.layout.app')
-        <!--nav-->
     <!--nav-->
-    <!--start main section-->
 
-    @section('css')
+ <!--nav-->
+ <!--start main section-->
+ @section('css')
     <link rel="stylesheet" href="{{ asset('css/Request.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/Stepper.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/FAQS.css') }}">
+
 
 
     <style>
@@ -123,7 +124,6 @@
         .alert{
           margin-top: 10px;
         }
-
       </style>
 
   @endsection
@@ -133,70 +133,88 @@
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content">
-      <div class="container ">
+        <div class="FAQS p-5">
+            <div class="text">
+              <h4 class="mx-2">FAQ'S</h4>
+              <br>
+              <h1 class="text-bold ">الأسئلة الأكثر شيوعًا</h1>
+              <h4>لديك أي أسئلة؟ وطنية هنا للمساعدة على اسئلتك</h4>
 
-            <div class="stepper d-flex flex-column mt-5 ml-2 mb-5">
-                <h1 class="head">تعليمات استخدام خدمة تقديم الاستشارات</h1>
-                <div class="d-flex mb-1 py-4">
-                  <div class="index d-flex flex-column pr-4 align-items-center">
-                    <div class="rounded-circle py-2 px-3 bg-primary text-white mb-1"><h1>1</h1></div>
-                    <div class="line "></div>
+              <div>
+                <form action="{{ Route('users.consultation.search') }}" method="GET" role="search" id="search">
 
-                  </div>
-                  <div class="steps">
-                    <h5 class="text-dark text-bold">اختر  نوع الاستشارة</h5>
-                    <p class="lead text-muted pb-3">قم باختيار نوع استشارتك من مجموعة الاستشارات المعروضة من خلال قراءة شرح وتفاصيل كل استشارة لمعرفة فئة استشارتك.</p>
-                  </div>
-                </div>
-                <div class="d-flex mb-1 py-4">
-                  <div class="index d-flex flex-column pr-4 align-items-center">
-                    <div class="rounded-circle py-2 px-3 bg-primary text-white font-size-500 mb-1"><h1>2</h1></div>
-                    <div class="line  "></div>
-                  </div>
-                  <div class="steps">
-                    <h5 class="text-dark text-bold"> اطلب استشارة   </h5>
-                    <p class="lead text-muted pb-3">  بعد اختيار نوع الاستشارة، اضغط زر طلب استشارة الموجود أسفل بطاقة الشرح. </p>
-                  </div>
-                </div>
-                <div class="d-flex mb-1 py-4">
-                  <div class="index d-flex flex-column pr-4 align-items-center">
-                    <div class="rounded-circle py-2 px-3 bg-primary text-white mb-1"><h1>3</h1></div>
-                    <div class="line  "></div>
-                  </div>
-                  <div class="steps">
-                    <h5 class="text-dark text-bold">  الأسئلة الأكثر شيوعًا </h5>
-                    <p class="lead text-muted pb-3"> بعد الضغط على زر طلب استشارة سيتم توجيهك إلى صفحة الأسئلة الأكثر شيوعًا. تصفح الأسئلة المعروضة وقم باستخدام محرك البحث لحصر الأسئلة. في حالم لم تجد إجابة على سؤالك قم بتقديم طلب استشارة جديدة.  </p>
-                  </div>
-                </div>
-                <div class="d-flex mb-1 py-4">
-                  <div class="index d-flex flex-column pr-4 align-items-center">
-                    <div class="rounded-circle py-2 px-3 bg-primary text-white mb-1"><h1>4</h1></div>
-                    <div class="line  "></div>
-                  </div>
-                  <div class="steps">
-                    <h5 class="text-dark text-bold"> املأ طلبك</h5>
-                    <p class="lead text-muted pb-3"> قم بكتابة استشارتك في المربع المخصص. كما يمكنك إضافة ملفات أو صور إذا أردت من خلال الضغط على “إضافة مرفق”.</p>
-                  </div>
-                </div>
-                <div class="d-flex mb-1 py-4">
-                  <div class="index d-flex flex-column pr-4 align-items-center">
-                    <div class="rounded-circle py-2 px-3 bg-primary text-white mb-1"><h1>5</h1></div>
-                  </div>
-                  <div class="steps">
-                    <h5 class="text-dark text-bold">الأن يمكنك متابعة استشارتك</h5>
-                    <p class="lead text-muted pb-3"> يمكنك متابعة  حالة استشارتك الجارية و تصفح استشاراتك السابقة من خلال صفحتك الشخصية باستخدامالقائمة الجانبية على اليمين والذهاب إلى “الاستشارات”.    </p>
-                  </div>
-                </div>
-                <button class="btnInfo ">
-                 <a href="{{ url('/users/consultation/faq') }}" style="color:black">
-                    رجوع لطلب استشارة </a>
-                </button>
+                <div class="dropdown">
+                    <select class="btn searchBtn dropdown-toggle" class="btn searchBtn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="">
+                      <option>الأقسام</option>
+                         @foreach ($data as $item)
+                         <option value=" {{ $item->id  }}">{{ $item->name }}</option>
+                         {{-- <a class="dropdown-item" href="{{ route('users.consultation.index',['category'=>$item->name]) }}"></a> --}}
 
+                        @endforeach
+                    </select>
+                </div>
 
+                 <input type="search" class="form-control" aria-label="Small" name="search" value="" aria-describedby="inputGroup-sizing-sm" placeholder="ابحث هنا .. ">
+              </div>
+            </form>
+
+            <div class="container btn">
+            <div class="send w-50 my-5">
+                <button class="btn w-50" type="submit" form="search" value="Submit">ابحث</button>
+                </div>
+            </div>
               </div>
 
+          </div>
+
+  <div class="container">
+
+            <div class="accordion">
+                @foreach ($cfaq as $key)
+              <div class="accordion-item">
+                <div class="accordion-item-header ">
+                  <div class="circule"></div>
+                  <h1 class="index">{{ $key->id }}</h1>
+
+                    {{ $key->title }}
+
+                </div>
+
+                <div class="accordion-item-body">
+
+                  <div class="accordion-item-body-content">
+                     {!! $key->content !!}   </div>
+                </div>
+              </div>
+              @endforeach
+
+
             </div>
+
+
+          </div>
+          <div class="d-flex justify-content-center">
+
+            {{ $cfaq->links() }}
+          </div>
+
+          <div class="moreQ my-5">
+
+            <div>
+                    <p class="text-bold"> مازال لديك أسئلة؟   </p >
+                <h6 >في حالة لم يتم الإجابة على أسئلتك، قم بطلب استشارة جديدة من هنا </h6>
+
+            </div>
+                <div class="btn my-5">
+                    <button class="btnRequest">
+                     <a href="{{ url('/users/consultation/request/create') }}" style="color:white">
+                        طلب استشارة</a>
+                    </button>
+                  </div>
+        </div>
+      </div>
       <!-- /.content-wrapper -->
+
 
       @endsection
 
@@ -217,11 +235,9 @@
   <!-- InputMask -->
   <script src="./plugins/jquery-ui/jquery-ui.min.js"></script>
 
-
   <script src="./plugins/fullcalendar/main.js"></script>
   <script src="./plugins/bs-stepper/js/bs-stepper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-  <script src="./FAQ'S.js"></script>
-
+  <script src="{{ asset('js/FAQS.js') }}"></script>
 
   @endsection

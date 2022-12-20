@@ -218,8 +218,12 @@
             </div>
 
              <div class="btn float-start py-3">
-              <button class="btnInfo"> تعليمات طلب استشارة </button>
-              <button class="btnRequest">طلب استشارة</button>
+              <button class="btnInfo">
+                <a href="{{ url('/users/consultation/stepper') }}" style="color:black">تعليمات طلب استشارة</a>
+              </button>
+              <button class="btnRequest">
+                <a href="{{ url('/users/consultation/faq') }}" style="color:black">طلب استشارة</a>
+              </button>
             </div>
           </div>
 
@@ -313,8 +317,12 @@
         </div>
 
          <div class="btn float-start py-3">
-          <button class="btnInfo"> تعليمات طلب استشارة </button>
-          <button class="btnRequest">طلب استشارة</button>
+            <button class="btnInfo">
+                <a href="{{ url('/users/consultation/stepper') }}" style="color:black">تعليمات طلب استشارة</a>
+              </button>
+              <button class="btnRequest">
+                <a href="{{ url('/users/consultation/faq') }}" style="color:black">طلب استشارة</a>
+              </button>
         </div>
       </div>
 
@@ -367,8 +375,12 @@
     </div>
 
      <div class="btn float-start py-3">
-      <button class="btnInfo"> تعليمات طلب استشارة </button>
-      <button class="btnRequest">طلب استشارة</button>
+        <button class="btnInfo">
+            <a href="{{ url('/users/consultation/stepper') }}" style="color:black">تعليمات طلب استشارة</a>
+          </button>
+          <button class="btnRequest">
+            <a href="{{ url('/users/consultation/faq') }}" style="color:black">طلب استشارة</a>
+          </button>
     </div>
     </div>
 
@@ -461,8 +473,12 @@
             </div>
 
             <div class="btn float-start py-3">
-              <button class="btnInfo"> تعليمات طلب استشارة </button>
-              <button class="btnRequest">طلب استشارة</button>
+                <button class="btnInfo">
+                    <a href="{{ url('/users/consultation/stepper') }}" style="color:black">تعليمات طلب استشارة</a>
+                  </button>
+                  <button class="btnRequest">
+                    <a href="{{ url('/users/consultation/faq') }}" style="color:black">طلب استشارة</a>
+                  </button>
             </div>
             </div>
 
@@ -524,8 +540,12 @@
                     </div>
 
             <div class="btn float-start py-3">
-              <button class="btnInfo"> تعليمات طلب استشارة </button>
-              <button class="btnRequest">طلب استشارة</button>
+                <button class="btnInfo">
+                    <a href="{{ url('/users/consultation/stepper') }}" style="color:black">تعليمات طلب استشارة</a>
+                  </button>
+                  <button class="btnRequest">
+                    <a href="{{ url('/users/consultation/faq') }}" style="color:black">طلب استشارة</a>
+                  </button>
             </div>
             </div>
 
@@ -616,8 +636,12 @@
             </div>
 
             <div class="btn float-start py-3">
-            <button class="btnInfo"> تعليمات طلب استشارة </button>
-            <button class="btnRequest">طلب استشارة</button>
+                <button class="btnInfo">
+                    <a href="{{ url('/users/consultation/stepper') }}" style="color:black">تعليمات طلب استشارة</a>
+                  </button>
+                  <button class="btnRequest">
+                    <a href="{{ url('/users/consultation/faq') }}" style="color:black">طلب استشارة</a>
+                  </button>
             </div>
             </div>
 

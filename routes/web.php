@@ -1,7 +1,12 @@
 <?php
 
 use App\Http\Controllers\Admin\ConsultationController;
+use App\Http\Controllers\Users\UserConsultationController;
+use App\Http\Controllers\Users\RequestController;
+use App\Http\Controllers\Users\SearchController;
+use App\Http\Controllers\Users\RepliesController;
 use App\Models\Consultation;
+use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -107,12 +112,12 @@ Route::prefix('users')->middleware(['auth:sanctum', 'verified'])->name('users.')
         }
     })->name('edit');
 
-    Route::get('/consultation',function() {
+/*     Route::get('/consultation/main',function() {
         return view('users.consultation_main');
-    });
-    Route::get('/consultation/chat',function() {
+    }); */
+/*     Route::get('/consultation/chat',function() {
         return view('users.consultation_chat');
-    });
+    }); */
     Route::get('/consultation/en',function() {
         return view('users.consultation_en');
     });
@@ -125,13 +130,37 @@ Route::prefix('users')->middleware(['auth:sanctum', 'verified'])->name('users.')
     Route::get('/consultation/about',function() {
         return view('users.consultation_about');
     });
-    Route::get('/consultation/request',function() {
-        return view('users.consultation_request');
-    });
+
+    Route::get('/consultation/request/create',[RequestController::class,'create'])->name('consultation.create');
+    Route::post('/consultation/request/store',[RequestController::class,'store'])->name('consultation.store');
+    Route::get('/consultation/main',[RequestController::class,'index'])->name('consultation.index');
+    Route::get('/consultation/main/status/{id}',[RequestController::class,'status']);
+
+    Route::get('/consultation/chat/{id}',[RepliesController::class,'index'])->name('consultation.chat');
+    Route::get('/consultation/reply/{id}',[RepliesController::class,'reply'])->name('consultation.reply');
+    Route::post('/consultation/chat/store',[RepliesController::class,'store']);
+
     Route::get('/consultation/stepper',function() {
         return view('users.consultation_stepper');
     });
+
+    // Route::get('/consultation/faq',function() {
+    //     return view('users.consultation_faq');
+    // });
+
+/*   Route::resource('consultation', UserConsultationController::class)
+    ->only(['index','edit', 'store', 'update','destroy'])
+    ->middleware(['auth', 'verified']); */
+
 });
+
+
+/* Route::post('users/consultation/{reques}', function ($request) {
+    ->name('consultation.store')
+}); */
+
+Route::get('users/consultation/faq',[SearchController::class,'index'])->name('users.consultation.faq');
+Route::get('users/consultation/search',[SearchController::class,'search'])->name('users.consultation.search');
 
 Route::get('admin/consultations/new',[ConsultationController::class,'new'])->name('admin.consultations.new');
 Route::get('admin/consultations/rejected',[ConsultationController::class,'rejected'])->name('admin.consultations.rejected');

@@ -13,8 +13,8 @@ input{
     position: relative;
     max-width: 205px;
     margin: 10px auto;
-   
-   
+
+
 }
 
 .avatar-upload .avatar-edit {
@@ -57,10 +57,10 @@ input{
 
 
 
-        
-        
-        
-       
+
+
+
+
 .avatar-upload .avatar-preview {
   width: 192px;
   height: 192px;
@@ -128,23 +128,23 @@ input.form-custom.error{
 }
 
  </style>
-     
+
  @endsection
  @section('content')
- 
-     
- 
+
+
+
  <main class="pt-5 pb-5">
     {{-- @if ($errors->any())
     <div  style="margin-top: 100px">
         @foreach ($errors->all() as $error)
         <div class="alert alert-danger  mx-4 mb-2">
-                
+
                    {{ $error }}
-            
+
         </div>
         @endforeach
-    </div>    
+    </div>
     @endif --}}
 
  </main>
@@ -155,10 +155,8 @@ input.form-custom.error{
 
 
     <!--start js files-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-   
+
+
 @endsection
 @section('js')
 <script>
@@ -174,7 +172,7 @@ input.form-custom.error{
         var img= $("#imageUpload").val();
     }
     console.log(img);
-    
+
     function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();

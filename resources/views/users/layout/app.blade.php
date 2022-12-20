@@ -135,9 +135,16 @@
         .alert{
           margin-top: 10px;
         }
-
-
       </style>
+
+
+      <style>
+        .btn:not(:disabled):not(.disabled){
+            padding: 0px !important;
+            margin: 0px !important;
+        }
+      </style>
+
 
   @yield('css')
 
@@ -262,7 +269,18 @@
 
   <script src="{{asset('plugins/fullcalendar/main.js')}}"></script>
   <script src="{{asset('plugins/bs-stepper/js/bs-stepper.min.js')}}"></script>
+  {{-- <script src="{{asset('dist/js/jquery-3.6.0.min.js')}}"></script> --}}
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  {{--<script>src="//cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+  <script>
+      $(document).ready(function() {
+       $( '#mywataneya2' ).wataneya2;
+         } );
+  </script>--}}
 
 
 
