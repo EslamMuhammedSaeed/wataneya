@@ -31,6 +31,34 @@ class RequestController extends Controller
         //dd($userconsultations);
         return view('users.consultation_main', compact('userconsultations'));
     }
+    public function newConsultations()
+    {
+        $user=Auth::user();
+        $userconsultations = Consultation::where('user_id', $user->id)->where('status', 'submitted')->orderBy('id','desc')->simplePaginate(2);
+        //dd($userconsultations);
+        return view('users.consultation_main', compact('userconsultations'));
+    }
+    public function closedConsultations()
+    {
+        $user=Auth::user();
+        $userconsultations = Consultation::where('user_id', $user->id)->where('status', 'closed')->orderBy('id','desc')->simplePaginate(2);
+        //dd($userconsultations);
+        return view('users.consultation_main', compact('userconsultations'));
+    }
+    public function assignedConsultations()
+    {
+        $user=Auth::user();
+        $userconsultations = Consultation::where('user_id', $user->id)->where('status', 'assigned')->orderBy('id','desc')->simplePaginate(2);
+        //dd($userconsultations);
+        return view('users.consultation_main', compact('userconsultations'));
+    }
+    public function rejectedConsultations()
+    {
+        $user=Auth::user();
+        $userconsultations = Consultation::where('user_id', $user->id)->where('status', 'rejected')->orderBy('id','desc')->simplePaginate(2);
+        //dd($userconsultations);
+        return view('users.consultation_main', compact('userconsultations'));
+    }
 
 
     public function create()

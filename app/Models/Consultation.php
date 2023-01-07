@@ -25,4 +25,8 @@ class Consultation extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function consultant()
+    {
+        return $this->belongsTo(Consultant::class);
+    }
 }

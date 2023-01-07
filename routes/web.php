@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\Admin\ConsultationController;
 use App\Http\Controllers\Users\UserConsultationController;
+use App\Http\Controllers\Consultants\ConsultantController;
 use App\Http\Controllers\Users\RequestController;
 use App\Http\Controllers\Users\SearchController;
 use App\Http\Controllers\Users\RepliesController;
+use App\Http\Controllers\Consultants\RepliesConsultantController;
 use App\Models\Consultation;
 use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
@@ -12,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
+use App\Http\Middleware\IsConsultant;
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -59,7 +62,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/test', function () {
     return view('login-test2');
 });
 
-Route::middleware(['auth:sanctum', 'verified','documented'])->get('/dashboard', function () {
+Route::middleware(['auth:sanctum', 'verified','documented', 'redirect.consultant'])->get('/dashboard', function () {
     return view('dashboard_main');
 })->name('dashboard');
 
@@ -71,7 +74,7 @@ Route::prefix('newsletter')->name('newsletter.')->group(function () {
     Route::get('/create',[App\Http\Controllers\NewsletterController::class,'createCampaign'])->name('create');
 
 });
-Route::prefix('users')->middleware(['auth:sanctum', 'verified'])->name('users.')->group(function () {
+Route::prefix('users')->middleware(['auth:sanctum', 'verified', 'redirect.consultant'])->name('users.')->group(function () {
     Route::get('/organisation/create',[App\Http\Controllers\Users\OrganisationController::class,'create'])->name('organisation.create');
     Route::post('/organisation/store',[App\Http\Controllers\Users\OrganisationController::class,'store'])->name('organisation.store');
 
@@ -134,6 +137,10 @@ Route::prefix('users')->middleware(['auth:sanctum', 'verified'])->name('users.')
     Route::get('/consultation/request/create',[RequestController::class,'create'])->name('consultation.create');
     Route::post('/consultation/request/store',[RequestController::class,'store'])->name('consultation.store');
     Route::get('/consultation/main',[RequestController::class,'index'])->name('consultation.index');
+    Route::get('/consultation/new',[RequestController::class,'newConsultations'])->name('consultation.new');
+    Route::get('/consultation/closed',[RequestController::class,'closedConsultations'])->name('consultation.closed');
+    Route::get('/consultation/assigned',[RequestController::class,'assignedConsultations'])->name('consultation.assigned');
+    Route::get('/consultation/rejected',[RequestController::class,'rejectedConsultations'])->name('consultation.rejected');
     Route::get('/consultation/main/status/{id}',[RequestController::class,'status']);
 
     Route::get('/consultation/chat/{id}',[RepliesController::class,'index'])->name('consultation.chat');
@@ -153,6 +160,22 @@ Route::prefix('users')->middleware(['auth:sanctum', 'verified'])->name('users.')
     ->middleware(['auth', 'verified']); */
 
 });
+
+Route::prefix('consultants')->middleware(['auth:sanctum', 'verified','is.consultant'])->name('consultants.')->group(function () {
+
+    Route::get('/consultation/main',[ConsultantController::class,'index'])->name('consultation.index');
+    Route::get('/consultation/new',[ConsultantController::class,'newConsultations'])->name('consultation.new');
+    Route::get('/consultation/closed',[ConsultantController::class,'closedConsultations'])->name('consultation.closed');
+    Route::get('/consultation/assigned',[ConsultantController::class,'assignedConsultations'])->name('consultation.assigned');
+    Route::get('/consultation/rejected',[ConsultantController::class,'rejectedConsultations'])->name('consultation.rejected');
+    Route::get('/consultation/main/status/{id}',[ConsultantController::class,'status']);
+
+    Route::get('/consultation/chat/{id}',[RepliesConsultantController::class,'index'])->name('consultation.chat');
+    Route::get('/consultation/reply/{id}',[RepliesConsultantController::class,'reply'])->name('consultation.reply');
+    Route::post('/consultation/chat/store',[RepliesConsultantController::class,'store']);
+
+});
+
 
 
 /* Route::post('users/consultation/{reques}', function ($request) {

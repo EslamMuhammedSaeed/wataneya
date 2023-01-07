@@ -159,11 +159,11 @@
                 <p>الاستشارات جديدة</p>
               </span>
             </div>
-            <div class="ser">
+{{--             <div class="ser">
               <label for="search">البحث :</label>
               <input type="text">
               <label for="search" class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></label>
-            </div>
+            </div> --}}
           </div>
 
 
@@ -200,12 +200,14 @@
                       <button style="background-color: #41B669">
                         فتح الاستشارة</button>
                     </form>
+                    @if ($item->status == 'assigned')
 
-                    <form method="GET" action="{{ url  ('users/consultation/main/status/'.$item->id) }}">
-                      <button>
-                        <i class="fa-solid fa-trash-can"></i>
-                        غلق الاستشارة
-                        </button>
+                        <form method="GET" action="{{ url  ('users/consultation/main/status/'.$item->id) }}">
+                            <button>
+                              <i class="fa-solid fa-trash-can"></i>
+                              غلق الاستشارة
+                              </button>
+                    @endif
 
                     </form>
                     </div>

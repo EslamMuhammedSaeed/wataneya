@@ -1,11 +1,12 @@
 @extends('users.layout.app')
 <!--nav-->
-
 <!--nav-->
 <!--start main section-->
 
 @section('css')
+    <link rel="stylesheet" href="{{ asset('css/section-5.css') }}">
     <link rel="stylesheet" href="{{ asset('css/section-2.css') }}">
+
 
     <style>
         @font-face {
@@ -175,64 +176,97 @@
                 </div>
 
                 @foreach ($reply as $key)
-                    @if ($key->owner == 1 || $key->status == 'approved')
+                    @if ($key->owner == 1 || $key->status == 'approved' || $key->status == 'rejected')
                         <div class="chat-box">
                             <div class="image">
                                 <img src="{{ filter_var($data->consultant->user->avatar, FILTER_VALIDATE_URL) ? $data->consultant->user->avatar : Voyager::image($data->consultant->user->avatar) }}"
                                     alt="">
                                 <span>{{ $data->consultant->user->name }}</span>
                             </div>
-                            <div class="text-box">
-                                <div class="box-content">
-                                    <div class="first-box">
-                                        <p>{!! $key->content !!}</p>
-                                    </div>
-                                    <div class="second-box">
-                                        <img src="{{ asset('img/Group 223.png') }}" alt="">
-                                        <img src="{{ asset('img/Group 224.png') }}" alt="">
-                                        <a href="{{ $key->attachment }}">Download</a>
+
+                            @if ($key->owner == 0 || $key->status == 'rejected')
+                                <div class="text-box">
+                                    <div class="box-content">
+                                        <div class="first-box">
+                                            <p>{!! $key->content !!}</p>
+                                        </div>
+                                        <div class="second-box">
+                                            <img src="{{ asset('img/Group 223.png') }}" alt="">
+                                            <img src="{{ asset('img/Group 224.png') }}" alt="">
+                                            <a href="{{ $key->attachment }}">Download</a>
+                                        </div>
+                                        <div class="thired-box" style="color: red">
+                                            <p>{!! $key->comment !!}</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @else
+                                <div class="text-box">
+                                    <div class="box-content">
+                                        <div class="first-box">
+                                            <p>{!! $key->content !!}</p>
+                                        </div>
+                                        <div class="second-box">
+                                            <img src="{{ asset('img/Group 223.png') }}" alt="">
+                                            <img src="{{ asset('img/Group 224.png') }}" alt="">
+                                            <a href="{{ $key->attachment }}">Download</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+
                             <div class="time">
                                 <span>{{ $key->updated_at }}</span>
                             </div>
                         </div>
                     @endif
                 @endforeach
-            </div>
 
-            @if ($data->status == 'assigned')
-                <div class="footer-section">
-                    <div class="container">
-                        <span>Your Answer</span>
-                        <div class="box-cont">
-                            <img src="{{ asset('img/wataneya logo middle3.png') }}" alt="">
-                            <div class="text-cont">
-                                <header>
-                                    <ul>
-                                        <li><i class="fa-thin fa-b"></i></li>
-                                        <li><i class="fa-solid fa-i"></i></li>
-                                        <li><i class="fa-solid fa-download"></i></li>
-                                        <li><i class="fa-solid fa-download"></i></li>
-                                        <li><i class="fa-solid fa-download"></i></li>
-                                    </ul>
-                                </header>
-                                <form class="send" method="POST" action="{{ url('users/consultation/chat/store') }}">
-                                    @csrf
-                                    <textarea name="content" id=""></textarea>
-                                    <button type="submit" name="id" value="{{ $id }}"><img
-                                            src="{{ asset('img/Fill 2.png') }}" alt=""></button>
-                                </form>
-            @endif
+
+                @if ($data->status == 'assigned')
+                    <div class="footer-section">
+                        <div class="container">
+                            <span>Your Answer</span>
+                            <div class="box-cont">
+                                <img src="{{ asset('img/wataneya logo middle3.png') }}" alt="">
+                                <div class="text-cont">
+                                    <header>
+                                        <ul>
+                                            <li><i class="fa-thin fa-b"></i></li>
+                                            <li><i class="fa-solid fa-i"></i></li>
+                                            <li><i class="fa-solid fa-download"></i></li>
+                                            <li><i class="fa-solid fa-download"></i></li>
+                                            <li><i class="fa-solid fa-download"></i></li>
+                                        </ul>
+                                    </header>
+                                    <form class="send" method="POST"
+                                        action="{{ url('consultants/consultation/chat/store') }}">
+                                        @csrf
+                                        <textarea name="content" id=""></textarea>
+                                        <button type="submit" name="id" value="{{ $id }}"><img
+                                                src="{{ asset('img/Fill 2.png') }}" alt=""></button>
+                                    </form>
+                @endif
+            </div>
     </div>
     </div>
     </div>
+
+    <br><br>
+    {{--       <div id="btn">
+          <button>
+              رد
+          <i class="fa-solid fa-circle-plus"></i>
+          </button>
+          <button>ُقبول</button>
+          <button>اغلاق الاستشارة</button>
+      </div> --}}
     </div>
     </section>
     </div>
     <!-- /.content-wrapper -->
 @endsection
+
 
 
 

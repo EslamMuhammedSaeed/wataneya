@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Users;
+namespace App\Http\Controllers\Consultants;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -24,14 +24,14 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Facade\FlareClient\Http\Response;
 
-class RepliesController extends Controller
+class RepliesConsultantController extends Controller
 {
     public function index($id)
     {
         $data= Consultation::find($id);
         $reply= ConsultationReply::where('consultation_id', $data->id)->get();
         $user=Auth::user();
-        return view('users.consultation_chat', compact('data','id','user','reply'));
+        return view('consultants.consultation_admin_chat', compact('data','id','user','reply'));
     }
 
 /*     public function reply($id)
@@ -50,17 +50,19 @@ class RepliesController extends Controller
     public function store(Request $request)
     {
         //$consultationid= Consultation::get()->id;
+        $user=Auth::user();
+        $consultant= Consultant::where('user_id', $user->id)->first();
         $consultation = new ConsultationReply;
         $consultation->consultation_id = $request->id;
         $consultation->content = $request->content;
         $consultation->attachment = $request->attachment;
         $consultation->status = 'submitted';
         $consultation->user_id = Auth::user()->id;
-        $consultation->owner = '1';
+        $consultation->consultant_id = $consultant->id;
+        $consultation->owner = '0';
         $consultation->save();
         return redirect()->back();
         //dd($consultation);
 
     }
-
 }

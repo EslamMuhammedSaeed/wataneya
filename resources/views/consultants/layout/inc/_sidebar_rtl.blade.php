@@ -25,7 +25,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
             <li class="nav-item mb-2">
-                <a href="#" class="nav-link mx-auto">
+                <a href="" class="nav-link mx-auto">
                     <i class="nav-icon fa fa-handshake-o"></i>
                     <p>
                     الاستشارات
@@ -34,33 +34,31 @@
                 </a>
                 <ul class="nav nav-treeview">
 
+
+
                     <li class="nav-item ">
-                        <a href="{{ url('users/consultation/new') }}" class="nav-link mx-auto">
+                        <a href="{{ route('consultants.consultation.new') }}" class="nav-link mx-auto">
                             <i class="far  nav-icon"></i>
                             <p>الاستشارات الجديدة</p>
                         </a>
                         </li>
 
+
+
                     <li class="nav-item ">
-                    <a href="{{ url('users/consultation/assigned') }}" class="nav-link mx-auto">
+                    <a href="{{ route('consultants.consultation.assigned') }}" class="nav-link mx-auto">
                         <i class="far  nav-icon"></i>
                         <p>الاستشارات الجارية</p>
                     </a>
                     </li>
 
                     <li class="nav-item ">
-                        <a href="{{ url('users/consultation/closed') }}" class="nav-link mx-auto">
+                        <a href="{{ url('consultants/consultation/closed') }}" class="nav-link mx-auto">
                             <i class="far  nav-icon"></i>
                             <p>الاستشارات المغلقة</p>
                         </a>
                         </li>
 
-                        <li class="nav-item ">
-                            <a href="{{ url('users/consultation/rejected') }}" class="nav-link mx-auto">
-                                <i class="far  nav-icon"></i>
-                                <p>الاستشارات المرفوضة</p>
-                            </a>
-                            </li>
                 </ul>
             </li>
             <li class="nav-item mb-2">
