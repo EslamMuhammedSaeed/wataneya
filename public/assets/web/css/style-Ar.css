@@ -4,7 +4,7 @@
     font-family: 'wataneya-r';
 
     src: url(../fonts/DINNextLTArabic-Regular.ttf);
-
+    font-display: swap;
 }
 
 
@@ -1386,8 +1386,13 @@ a.news-item p {
 .new-info-p { padding-left: 30px; margin-top: 20px;
     line-height: 28px }
 .site-map{
-    margin-top: 30px;
+    margin-top: 15px;
     margin-bottom: 15px
+}
+.site-map ul {
+    display: flex;
+    justify-content: start;
+    align-items: center;
 }
 .site-map ul li {
     display: inline-block;
@@ -1398,7 +1403,8 @@ a.news-item p {
 
 .site-map ul li a {
     text-decoration: none;
-    color: #333
+    color: #333;
+    margin-top: 0;
 }
 .site-map ul li a:hover {
     color: var(--green-color)
@@ -1924,7 +1930,7 @@ span.main-color { background-color: var(--green-color) !important }
 a.mere-btn {  float: left; }
 
 
-.story-main { margin-top: 50px; }
+.story-main { margin-top: 100px; }
 .story-main img { width: 100%; margin-bottom: 30px; }
 
 
@@ -2083,7 +2089,7 @@ p.partners-title {
         padding-bottom: 60px !important
     }
 
-    body {   padding-bottom: 39px !important;padding-top: 100px !important; }
+    body {   padding-bottom: 39px !important;padding-top: 46px !important; }
 
     .footer-main .col-md-2 img {
         float: none;
@@ -2287,7 +2293,7 @@ p.partners-title {
         margin-bottom: 50px;
     }
 
-    .logo-main img { height: 40px; }
+    .logo-main img { height: 40px; width:90px; }
     .menu-btn { margin-top:0  }
 
     .head-top ul li a, .head-top .lan-main a { font-weight: normal; }

@@ -32,7 +32,9 @@
             </ol>
             @show
         </div>
-        <ul class="nav navbar-nav @if (__('voyager::generic.is_rtl') == 'true') navbar-left @else navbar-right @endif">
+        {{-- <ul class="nav navbar-nav @if (__('voyager::generic.is_rtl') == 'true') navbar-left @else navbar-right @endif"> --}}
+        <ul class="nav navbar-nav navbar-left">
+
             <li class="dropdown profile">
                 <a href="#" class="dropdown-toggle text-right" data-toggle="dropdown" role="button"
                    aria-expanded="false"><img src="{{ $user_avatar }}" class="profile-img"  style="display: inline-block"> <span

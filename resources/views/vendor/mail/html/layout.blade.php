@@ -23,7 +23,7 @@ width: 100% !important;
 }
 </style>
 </head>
-<body style="text-align: right">
+<body style="text-align: left">
 
 <table class="wrapper" width="100%" cellpadding="0" cellspacing="0" role="presentation">
 <tr>

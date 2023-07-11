@@ -21,13 +21,12 @@ class RedirectConsultant
 
             //foreach(Auth::user()->role_id as $role){
 
-                if(Auth::user()->role_id == '3'){
+                if(Auth::user()->category == 'consultant'){
 
-                    return redirect()->route('consultants.consultation.index');
+                    return redirect()->route('consultants.consultation.new');
 
                 }
                 else{
-
                     return $next($request);
                 }
            // }

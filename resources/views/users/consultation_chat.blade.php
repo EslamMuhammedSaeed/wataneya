@@ -141,6 +141,106 @@
         .alert {
             margin-top: 10px;
         }
+
+        section .chat-box .text-box {
+            width: 100% !important;
+            height: auto !important;
+            background-color: #333;
+            border-radius: 20px;
+            -webkit-border-radius: 20px;
+            -moz-border-radius: 20px;
+            -ms-border-radius: 20px;
+            -o-border-radius: 20px;
+        }
+        section .chat-box .image {
+            display: block;
+            width: auto !important;
+            text-align: center;
+        }
+        section .text-box .box-content .first-box p {
+            color: white;
+            font-weight: 400;
+            font-size: 16px;
+            margin-bottom: 15px;
+            justify-content: start;
+            display: block;
+        }
+        .content-wrapper section {
+            direction: inherit;
+            height: 100vh;
+        }
+        section .chat-box .image {
+            margin-right: 10px;
+            margin-left: 10px;
+        }
+        section .text-box .box-content .first-box {
+            margin-bottom: 5px;
+            width: 100%;
+        }
+        .footer-section .box-cont .text-cont {
+            width: 100%;
+            height: 136px;
+        }
+        .messagecontainer{
+  border-radius: 6px;
+        border: solid 1px #75767a;
+  display:flex;
+  justify-content:space-between;
+  width:750px;
+  min-height:44px;
+  height:auto;
+}
+
+#file{
+  display: none;
+}
+
+.file{
+  display:flex;
+  font-size:32px;
+  font-weight:bold;
+  color:#75767a;
+  border-right: 1px solid #75767a;
+  padding: 4px 16px;
+  cursor:pointer;
+}
+
+.send{
+  /* border-left: 1px solid #75767a;
+  background-color: #a0a0a0; */
+  width:65px;
+  padding: 4px 16px;
+  display:flex;
+}
+
+.btn{
+  border:none;
+  font-size:14px;
+  line-height:34px;
+  background-color:transparent;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.input{
+  flex-grow:1;
+  padding: 4px 16px;
+  display:flex;
+  
+}
+
+.text{
+  width:100%;
+  font-size:13px;
+  font-family: Arial;
+  resize:none;
+  border:none;
+}
+  .text:focus{
+    outline:none;
+  }
+}
     </style>
 @endsection
 
@@ -148,68 +248,185 @@
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content">
-        <section>
-            <div class="container">
+        <section style="display: contents;">
+            <div class="container-fluid">
                 <div class="chat-box">
                     <div class="image">
                         <img src="{{ filter_var($data->user->avatar, FILTER_VALIDATE_URL) ? $data->user->avatar : Voyager::image($data->user->avatar) }}"
                             alt="">
                         <span>{{ $data->user->name }}</span>
                     </div>
-                    <div class="text-box">
+                    <div class="text-box shadow-sm" style="background: #bbe1e6">
                         <div class="box-content">
                             <div class="first-box">
-                                <p>{{ $data->title }}</p>
-                                <p>{!! $data->content !!}</p>
+                                <p style="font-weight: bold;color:black">{{ $data->title }}</p>
+                                <p style="color:black">{!! $data->content !!}</p>
+                                @if ($data->attachment)
+                                    <div>
+                                        <a style="color: #0078f9;text-decoration: underline;background-color: transparent;" target="_blank" href="{{ $data->attachment }}">{{ __('site.attachment') }}</a>
+
+                                    </div>
+                                @endif
+
+                                <div class="text-white mt-3 d-flex justify-content-end" style="color: black !important">{{ $data->created_at }}</div>
+                                
                             </div>
-                            <div class="second-box">
+                            {{-- <div class="second-box">
                                 <img src="{{ asset('img/Group 223.png') }}" alt="">
                                 <img src="{{ asset('img/Group 224.png') }}" alt="">
-                                <a href="{{ $data->attachment }}">Download</a>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
-                    <div class="time">
+                    {{-- <div class="time">
                         <span>{{ $data->updated_at }}</span>
-                    </div>
+                    </div> --}}
                 </div>
 
-                @foreach ($reply as $key)
-                    @if ($key->owner == 1 || $key->status == 'approved')
+                @if($data->status == 'rejected' && $data->admin_rejection_comment )
+                    <div class="chat-box">
+
+                        <div class="text-box shadow-sm" style="background-color: #ffc4c4;">
+                            <div class="box-content">
+                                <div class="first-box">
+                                    {{-- <p style="font-weight: bold">{{ $reply->title }}</p> --}}
+                                    <h6 style="color: black;font-weight:bold">{{ __('site.rejection reason') }} :</h6>
+                                    <p style="color: black">{!! $data->admin_rejection_comment !!}</p>
+                                    
+                                </div>
+                                {{-- <div class="second-box">
+                                    <img src="{{ asset('img/Group 223.png') }}" alt="">
+                                    <img src="{{ asset('img/Group 224.png') }}" alt="">
+                                </div> --}}
+                            </div>
+                        </div>
+                        {{-- <div class="time">
+                            <span>{{ $data->updated_at }}</span>
+                        </div> --}}
+                    </div>
+                @endif
+
+                @foreach ($replies as $reply)
+                    @if ($reply->owner == 0 && $reply->status == 'approved')
                         <div class="chat-box">
                             <div class="image">
-                                <img src="{{ filter_var($data->consultant->user->avatar, FILTER_VALIDATE_URL) ? $data->consultant->user->avatar : Voyager::image($data->consultant->user->avatar) }}"
+                                <img src="{{ filter_var($reply->consultant->user->avatar, FILTER_VALIDATE_URL) ? $reply->consultant->user->avatar : Voyager::image($reply->consultant->user->avatar) }}"
                                     alt="">
-                                <span>{{ $data->consultant->user->name }}</span>
+                                <span>{{ $reply->consultant->user->name }} <span class="text-success">({{__('site.consultant')}})</span> </span>
+                            </div>
+                            <div class="text-box shadow-sm" style="background-color: #efefef;">
+                                <div class="box-content">
+                                    <div class="first-box">
+                                        {{-- <p style="font-weight: bold">{{ $reply->title }}</p> --}}
+                                        <p style="color: black">{!! $reply->content !!}</p>
+                                        @if ($reply->attachment)
+                                            <div>
+                                                <a style="color: #0078f9;text-decoration: underline;background-color: transparent;" target="_blank" href="{{ $reply->attachment }}">{{ __('site.attachment') }}</a>
+        
+                                            </div>
+                                        @endif
+
+                                        @if ($reply->meeting_url)
+                                            <div class="mt-3">
+                                                
+                                                <p style="color: #098cff"><i class="fa-solid fa-circle-info mx-2"></i>{{ __('site.The consultant request for a meeting at : ') . $reply->meeting_time}}</p>
+                                                <a href="{{ $reply->meeting_url }}" target="_blank" class="btn btn-primary @if($reply->meeting_time > now()->addMinutes(30) || $reply->meeting_time < now()->subMinutes(30)) disabled @endif" style="background: #098cff;padding:5px 10px !important;"><img src="{{ asset('img/zoom.png') }}" class="mx-1" style="height: 40px" alt=""><span class="mx-1">{{ __('site.start meeting') }}</span></a>
+                                            </div>
+                                        @endif
+        
+        
+                                        <div class="mt-3 d-flex justify-content-end" style="color:black">{{ $reply->created_at }}</div>
+                                        
+                                    </div>
+                                    {{-- <div class="second-box">
+                                        <img src="{{ asset('img/Group 223.png') }}" alt="">
+                                        <img src="{{ asset('img/Group 224.png') }}" alt="">
+                                    </div> --}}
+                                </div>
+                            </div>
+                            {{-- <div class="time">
+                                <span>{{ $data->updated_at }}</span>
+                            </div> --}}
+                        </div>
+                        {{-- <div class="chat-box">
+                            <div class="image">
+                                <img src="{{ filter_var($reply->consultant->user->avatar, FILTER_VALIDATE_URL) ? $reply->consultant->user->avatar : Voyager::image($reply->consultant->user->avatar) }}"
+                                    alt="">
+                                <span>{{ $reply->consultant->user->name }}</span>
                             </div>
                             <div class="text-box">
                                 <div class="box-content">
                                     <div class="first-box">
-                                        <p>{!! $key->content !!}</p>
+                                        <p>{!! $reply->content !!}</p>
                                     </div>
                                     <div class="second-box">
                                         <img src="{{ asset('img/Group 223.png') }}" alt="">
                                         <img src="{{ asset('img/Group 224.png') }}" alt="">
-                                        <a href="{{ $key->attachment }}">Download</a>
+                                        <a href="{{ $reply->attachment }}">Download</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="time">
-                                <span>{{ $key->updated_at }}</span>
+                                <span>{{ $reply->updated_at }}</span>
                             </div>
+                        </div> --}}
+                    @elseif($reply->owner == 1)   
+                        <div class="chat-box">
+                            <div class="image">
+                                <img src="{{ filter_var($user->avatar, FILTER_VALIDATE_URL) ? $user->avatar : Voyager::image($user->avatar) }}"
+                                    alt="">
+                                <span>{{ $user->name }}</span>
+                            </div>
+                            <div class="text-box shadow-sm" style="background: #bbe1e6">
+                                <div class="box-content">
+                                    <div class="first-box">
+                                        {{-- <p style="font-weight: bold">{{ $reply->title }}</p> --}}
+                                        <p style="color: black">{!! $reply->content !!}</p>
+                                        @if ($reply->attachment)
+                                            <div>
+                                                <a style="color: #0078f9;text-decoration: underline;background-color: transparent;" target="_blank" href="{{ $reply->attachment }}">{{ __('site.attachment') }}</a>
+        
+                                            </div>
+                                        @endif
+        
+                                        <div class="mt-3 d-flex justify-content-end" style="color: black !important">{{ $reply->created_at }}</div>
+                                        
+                                    </div>
+                                    {{-- <div class="second-box">
+                                        <img src="{{ asset('img/Group 223.png') }}" alt="">
+                                        <img src="{{ asset('img/Group 224.png') }}" alt="">
+                                    </div> --}}
+                                </div>
+                            </div>
+                            {{-- <div class="time">
+                                <span>{{ $data->updated_at }}</span>
+                            </div> --}}
                         </div>
                     @endif
                 @endforeach
             </div>
 
             @if ($data->status == 'assigned')
+            {{-- <div class="messagecontainer">
+
+                <div class="file">
+                  <label for="file" class="label">+</label>
+                  <input type="file" id="file"/>
+                </div>
+              <div class="input">
+                <textarea class="text"></textarea>
+                </div>
+                <div class="send">
+                  <input type="submit" class="btn"/>
+                </div>
+            </div> --}}
                 <div class="footer-section">
-                    <div class="container">
+                    <div class="container-fluid">
                         <span>Your Answer</span>
                         <div class="box-cont">
+                            
                             <img src="{{ asset('img/wataneya logo middle3.png') }}" alt="">
                             <div class="text-cont">
-                                <header>
+                                {{-- <header>
                                     <ul>
                                         <li><i class="fa-thin fa-b"></i></li>
                                         <li><i class="fa-solid fa-i"></i></li>
@@ -217,12 +434,43 @@
                                         <li><i class="fa-solid fa-download"></i></li>
                                         <li><i class="fa-solid fa-download"></i></li>
                                     </ul>
-                                </header>
-                                <form class="send" method="POST" action="{{ url('users/consultation/chat/store') }}">
+                                </header> --}}
+                                <form class="d-block" class="send" method="POST" action="{{ url('users/consultation/chat/store/'.$data->id) }}" enctype="multipart/form-data">
                                     @csrf
-                                    <textarea name="content" id=""></textarea>
-                                    <button type="submit" name="id" value="{{ $id }}"><img
-                                            src="{{ asset('img/Fill 2.png') }}" alt=""></button>
+                                    <textarea class="px-2 w-100 shadow-sm" rows="5" style="border-radius: 5px;" name="content" id="" required></textarea>
+
+                                    <div class="d-flex align-items-top">
+                                        <button class="btn btn-white shadow-sm " type="submit" style="height:43px;background: white;padding: 3px 8px !important;color:black;border: 1px solid #999999;">
+                                            <img style="width: 20px;height:auto" src="{{ asset('img/Fill 2.png') }}" alt="">
+                                            <span class="mx-1 my-0 d-inline-block">{{ __('site.send') }}</span>
+                                       </button>
+   
+                                       {{-- <label for="file" class="label"> --}}
+                                       <div class="d-inline-block mx-2">
+                                           <button type="button" onclick="importData()" class="btn btn-white shadow-sm " style="background: white;padding: 3px 8px !important;color:black;border: 1px solid #999999;">
+                                               <img style="width: 20px;height:auto" src="{{ asset('img/attachment.png') }}" alt="">
+                                               <span class="mx-1 my-0 d-inline-block">{{ __('site.add attachment') }}</span>
+                                               
+                                                       
+                                          </button>
+                                          <div id="files">
+                                       </div>  
+                                    </div>
+                                      
+                                    
+
+                                   </div>
+                                   {{-- </label> --}}
+                                   <input type="file" id="file" onchange="showFile()" name="attachment"/>
+                                    {{-- <img
+                                            src="{{ asset('img/Fill 2.png') }}" alt="">
+                                            <div class="file" style="position: absolute;
+                                            right: 40px;
+                                            bottom: 20px;">
+                                                <label for="file" class="label">+</label>
+                                                <input type="file" id="file"/>
+                                              </div> --}}
+                                    {{-- <button type="submit" name="id" value="{{ $id }}"></button> --}}
                                 </form>
             @endif
     </div>
@@ -252,4 +500,23 @@
 
     <script src="./plugins/fullcalendar/main.js"></script>
     <script src="./plugins/bs-stepper/js/bs-stepper.min.js"></script>
+    <script>
+        function importData() {
+            let input = $('#file');
+            // input.type = 'file';
+            // input.onchange = function(e) {
+            //     // you can use this method to get file and perform respective operations
+            //     console.log('here');
+            //             let files =   Array.from(input.files);
+            //             console.log(files);
+            //         };
+            input.click();
+            
+        }
+        function showFile(){
+            let files = $('#file').prop('files');
+            $('#files').text(files[0].name);
+            // console.log(files[0].name);
+        }
+    </script>
 @endsection

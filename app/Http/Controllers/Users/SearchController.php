@@ -25,25 +25,50 @@ use TCG\Voyager\Events\BreadImagesDeleted;
 
 class SearchController extends Controller
 {
-    public function index()
+    public function index(Request $request)
 
     {
-        $data = ConsultationCategory::all();
-        $cfaq = CommonQuestion::simplePaginate(5);
-        return view('users.consultation_faq', ['data' => $data], ['cfaq' => $cfaq]);
+        $categories = ConsultationCategory::get();
+        $search_text = $request->search;
+        // $requestFaq1 = CommonQuestion::where('title', 'LIKE', '%' . $search_text . '%')->get();
+        // $requestFaq = CommonQuestion::where('content', 'LIKE', '%' . $search_text . '%')->get();
+        $consultations = new CommonQuestion();
+        if($request->category > 0 ){
+            $category = ConsultationCategory::find($request->category);
+
+            $consultations = $consultations->where('category_id',$request->category);
+        }else{
+            $category = 0;
+        }
+        if($request->search){
+            $consultations = $consultations->where('title', 'LIKE', '%' . $search_text . '%')->orWhere('content', 'LIKE', '%' . $search_text . '%');
+        }
+        $consultations = $consultations->where('status',1)->simplePaginate(10);
+        return view('users.consultation_faq', compact('search_text', 'category', 'consultations','categories'));
     }
 
 
-    public function search()
+    public function search(Request $request)
     {
 
-        $search_text = $_GET['search'];
-        $requestFaq1 = CommonQuestion::where('title', 'LIKE', '%' . $search_text . '%')->get();
-        $requestFaq = CommonQuestion::where('content', 'LIKE', '%' . $search_text . '%')->get();
-        $data1 = Consultation::wherehas('category', function ($query) use ($search_text) {
-            $query->where('name', $search_text);
-        })->get();
-        return view('users.consultation_faq_search', compact('requestFaq1', 'requestFaq', 'data1'));
+        $categories = ConsultationCategory::get();
+        $search_text = $request->search;
+        // $requestFaq1 = CommonQuestion::where('title', 'LIKE', '%' . $search_text . '%')->get();
+        // $requestFaq = CommonQuestion::where('content', 'LIKE', '%' . $search_text . '%')->get();
+        $consultations = new CommonQuestion();
+        if($request->category > 0){
+            $category = ConsultationCategory::find($request->category);
+
+            $consultations = $consultations->where('category_id',$request->category);
+
+        }else{
+            $category = 0;
+        }
+        if($request->search){
+            $consultations = $consultations->where('status',1)->where('title', 'LIKE', '%' . $search_text . '%')->orWhere('content', 'LIKE', '%' . $search_text . '%');
+        }
+        $consultations = $consultations->simplePaginate(10);
+        return view('users.consultation_faq', compact('search_text', 'category', 'consultations','categories'));
 
         //->with('consultationCategory')->simplePaginate(5)
     }

@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html dir="rtl">
+<html  dir="{{ LaravelLocalization::getCurrentLocaleDirection() }}" lang="{{ LaravelLocalization::getCurrentLocale() }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,13 +26,36 @@
 
   <!-- Theme style -->
       <link href="https://fonts.googleapis.com/css?family=Cairo:400,700" rel="stylesheet">
-      <link rel="stylesheet" href="{{asset('dist/css/adminlte_rtl.min.css')}}">
+      {{-- <link rel="stylesheet" href="{{asset('dist/css/adminlte_rtl.min.css')}}"> --}}
       <link rel="stylesheet" href="{{asset('plugins/bs-stepper/css/bs-stepper.min.css')}}">
       <link rel="stylesheet" href="{{asset('css/all.min.css')}}">
 
       {{-- <link rel="stylesheet" href="{{ voyager_asset('css/app.css') }}">
       <link rel="stylesheet" href="{{ voyager_asset('css/rtl.css') }}"> --}}
 
+      @if (LaravelLocalization::getCurrentLocale() == 'ar')
+        <link rel="stylesheet" href="{{asset('dist/css/adminlte_rtl.min.css')}}">  
+        <style>
+            .float-sm-right{
+                float: left !important;
+            }
+            
+            .card-white:not(.card-outline)>.card-header {
+                
+            }
+            .navbar-nav.ml-auto{
+                    margin-left :0 !important;
+                    margin-right:auto;
+            } 
+            .alert-dismissible .close{
+                    right: auto !important;
+            }
+           
+            
+        </style> 
+      @else
+          <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css?v=3.2.0') }}">
+      @endif 
 
       <style>
         @font-face {
@@ -135,6 +158,21 @@
         .alert{
           margin-top: 10px;
         }
+        pre {
+            overflow: initial;
+            word-wrap: break-word;
+            background-color: #ffffff;
+            border: 1px solid #fff;
+            border-radius: 4px;
+            color: #333;
+            display: block;
+            font-size: 13px;
+            line-height: 1.428571429;
+            margin: 0 0 10px;
+            padding: 9.5px;
+            word-break: break-word;
+            white-space: pre-wrap;
+        }
       </style>
 
 
@@ -150,7 +188,7 @@
 
 </head>
 
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-fixed">
   <?php
     if (\Illuminate\Support\Str::startsWith(Auth::user()->avatar, 'http://') || \Illuminate\Support\Str::startsWith(Auth::user()->avatar, 'https://')) {
         $user_avatar = Auth::user()->avatar;
@@ -160,7 +198,7 @@
   ?>
   <div class="wrapper">
     <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light pr-0">
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light pr-0 justify-content-space-between" style="justify-content: space-between;">
       <!-- Left navbar links -->
       <ul class="navbar-nav">
         <li class="nav-item align-items-center justify-content-center d-flex">
@@ -175,8 +213,23 @@
       </ul>
 
       <!-- Right navbar links -->
-      <ul class="navbar-nav nav-end-items">
+      <ul class="navbar-nav nav-end-items" style="margin: 0 20px">
 
+
+        <li class="nav-item dropdown">
+          <a class="nav-link" data-toggle="dropdown" href="#">
+              <i class="far fa-flag "></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+              @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+
+                  <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [],true) }}">
+                      {{ $properties['native'] }}
+                  </a>
+                  
+              @endforeach
+          </div>
+        </li> 
 
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">
@@ -231,7 +284,23 @@
     <!-- Main Sidebar Container -->
 
 
-      @include('users.layout.inc._sidebar_rtl')
+
+      @if (LaravelLocalization::getCurrentLocale() == 'ar')
+        @if(Auth::user()->category == 'consultant')
+          @include('consultants.layout.inc._sidebar_rtl')
+
+        @else
+          @include('users.layout.inc._sidebar_rtl')
+
+        @endif
+      @else
+        @if(Auth::user()->consultant)
+          @include('consultants.layout.inc._sidebar')
+
+        @else
+          @include('users.layout.inc._sidebar')
+        @endif  
+      @endif 
 
 
     <!-- Content Wrapper. Contains page content -->

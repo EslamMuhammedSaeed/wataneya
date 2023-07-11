@@ -6,24 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('land2/assets/img/apple-icon.png') }}">
     <?php $admin_favicon = Voyager::setting('admin.icon_image', ''); ?>
- 
+
     <link rel="shortcut icon" href="{{ Voyager::image($admin_favicon) }}" type="image/png">
-    <meta itemprop="name" content="الرئيسية | وطنية">
+    <title>{{ __('lang.home') }} | {{ __('lang.wataneya') }}</title>
+    <meta itemprop="name" content="{{ __('lang.home') }} | {{ __('lang.wataneya') }}">
     <meta itemprop="description" content="{{ __('lang.Meta_description') }}">
-    <meta itemprop="image" content="https://wataneya.org/storage/media/photos/shares/625d55fceb5d9.jpg">
+    <meta itemprop="image" content="{{ asset('img/625d55fceb5d9.jpg') }}">
 
     <!-- Facebook Meta Tags -->
-    <meta property="og:url" content="https://wataneya.org/ar">
+    <meta property="og:url" content="{{ env('APP_URL') }}">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="الرئيسية | وطنية">
+    <meta property="og:title" content="{{ __('lang.home') }} | {{ __('lang.wataneya') }}">
     <meta property="og:description" content="{{ __('lang.Meta_description') }}">
-    <meta property="og:image" content="https://wataneya.org/storage/media/photos/shares/625d55fceb5d9.jpg">
+    <meta property="og:image" content="{{ asset('img/625d55fceb5d9.jpg') }}">
 
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="الرئيسية | وطنية">
+    <meta name="twitter:title" content="{{ __('lang.home') }} | {{ __('lang.wataneya') }}">
     <meta name="twitter:description" content="{{ __('lang.Meta_description') }}">
-    <meta name="twitter:image" content="https://wataneya.org/storage/media/photos/shares/625d55fceb5d9.jpg">
+    <meta name="twitter:image" content="{{ asset('img/625d55fceb5d9.jpg') }}">
 
 
     <!--     Fonts and icons     -->
@@ -158,7 +159,36 @@
             .dropdown.dropdown-hover:after {
                 bottom: 250px !important;
             }
+
+            .head-links-main ul {
+                display: flex;
+                justify-content: center;
+            }
+
+
         }
+
+        .btn-slide {
+            padding: 15px 30px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            font-size: 1.2rem;
+            color: white;
+            background-color: #fdde00;
+            text-shadow: 1px 1px 0px rgba(62, 62, 62, 0.756);
+
+        }
+
+        .btn-slide:hover {
+            color: white;
+
+        }
+
+        @media only screen and (max-width: 991px) {
+            body {
+                padding-top: 56px !important;
+            }
+        }
+
 
         @media (max-width: 667px) {
             .ser {
@@ -172,348 +202,87 @@
             .dis-rel {
                 bottom: 0px !important;
             }
+
+            .head-links-main {
+                width: auto !important;
+            }
+
+            .head-links-main ul {
+                display: flex;
+                justify-content: center;
+            }
+
+            .about-us {
+                padding-top: 56px !important;
+            }
+
+            .dropdown.nav-item .dropdown-menu-animation.show {
+                height: auto !important;
+                min-height: 150px !important
+            }
+            
+
+        }
+        .container-fluid{
+            padding-left: 0;
+            padding-right: 0;
         }
     </style>
 </head>
 
 <body class="about-us">
-    <div class="container-fluid remove-padding head-top">
-        <div class="container remove-padding d-flex">
-
-            <div class="col-md-4 col-sm-4 head-links-main">
-                <ul>
-                    <li class="hidden-xs hidden-sm">
-                        <a href="https://www.facebook.com/wataneya/" target="_blank" title="تطبيق الفيس بوك">
-                            <i class="fa fa-facebook"></i>
-                        </a>
-                    </li>
-                    <li class="hidden-xs hidden-sm">
-                        <a href="https://twitter.com/WataneyaSociety" target="_blank" title="تطبيق التويتر">
-                            <i class="fa fa-twitter"></i>
-                        </a>
-                    </li>
-                    <li class="hidden-xs hidden-sm">
-                        <a href="https://www.youtube.com/user/amaaner" target="_blank" title="Youtube">
-                            <i class="fa fa-youtube"></i>
-                        </a>
-                    </li>
-                    <li class="hidden-xs hidden-sm">
-                        <a href="https://www.instagram.com/wataneyasociety/" target="_blank" title="Instagram">
-                            <i class="fa fa-instagram"></i>
-                        </a>
-                    </li>
-                    <li class="hidden-xs hidden-sm">
-                        <a href="https://eg.linkedin.com/company/wataneya-society" target="_blank" title="لينكد إن">
-                            <i class="fa fa-linkedin"></i>
-                        </a>
-                    </li>
-                    <li class="phone-link"><a href="https://wataneya.org/ar/contact-us">اتصل الآن</a></li>
-                </ul>
-            </div>
-
-            <div class="col-md-4 col-sm-4 slogen-main hidden-xs">
-                <p>حيـــــاة كريمـــــة لكــــل يتيـــــم</p>
-            </div>
-
-            {{-- <div class="col-md-4 lan-main col-sm-4">
-                <a href="https://wataneya.org/en">
-                    English
-                </a>
-            </div> --}}
-        </div>
-    </div>
+    
     <!-- Navbar Transparent -->
 
 
-    <div class="container-fluid position-sticky z-index-sticky top-0">
-        <div class="row">
-            <div class="col-12">
-                <nav
-                    class="navbar navbar-expand-lg bg-white top-0 z-index-fixed shadow position-absolute py-2 start-0 end-0">
-
-                    <div class="container-fluid px-0">
-                        <a class="navbar-brand py-1 font-weight-bolder me-sm-3"
-                            href="https://demos.creative-tim.com/material-kit/index" rel="tooltip"
-                            title="Designed and Coded by Creative Tim" data-placement="bottom" target="_blank">
-                            <img src="https://wataneya.org/assets/defaults/logo/logo.png" alt="">
-                        </a>
-                        <button class="navbar-toggler shadow-none me-2" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false"
-                            aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon mt-2">
-                                <span class="navbar-toggler-bar bar1"></span>
-                                <span class="navbar-toggler-bar bar2"></span>
-                                <span class="navbar-toggler-bar bar3"></span>
-                            </span>
-                        </button>
-                        <div class="collapse navbar-collapse pt-3 pb-2 py-lg-0 w-100" id="navigation">
-                            <ul class="navbar-nav navbar-nav-hover mx-auto text-right">
-                                <li class="nav-item dropdown dropdown-hover mx-2">
-                                    <a class="nav-link pe-2 d-flex cursor-pointer align-items-center"
-                                        id="dropdownMenuPages" data-bs-toggle="dropdown" aria-expanded="false">
-                                        {{-- <i class="material-icons opacity-6 ms-2 text-md">dashboard</i> --}}
-                                        <span class="ar text-md text-bold pb-1">عن وطنية</span>
-
-                                        <img src="{{ asset('land2/assets/img/down-arrow-dark.svg') }}"
-                                            alt="down-arrow" class="arrow me-auto me-md-2">
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-animation me-n3 dropdown-md p-3 border-radius-xl mt-0 mt-lg-3 shadow-sm"
-                                        aria-labelledby="dropdownMenuPages">
-                                        <div class="d-none d-lg-block">
-
-                                            <a href="https://wataneya.org/ar/pages/who-we-are"
-                                                class="dropdown-item border-radius-md">
-                                                <span>من نحن</span>
-                                            </a>
-                                            <a href="https://wataneya.org/ar/Board-Member"
-                                                class="dropdown-item border-radius-md">
-                                                <span>مجلس الإدارة</span>
-                                            </a>
-                                            <a href="https://wataneya.org/ar/staff"
-                                                class="dropdown-item border-radius-md">
-                                                <span>فريق العمل</span>
-                                            </a>
-
-                                            <a href="https://wataneya.org/ar/pages/alliances-and-partnerships"
-                                                class="dropdown-item border-radius-md">
-                                                <span>تحالفات</span>
-                                            </a>
-                                            <a href="https://wataneya.org/ar/pages/awards"
-                                                class="dropdown-item border-radius-md">
-                                                <span>تكريم جهود وطنية</span>
-                                            </a>
-                                            <a href="https://wataneya.org/ar/pages/the-impact"
-                                                class="dropdown-item border-radius-md">
-                                                <span>أثر وطنية</span>
-                                            </a>
-                                            <a href="https://wataneya.org/ar/pages/careers"
-                                                class="dropdown-item border-radius-md">
-                                                <span>انضم لفريق وطنية</span>
-                                            </a>
-                                        </div>
-
-
-
-                                    </div>
-                                </li>
-
-                                <li class="nav-item dropdown dropdown-hover mx-2">
-                                    <a class="nav-link pe-2 d-flex cursor-pointer align-items-center"
-                                        id="dropdownMenuPages" data-bs-toggle="dropdown" aria-expanded="false">
-                                        {{-- <i class="material-icons opacity-6 ms-2 text-md">dashboard</i> --}}
-                                        <span class="ar text-md text-bold pb-1">خدمات وطنية</span>
-
-                                        <img src="{{ asset('land2/assets/img/down-arrow-dark.svg') }}"
-                                            alt="down-arrow" class="arrow me-auto me-md-2">
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-animation me-n3 dropdown-md p-3 border-radius-xl mt-0 mt-lg-3"
-                                        aria-labelledby="dropdownMenuPages">
-                                        <div class="d-none d-lg-block">
-
-                                            <a href="https://wataneya.org/ar/services?service_category_id=1"
-                                                class="dropdown-item border-radius-md">
-                                                <span>تطوير نظم الرعاية البديلة</span>
-                                            </a>
-                                            <a href="https://wataneya.org/ar/services?service_category_id=2"
-                                                class="dropdown-item border-radius-md">
-                                                <span>الاستشارات الفنية</span>
-                                            </a>
-                                            <a href="https://wataneya.org/ar/services?service_category_id=3"
-                                                class="dropdown-item border-radius-md">
-                                                <span>برامج التعلم و التطوير</span>
-                                            </a>
-
-                                            <a href="https://wataneya.org/ar/services?service_category_id=4"
-                                                class="dropdown-item border-radius-md">
-                                                <span>الإنتاج المعرفى</span>
-                                            </a>
-                                        </div>
-
-
-
-                                    </div>
-                                </li>
-
-                                <li class="nav-item  mx-2">
-                                    <a href="https://wataneya.org/ar/pages/sanad-for-alternative-care"
-                                        class="nav-link pe-2 d-flex cursor-pointer align-items-center">
-                                        {{-- <i class="material-icons opacity-6 ms-2 text-md">dashboard</i> --}}
-                                        <span class="ar text-md text-bold pb-1">سند للرعاية البديلة</span>
-
-                                    </a>
-
-                                </li>
-
-                                <li class="nav-item dropdown dropdown-hover mx-2">
-                                    <a class="nav-link pe-2 d-flex cursor-pointer align-items-center"
-                                        id="dropdownMenuPages" data-bs-toggle="dropdown" aria-expanded="false">
-                                        {{-- <i class="material-icons opacity-6 ms-2 text-md">dashboard</i> --}}
-                                        <span class="ar text-md text-bold pb-1">المركز الإعلامى</span>
-
-                                        <img src="{{ asset('land2/assets/img/down-arrow-dark.svg') }}"
-                                            alt="down-arrow" class="arrow me-auto me-md-2">
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-animation me-n3 dropdown-md p-3 border-radius-xl mt-0 mt-lg-3"
-                                        aria-labelledby="dropdownMenuPages">
-                                        <div class="d-none d-lg-block">
-
-                                            <a href="https://wataneya.org/ar/news"
-                                                class="dropdown-item border-radius-md">
-                                                <span>الأخبار</span>
-                                            </a>
-                                            <a href="https://wataneya.org/ar/pages/awareness-campaigns"
-                                                class="dropdown-item border-radius-md">
-                                                <span>الحملات التوعوية</span>
-                                            </a>
-                                            <a href="https://wataneya.org/ar/events"
-                                                class="dropdown-item border-radius-md">
-                                                <span>الفعاليات</span>
-                                            </a>
-                                            <a href="https://wataneya.org/ar/media-bags"
-                                                class="dropdown-item border-radius-md">
-                                                <span>الحقيبة الإعلامية</span>
-                                            </a>
-
-                                            <a href="https://wataneya.org/ar/technical-reports"
-                                                class="dropdown-item border-radius-md">
-                                                <span>التقارير الفنية</span>
-                                            </a>
-                                            <a href="https://wataneya.org/ar/periodical-newsletters"
-                                                class="dropdown-item border-radius-md">
-                                                <span>النشرة الدورية</span>
-                                            </a>
-                                        </div>
-
-
-
-                                    </div>
-                                </li>
-
-                                <li class="nav-item dropdown dropdown-hover mx-2">
-                                    <a class="nav-link pe-2 d-flex cursor-pointer align-items-center"
-                                        id="dropdownMenuPages" data-bs-toggle="dropdown" aria-expanded="false">
-                                        {{-- <i class="material-icons opacity-6 ms-2 text-md">dashboard</i> --}}
-                                        <span class="ar text-md text-bold pb-1">شركاء رحلتنا</span>
-
-                                        <img src="{{ asset('land2/assets/img/down-arrow-dark.svg') }}"
-                                            alt="down-arrow" class="arrow me-auto me-md-2">
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-animation me-n3 dropdown-md p-3 border-radius-xl mt-0 mt-lg-3"
-                                        aria-labelledby="dropdownMenuPages">
-                                        <div class="d-none d-lg-block">
-
-                                            <a href="https://wataneya.org/ar/pages/government-agencies"
-                                                class="dropdown-item border-radius-md">
-                                                <span>جهات حكومية</span>
-                                            </a>
-                                            <a href="https://wataneya.org/ar/pages/donors"
-                                                class="dropdown-item border-radius-md">
-                                                <span>جهات مانحة</span>
-                                            </a>
-                                            <a href="https://wataneya.org/ar/pages/private-sector"
-                                                class="dropdown-item border-radius-md">
-                                                <span>قطاع خاص</span>
-                                            </a>
-
-                                            <a href="https://wataneya.org/ar/pages/civil-society-and-initiatives"
-                                                class="dropdown-item border-radius-md">
-                                                <span>مجتمع مدني ومبادرات</span>
-                                            </a>
-                                            <a href="https://wataneya.org/ar/pages/educational-sector"
-                                                class="dropdown-item border-radius-md">
-                                                <span>مؤسسات تعليمية</span>
-                                            </a>
-                                            <a href="https://wataneya.org/ar/pages/media-parties"
-                                                class="dropdown-item border-radius-md">
-                                                <span>جهات إعلامية</span>
-                                            </a>
-                                        </div>
-
-
-                                    </div>
-                                </li>
-
-
-
-
-                                @if (!Auth::user())
-                                    <li class="nav-item my-auto me-3 me-lg-7">
-
-                                        <a href="https://wataneya.org/ar/donations"
-                                            class="btn  btn-dark btn-navy  ar text-md mb-0 ms-1 mt-2 shadow-md mt-md-0 "
-                                            style="font-weight: 500;background-color:#3ec1ce">تبرع الآن</a>
-
-
-                                        <a href="{{ route('login') }}"
-                                            class="btn   btn-dark ar btn-yellow text-dark text-md shadow-md mb-0 ms-1 mt-2 mt-md-0"
-                                            style="font-weight: 500;background-color:#fdde00">تسجيل الدخول</a>
-
-                                    </li>
-                                @else  
-                                <li class="nav-item dropdown dropdown-hover mx-2">
-                                    <a class="nav-link pe-2 d-flex cursor-pointer align-items-center"
-                                        id="dropdownMenuPages" data-bs-toggle="dropdown" aria-expanded="false">
-                                        {{-- <i class="material-icons opacity-6 ms-2 text-md">dashboard</i> --}}
-                                        <span class="ar text-md text-bold pb-1">{{ Auth::user()->name }}</span>
-
-                                        <img src="{{ asset('land2/assets/img/down-arrow-dark.svg') }}"
-                                            alt="down-arrow" class="arrow me-auto me-md-2">
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-animation me-n3 dropdown-md p-3 border-radius-xl mt-0 mt-lg-3"
-                                        aria-labelledby="dropdownMenuPages">
-                                        <div class="d-none d-lg-block">
-
-                                            <a href="{{ route('dashboard') }}"
-                                                class="dropdown-item border-radius-md">
-                                                <span>الصفحة الشخصية</span>
-                                            </a>
-                                            <form action="{{ route('logout') }}" method="post">
-                                                @csrf
-                                                <button type="submit"
-                                                    class="dropdown-item border-radius-md">
-                                                    <span>تسجيل الخروج</span>
-                                                </button>
-                                            </form>
-                                            
-                                        </div>
-
-
-                                    </div>
-                                </li>
-                                    
-                                @endif
-                                
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-                <!-- End Navbar -->
-            </div>
-        </div>
-    </div>
+   @include('web.inc.nav_bar')
 
 
     <!-- End Navbar -->
     <!-- -------- START HEADER 7 w/ text and video ------- -->
-    <header class="bg-gradient-dark">
+    <header class="bg-gradient-dark" style="padding-top: 80px;">
         <div class="page-header min-vh-90 d-block">
             {{-- <span class="mask bg-gradient-info opacity-8"></span> --}}
             <div id="demo" class="carousel slide" data-ride="carousel">
 
                 <!-- Indicators -->
                 <ul class="carousel-indicators">
-                    <li data-target="#demo" data-slide-to="0" class="active"></li>
-                    <li data-target="#demo" data-slide-to="1"></li>
+                    @forelse ($slides as $index => $slide)
+                        <li data-target="#demo" data-slide-to="0"
+                            class="test @if ($index == 0) active @endif"></li>
+                    @empty
+                    @endforelse
+                    {{-- <li data-target="#demo" data-slide-to="1"></li> --}}
                 </ul>
 
                 <!-- The slideshow -->
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="{{ asset('img/carousal_1.jpg') }}" alt="image">
-                    </div>
-                    <div class="carousel-item">
+                    @forelse ($slides as $index => $slide)
+                        <div class="carousel-item @if ($index == 0) active @endif">
+
+                            @php
+                                $Agent = new Jenssegers\Agent\Agent();
+                            @endphp
+
+
+                            @if ($Agent->isMobile())
+                                <img width="1500px" src="{{ asset('storage/' . $slide->mobile_image) }}" alt="image">
+                            @else
+                                <img width="1500px" src="{{ asset('storage/' . $slide->image) }}" alt="image">    
+                            @endif    
+                            @if ($slide->action)
+                                <div class="carousel-caption d-flex justify-content-end">
+                                    <a href="{{ $slide->route }}" class="btn  btn-slide">اعرف المزيد</a>
+                                </div>
+                            @endif
+                        </div>
+                    @empty
+                    @endforelse
+
+
+                    {{-- <div class="carousel-item">
                         <img width="1500px" src="{{ asset('img/carousal_2.png') }}" alt="image">
-                    </div>
+                    </div> --}}
 
                 </div>
 
@@ -527,19 +296,22 @@
 
             </div>
             <div class="position-absolute w-100 z-index-1 bottom-0" style="margin-top: -20px">
-                <svg class="waves" xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 40" preserveAspectRatio="none"
-                    shaps-rendering="auto">
+                <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    viewBox="0 24 150 40" preserveAspectRatio="none" shaps-rendering="auto">
                     <defs>
                         <path id="gentle-wave"
                             d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
                     </defs>
                     <g class="moving-waves">
                         <use xlink:href="#gentle-wave" x="48" y="-1" fill="rgba(255,255,255,0.40" />
-                        <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.35)" />
-                        <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.25)" />
-                        <use xlink:href="#gentle-wave" x="48" y="8" fill="rgba(255,255,255,0.20)" />
-                        <use xlink:href="#gentle-wave" x="48" y="13" fill="rgba(255,255,255,0.15)" />
+                        <use xlink:href="#gentle-wave" x="48" y="3"
+                            fill="rgba(255,255,255,0.35)" />
+                        <use xlink:href="#gentle-wave" x="48" y="5"
+                            fill="rgba(255,255,255,0.25)" />
+                        <use xlink:href="#gentle-wave" x="48" y="8"
+                            fill="rgba(255,255,255,0.20)" />
+                        <use xlink:href="#gentle-wave" x="48" y="13"
+                            fill="rgba(255,255,255,0.15)" />
                         <use xlink:href="#gentle-wave" x="48" y="16" fill="rgba(255,255,255,1" />
                     </g>
                 </svg>
@@ -553,7 +325,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 my-3">
-                    <h3 class="ar text-right mb-3">عن وطنية</h3>
+                    <h3 class="ar text-justify mb-3">عن وطنية</h3>
                     <p class="ps-5 ar text-justify">
                         منذ نشأتها في 2008، نجحت جمعية وطنية في أن تصبح بيت خبرة في مجال الرعاية البديلة، وأن تكون نقطة
                         مرجعية من قبل أصحاب المصلحة لما لها من خبرات عملية وعلمية، كانت وطنية أول من يتعاون مع وزارة
@@ -741,7 +513,7 @@
                 <div class="row">
                     <div class="py-4 col-md-7 d-flex justify-content-top flex-column">
                         <h5 class="ar text-right mb-2" style="font-weight: 600">تطوير نظم الرعاية البديلة</h5>
-                        <p class="ar text-right" style="font-weight: 300;font-size:1.2rem">
+                        <p class="ar text-justify" style="font-weight: 300;font-size:1.2rem">
                             تعمل وطنية على تقديم الدعم لبيوت الرعاية في تعلم كيفية تطبيق معايير جودة الرعاية والتي تهتم
                             بالجوانب الإدارية والفنية والبيئية التي تحقق الأمان والاستقرار داخل المكان وتهيئ مستقبل آمن
                             لنزلاء البيت .
@@ -771,7 +543,7 @@
                 <div class="row">
                     <div class="py-4 col-md-7 d-flex justify-content-top flex-column">
                         <h5 class="ar text-right mb-2" style="font-weight: 600">الاستشارات الفنية</h5>
-                        <p class="ar text-right" style="font-weight: 300;font-size:1.2rem">
+                        <p class="ar text-justify" style="font-weight: 300;font-size:1.2rem">
                             تقدم جمعية وطنية خدمة الاستشارات الفنية لبيوت الرعاية، المؤسسات المعنية بالأطفال والشباب
                             فاقدي الرعاية الوالدية، والمسؤولية المجتمعية لشركات القطاع الخاص، من أجل خدمات أفضل للأطفال
                             والشباب، تضم الخدمة جميع الجوانب الفنية والإدارية حول رعاية الأطفال والشباب فاقدي الرعاية
@@ -803,7 +575,7 @@
                 <div class="row">
                     <div class="py-4 col-md-7 d-flex justify-content-top flex-column">
                         <h5 class="ar text-right mb-2" style="font-weight: 600">برامج التعلم والتطوير</h5>
-                        <p class="ar text-right" style="font-weight: 300;font-size:1.2rem">
+                        <p class="ar text-justify" style="font-weight: 300;font-size:1.2rem">
                             هي برامج متخصصة في بناء قدرات العاملين في مجال رعاية وحماية الأطفال والشباب فاقدي الرعاية
                             الوالدية والمتطوعين والكفلاء والأسر البديلة وكذلك شباب الأيتام.
                         </p>
@@ -832,7 +604,7 @@
                 <div class="row">
                     <div class="py-4 col-md-7 d-flex justify-content-top flex-column">
                         <h5 class="ar text-right mb-2" style="font-weight: 600">الإنتاج المعرفي</h5>
-                        <p class="ar text-right" style="font-weight: 300;font-size:1.2rem">
+                        <p class="ar text-justify" style="font-weight: 300;font-size:1.2rem">
                             هي حصيلة المعارف والخبرات المتراكمة الخاصة بوطنية متاحة للراغبين في التعمق في مجال رعاية
                             الأطفال والشباب فاقدي الرعاية الوالدية
                         </p>
@@ -909,7 +681,7 @@
         <div class="row">
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <a href="https://wataneya.org/ar/news/nahla-el-nimer-s-story-wins-the-american-telly-awards-gold-award"
-                    class="col-xs-12 remove-padding news-item" style="padding: 10px">
+                    class="col-xs-12 remove-padding news-item" style="padding: 10px;width:100%">
                     <div class="img-frame">
                         <img alt="من التمييز إلى التميز -قصة  نهلة النمر تحصد الجائزة الذهبية &quot;Telly Awards&quot; الأمريكية"
                             src="https://wataneya.org/storage/555/conversions/Screenshot-(264)-medium.jpg">
@@ -934,7 +706,7 @@
             </div>
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <a href="https://wataneya.org/ar/news/wataneya-qualifies-orphan-youth-for-employment"
-                    class="col-xs-12 remove-padding news-item" style="padding: 10px">
+                    class="col-xs-12 remove-padding news-item" style="padding: 10px;width:100%">
                     <div class="img-frame">
                         <img alt="نعمل على تنمية مهارات الشباب لسوق العمل"
                             src="https://wataneya.org/storage/553/conversions/1-medium.jpg">
@@ -1024,18 +796,19 @@
                 <div class="col-md-6 m-auto d-flex justify-content-center flex-column">
                     <h4 class="mb-3 text-white">للاشتراك في النشرة الدورية لجمعية وطنية</h4>
                     <form action="{{ route('newsletter.store_user') }}" method="POST">
-                      @csrf
-                      <div class="row">
-                          <div class="col-8">
-                              <div class="input-group">
-                                  <input type="text" name="email" class="form-control mb-sm-0" placeholder="البريد الإلكتروني">
-                              </div>
-                          </div>
-                          <div class="col-4 pe-0">
-                              <button type="submit"
-                                  class="btn bg-white mb-0 h-100 position-relative z-index-2">اشتراك</button>
-                          </div>
-                      </div>
+                        @csrf
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="input-group">
+                                    <input type="text" name="email" class="form-control mb-sm-0"
+                                        placeholder="البريد الإلكتروني">
+                                </div>
+                            </div>
+                            <div class="col-4 pe-0">
+                                <button type="submit"
+                                    class="btn bg-white mb-0 h-100 position-relative z-index-2">اشتراك</button>
+                            </div>
+                        </div>
                     </form>
                     <h4 class="mb-3 mt-5 text-white">تابعنا على شبكات التواصل الاجتماعي</h4>
                     <div class="row footer-main pt-0">
@@ -1056,7 +829,8 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="https://www.instagram.com/wataneyasociety/" target="_blank" title="Instagram">
+                                <a href="https://www.instagram.com/wataneyasociety/" target="_blank"
+                                    title="Instagram">
                                     <i class="fa fa-instagram"></i>
                                 </a>
                             </li>
@@ -1092,27 +866,27 @@
                 </div>
             </div>
             <div class="text-right mr-3 mt-2">
-              <p class="text-white">جميع الحقوق محفوظة لجمعية وطنية ©2022</p>
+                <p class="text-white">جميع الحقوق محفوظة لجمعية وطنية ©2022</p>
             </div>
         </div>
-        
+
     </section>
     <div class="container remove-padding mb-3">
         <div class="col-xs-12 bottom-list-img">
             <h3 style="font-family: 'dli';">تعمل وطنية على تحقيق أهداف التنمية المستدامة و رؤية مصر 2030</h3>
             <div class="text-center">
-              <ul class="achieve-goals-imgs">
-                <li><img alt="internetPlus" src="https://wataneya.org/assets/web/img/b1.png"></li>
-                <li><img alt="internetPlus" src="https://wataneya.org/assets/web/img/b2.png"></li>
-                <li><img alt="internetPlus" src="https://wataneya.org/assets/web/img/b3.png"></li>
-                <li><img alt="internetPlus" src="https://wataneya.org/assets/web/img/b4.png"></li>
-                <li><img alt="internetPlus" src="https://wataneya.org/assets/web/img/b5.png"></li>
-                <li><img alt="internetPlus" src="https://wataneya.org/assets/web/img/b6.png"></li>
-                <li><img alt="internetPlus" src="https://wataneya.org/assets/web/img/b7.png"></li>
+                <ul class="achieve-goals-imgs">
+                    <li><img alt="internetPlus" src="https://wataneya.org/assets/web/img/b1.png"></li>
+                    <li><img alt="internetPlus" src="https://wataneya.org/assets/web/img/b2.png"></li>
+                    <li><img alt="internetPlus" src="https://wataneya.org/assets/web/img/b3.png"></li>
+                    <li><img alt="internetPlus" src="https://wataneya.org/assets/web/img/b4.png"></li>
+                    <li><img alt="internetPlus" src="https://wataneya.org/assets/web/img/b5.png"></li>
+                    <li><img alt="internetPlus" src="https://wataneya.org/assets/web/img/b6.png"></li>
+                    <li><img alt="internetPlus" src="https://wataneya.org/assets/web/img/b7.png"></li>
 
-              </ul>
+                </ul>
             </div>
-            
+
         </div>
     </div>
     <!-- -------- END PRE-FOOTER 1 w/ SUBSCRIBE BUTTON AND IMAGE ------- -->

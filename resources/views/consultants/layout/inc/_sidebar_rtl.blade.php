@@ -25,7 +25,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
             <li class="nav-item mb-2">
-                <a href="" class="nav-link mx-auto">
+                <a href="#" class="nav-link mx-auto">
                     <i class="nav-icon fa fa-handshake-o"></i>
                     <p>
                     الاستشارات
@@ -34,19 +34,15 @@
                 </a>
                 <ul class="nav nav-treeview">
 
-
-
                     <li class="nav-item ">
-                        <a href="{{ route('consultants.consultation.new') }}" class="nav-link mx-auto">
+                        <a href="{{ url('consultants/consultation/new') }}" class="nav-link mx-auto">
                             <i class="far  nav-icon"></i>
                             <p>الاستشارات الجديدة</p>
                         </a>
                         </li>
 
-
-
                     <li class="nav-item ">
-                    <a href="{{ route('consultants.consultation.assigned') }}" class="nav-link mx-auto">
+                    <a href="{{ url('consultants/consultation/assigned') }}" class="nav-link mx-auto">
                         <i class="far  nav-icon"></i>
                         <p>الاستشارات الجارية</p>
                     </a>
@@ -59,31 +55,26 @@
                         </a>
                         </li>
 
+                        
                 </ul>
             </li>
-            <li class="nav-item mb-2">
-                <a href="{{ route('users.edit') }}" class="nav-link mx-auto">
-                    <i class="nav-icon fa fa-address-book"></i>
-                <p>
-                    تعديل الملف الشخصى
+            @if(Auth::user()->documented_at)
+              <li class="nav-item mb-2">
+                  <a href="{{ route('users.edit') }}" class="nav-link mx-auto">
+                      <i class="nav-icon fa fa-address-book"></i>
+                  <p>
+                      تعديل الملف الشخصى
 
-                </p>
-                </a>
+                  </p>
+                  </a>
 
-            </li>
+              </li>
+            @endif  
 
 
 
-            <li class="nav-item mb-2">
-                <a href="https://wataneya.org/ar/donations" class="nav-link mx-auto">
-                <i class="nav-icon fa fa-money"></i>
-                <p>
-
-                    التبرع
-                </p>
-                </a>
-            </li>
-            <li class="nav-item mb-2">
+            
+            {{-- <li class="nav-item mb-2">
                 <a href="https://wataneya.org/ar/services?service_category_id=3" class="nav-link mx-auto">
                 <i class="nav-icon fa fa-newspaper-o"></i>
                 <p>
@@ -91,7 +82,7 @@
                     البرامج و المؤتمرات
                 </p>
                 </a>
-            </li>
+            </li> --}}
 
 
 

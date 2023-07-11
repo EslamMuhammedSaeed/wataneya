@@ -22,7 +22,7 @@ class IsConsultant
 
             //foreach(Auth::user()->role_id as $role){
 
-                if(Auth::user()->role_id == '3'){
+                if(Auth::user()->consultant){
 
                   return $next($request);
 

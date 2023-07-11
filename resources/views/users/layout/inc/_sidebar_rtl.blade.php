@@ -63,21 +63,23 @@
                             </li>
                 </ul>
             </li>
+            @if(Auth::user()->documented_at)
+              <li class="nav-item mb-2">
+                  <a href="{{ route('users.edit') }}" class="nav-link mx-auto">
+                      <i class="nav-icon fa fa-address-book"></i>
+                  <p>
+                      تعديل الملف الشخصى
+
+                  </p>
+                  </a>
+
+              </li>
+            @endif
+
+
+
             <li class="nav-item mb-2">
-                <a href="{{ route('users.edit') }}" class="nav-link mx-auto">
-                    <i class="nav-icon fa fa-address-book"></i>
-                <p>
-                    تعديل الملف الشخصى
-
-                </p>
-                </a>
-
-            </li>
-
-
-
-            <li class="nav-item mb-2">
-                <a href="https://wataneya.org/ar/donations" class="nav-link mx-auto">
+                <a href="{{ route('web.donations.index') }}" class="nav-link mx-auto">
                 <i class="nav-icon fa fa-money"></i>
                 <p>
 
@@ -85,7 +87,7 @@
                 </p>
                 </a>
             </li>
-            <li class="nav-item mb-2">
+            {{-- <li class="nav-item mb-2">
                 <a href="https://wataneya.org/ar/services?service_category_id=3" class="nav-link mx-auto">
                 <i class="nav-icon fa fa-newspaper-o"></i>
                 <p>
@@ -93,7 +95,7 @@
                     البرامج و المؤتمرات
                 </p>
                 </a>
-            </li>
+            </li> --}}
 
 
 

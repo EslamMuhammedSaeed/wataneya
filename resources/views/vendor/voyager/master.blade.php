@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ config('app.locale') }}" dir="{{ __('voyager::generic.is_rtl') == 'true' ? 'rtl' : 'ltr' }}">
+<html lang="{{ config('app.locale') }}" dir="rtl">
 {{-- <head>
     <title>@yield('page_title', setting('admin.title') . " - " . setting('admin.description'))</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,6 +13,7 @@
 
     <!-- Favicon -->
     <?php $admin_favicon = Voyager::setting('admin.icon_image', ''); ?>
+    
     @if($admin_favicon == '')
         <link rel="shortcut icon" href="{{ voyager_asset('images/logo-icon.png') }}" type="image/png">
     @else
@@ -31,6 +32,7 @@
     @endif
 
     <!-- Few Dynamic Styles -->
+    
     <style type="text/css">
         .ps__rail-y{
             left: 0 !important;
@@ -121,10 +123,12 @@
     <link rel="stylesheet" href="{{ voyager_asset('css/app.css') }}">
 
     @yield('css')
-    @if(__('voyager::generic.is_rtl') == 'true')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-rtl/3.4.0/css/bootstrap-rtl.css">
+        <link rel="stylesheet" href="{{ voyager_asset('css/rtl.css') }}">
+    {{-- @if(__('voyager::generic.is_rtl') == 'true')
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-rtl/3.4.0/css/bootstrap-rtl.css">
         <link rel="stylesheet" href="{{ voyager_asset('css/rtl.css') }}">
-    @endif
+    @endif --}}
 
     <!-- Few Dynamic Styles -->
     <style type="text/css">
@@ -199,6 +203,24 @@
             left : 0 !important;
             right: 234px !important;
         }
+        .badge.badge-pill{
+            font-size: 1rem;
+        }
+        pre {
+            overflow: initial;
+            word-wrap: break-word;
+            background-color: #ffffff;
+            border: 1px solid #fff;
+            border-radius: 4px;
+            color: #333;
+            display: block;
+            font-size: 13px;
+            line-height: 1.428571429;
+            margin: 0 0 10px;
+            padding: 9.5px;
+            word-break: break-word;
+            white-space: pre-wrap;
+        }
     </style>
 
     @if(!empty(config('voyager.additional_css')))<!-- Additional CSS -->
@@ -208,6 +230,7 @@
     @yield('head')
 </head>
 <body class="voyager @if(isset($dataType) && isset($dataType->slug)){{ $dataType->slug }}@endif">
+    
 
     <div id="voyager-loader">
         <?php $admin_loader_img = Voyager::setting('admin.loader', ''); ?>

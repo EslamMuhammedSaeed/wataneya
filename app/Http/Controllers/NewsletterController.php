@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Newsletter;
+// use Spatie\Newsletter\Facades\Newsletter;
+// use Spatie\Newsletter\Newsletter as NewsletterNewsletter;
 use TCG\Voyager\Database\Schema\SchemaManager;
 use TCG\Voyager\Events\BreadDataAdded;
 use TCG\Voyager\Events\BreadDataDeleted;
@@ -16,8 +18,9 @@ class NewsletterController extends \TCG\Voyager\Http\Controllers\VoyagerBaseCont
 {
     //
     public function store_user(Request $request){
+
         if ( ! Newsletter::isSubscribed($request->email) ) {
-            Newsletter::subscribe($request->email,['FNAME'=>$request->first_name, 'LNAME'=>$request->last_name], 'subscribers');
+            Newsletter::subscribe($request->email,['FNAME'=>'here', 'LNAME'=>'there'], 'subscribers');
         }
         return redirect()->back();
     }

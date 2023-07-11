@@ -1,0 +1,129 @@
+:root {
+    --blue-color: #3ec1ce;
+    --grey-color: #58585b;
+}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+*:focus {
+    outline: none;
+}
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+html {
+    scroll-behavior: smooth;
+}
+.container {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+@media (min-width: 768px) {
+    .container {
+        width: 750px;
+    }
+}
+@media (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+}
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+}
+a {
+    text-decoration: none;
+}
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+/* end Global */
+/* Start Section */
+section .container {
+    direction: rtl;
+}
+section .container .title {
+    height: 67.865px;
+    display: flex;
+    align-items: flex-end;
+}
+section .container .title ul {
+    display: flex;
+}
+section .container .title ul li {
+    margin-left: 10px;
+}
+section .container .title ul li a {
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--grey-color);
+}
+section .container .title ul li a:hover {
+    color: #3ec1ce;
+}
+section .container .title ul li p {
+    font-size: 16px;
+    font-weight: bold;
+    color: #3ec1ce;
+}
+section .container .text {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+}
+section .container .text h1 {
+    align-self: center;
+    margin: 20px 0;
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--grey-color);
+}
+section .container .text p {
+    margin: 40px 0 50px;
+    font-size: 16px;
+    text-align: justify;
+    font-weight: bold;
+    color: var(--grey-color);
+    line-height: 26px;
+}
+section .container .image-box {
+    display: grid;
+    gap: 30px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+section .container .image-box a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+section .container .image-box a img {
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -ms-transition: 0.5s;
+    -o-transition: 0.5s;
+}
+section .container .image-box a img:hover {
+    transform: translateY(-10px);
+    -webkit-transform: translateY(-10px);
+    -moz-transform: translateY(-10px);
+    -ms-transform: translateY(-10px);
+    -o-transform: translateY(-10px);
+}
+/* Start Queries */
+@media (max-width: 767px) {
+    section .container .text h1 {
+        font-size: 20px;
+    }
+    section .container .text {
+        font-size: 14px;
+    }
+}

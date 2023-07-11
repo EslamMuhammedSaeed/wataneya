@@ -9,7 +9,8 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
         {{-- <link rel="stylesheet" href="{{ asset('dashboard_files/css/bootstrap.min.css') }}"> --}}
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+        {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"> --}}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
         {{-- <link rel="stylesheet" href="{{asset('plugins/fontawesome-free/css/all.min.css')}}"> --}}
@@ -372,7 +373,7 @@
                                         <img width="100" height="100" src="{{asset('img/company.png')}}" alt="">
                                     </div>
                                     <div>
-                                        <label class="form-check-label" for="radio1">مؤسسة</label>
+                                        <label class="form-check-label" for="radio1">{{ __('lang.organization') }}</label>
                                     </div>
                                     <div>
                                         <input type="radio" class="" id="radio1" name="category" value="organization" checked>
@@ -384,7 +385,7 @@
                                         <img  height="100" src="{{asset('img/home.png')}}" alt="">
                                     </div>
                                     <div>    
-                                        <label class="form-check-label" for="radio2">دار رعاية</label>
+                                        <label class="form-check-label" for="radio2">{{ __('lang.orphanage') }}</label>
                                     </div>  
                                     <div>
                                         <input type="radio" class="" id="radio2" name="category" value="orphanage">
@@ -396,7 +397,7 @@
                                         <img  height="100" src="{{asset('img/person.png')}}" alt="">
                                     </div>
                                     <div class="px-auto">    
-                                        <label class="form-check-label px-auto" for="radio3">فرد</label>
+                                        <label class="form-check-label px-auto" for="radio3">{{ __('lang.individual') }}</label>
                                     </div>  
                                     <div>
                                         <input type="radio" class="" id="radio3" name="category" value="individual">
@@ -405,7 +406,7 @@
                                 </div>
                             </div>
                             <div class="text-center">
-                                <input class="btn" type="submit" value="التالي">
+                                <input class="btn" type="submit" value="{{ __('lang.next') }}">
                             </div>
                             
                             

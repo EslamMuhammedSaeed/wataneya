@@ -72,4 +72,13 @@ class User extends \TCG\Voyager\Models\User implements MustVerifyEmail
     {
         return $this->hasOne(Orphanage::class);
     }
+    public function consultant(){
+        return $this->hasOne(Consultant::class);
+    }
+    public function roles(){
+        return $this->belongsToMany(Role::class,'user_roles');
+    }
+    public function role(){
+        return $this->belongsTo(Role::class);
+    }
 }

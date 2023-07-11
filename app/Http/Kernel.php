@@ -66,5 +66,10 @@ class Kernel extends HttpKernel
         'documented' => \App\Http\Middleware\Documented::class,
         'is.consultant' => \App\Http\Middleware\IsConsultant::class,
         'redirect.consultant' => \App\Http\Middleware\RedirectConsultant::class,
+        'localize'                => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class,
+        'localizationRedirect'    => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRedirectFilter::class,
+        'localeSessionRedirect'   => \Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class,
+        'localeCookieRedirect'    => \Mcamara\LaravelLocalization\Middleware\LocaleCookieRedirect::class,
+        'localeViewPath'          => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath::class
     ];
 }

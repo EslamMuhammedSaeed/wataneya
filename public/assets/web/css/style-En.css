@@ -4,7 +4,7 @@
     font-family: 'wataneya';
 
     src: url(../fonts/SF-UI-Display-Regular.otf);
-
+    font-display: swap;
 }
 
 
@@ -185,7 +185,7 @@ button.solid-btn:hover {
 }
 
 .head-top ul li.phone-link:before {
-    height: 20px;
+    height: 16px;
     width: 1px;
     background-color: var(--gray-color);
     content: "";
@@ -1617,8 +1617,14 @@ a.news-item p {
 }
 
 .site-map {
-    margin-top: 30px;
+    margin-top: 15px;
     margin-bottom: 15px
+}
+
+.site-map ul {
+    display: flex;
+    justify-content: start;
+    align-items: center;
 }
 
 .site-map ul li {
@@ -1630,7 +1636,8 @@ a.news-item p {
 
 .site-map ul li a {
     text-decoration: none;
-    color: #333
+    color: #333;
+    margin-top: 0;
 }
 
 .site-map ul li a:hover {
@@ -1781,6 +1788,7 @@ a.news-item p {
 
 .project-main p {
     line-height: 26px;
+    font-size: 14px;
 }
 
 .project-main h5 {
@@ -1911,7 +1919,7 @@ a.news-item p {
 }
 
 .project-main h6 {
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .project-main h6 span {
@@ -2237,7 +2245,7 @@ a.mere-btn {
 }
 
 .story-main {
-    margin-top: 50px;
+    margin-top: 100px;
 }
 
 .story-main img {
@@ -2581,6 +2589,7 @@ a.mere-btn {
     }
     .logo-main img {
         height: 40px;
+        width:90px;
     }
     .menu-btn {
         margin-top: 0
@@ -2677,7 +2686,7 @@ a.mere-btn {
         border-radius: 0 0px 0px 8px !important;
     }
     body {
-        padding-top: 93px !important;
+        padding-top: 46px !important;
     }
     .pro-item p {
         float: left;

@@ -28,10 +28,10 @@ class StoreOrganisationRequest extends FormRequest
             'name'=>'required|max:255',
             'category'=>'required|max:255',
             'field'=>'required|max:255',
-            'year'=>'required',
+            'year'=>'required|numeric|min:1900|max:'.now()->year,
             
             // 'facebook'=>'required',
-            'phone'=>'required',
+            'phone'=>'required|numeric',
             'email'=>'required|email',
             'geo'=>'required|max:255',
             'address'=>'max:255',
@@ -42,7 +42,7 @@ class StoreOrganisationRequest extends FormRequest
             'point_of_contact_name'=>'required|max:255',
             'point_of_contact_position'=>'required|max:255',
             'point_of_contact_email'=>'email',
-            'point_of_contact_phone'=>'required',
+            'point_of_contact_phone'=>'required|numeric',
             'about_wataneya'=>'required|max:255',
         ];
     }

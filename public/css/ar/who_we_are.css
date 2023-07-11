@@ -1,0 +1,464 @@
+:root {
+    --blue-color:#3ec1ce;
+    --grey-color: #58585b;
+}
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+*:focus {
+    outline: none;
+}
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+html {
+    scroll-behavior: smooth;
+}
+.container {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+@media (min-width: 768px) {
+    .container {
+        width: 750px;
+    }
+}
+@media (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+}
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+}
+a {
+    text-decoration: none;
+}
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+/* end Global */
+/* Start Section */
+/* Start Link */
+section {
+    direction: rtl;
+}
+section .container .link ul {
+    display: flex;
+    gap: 10px;
+}
+section .container .link ul li {
+    font-size: 16px;
+    font-weight: bold;
+}
+section .container .link ul li:first-child {
+    cursor: pointer;
+}
+section .container .link ul li a {
+    color: #333;
+}
+section .container .link ul li a:hover {
+    color: var(--blue-color);
+}
+section .container .link ul li:last-child {
+    color: var(--blue-color);
+}
+/* End Link */
+section .container .story {
+    display: flex;
+    gap: 20px;
+}
+section .container .story .left .paragraph {
+    display: flex;
+    flex-direction: column;
+}
+section .container .story .left .paragraph p {
+    align-self: flex-end;
+    width: 70.2%;
+    font-size: 18px;
+    line-height: 26px;
+    color: var(--grey-color);
+    text-align: justify;
+}
+section .container .story .left .paragraph span {
+    display: none;
+}
+section .container .story .left .paragraph span.open {
+    display: inline;
+}
+section .container .story .left .paragraph button {
+    background-color: #3EC1CE;
+    border: none;
+    align-self: flex-end;
+    width: 200px;
+    height: 40px;
+    font-size: 20px;
+    padding: 5px 15px;
+    color: white;
+    cursor: pointer;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+section .container .story .right iframe {
+    position: relative;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    animation: up-and-down 5s linear infinite;
+    -webkit-animation: up-and-down 5s linear infinite;
+}
+/* End Story */
+section .container .vision div {
+    display: flex;
+    justify-content: center;
+}
+section .container .vision div p {
+    width: 75%;
+    font-size: 18px;
+    line-height: 26px;
+    color: var(--grey-color);
+}
+/* End Vision */
+section .container .mission {
+    display: flex;
+}
+section .container .mission div:last-child {
+    display: flex;
+    justify-content: center;
+}
+section .container .mission div:last-child p {
+    width: 60%;
+    font-size: 18px;
+    line-height: 26px;
+    color: var(--grey-color);
+}
+section .container .mission .mission-right img {
+    width: 350px;
+    height: 250px;
+    border-radius: 30px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    -ms-border-radius: 30px;
+    -o-border-radius: 30px;
+}
+/* End Mission */
+section .container .values div {
+    display: flex;
+    justify-content: center;
+}
+section .container .values div p {
+    width: 75%;
+    font-size: 18px;
+    line-height: 26px;
+    color: var(--grey-color);
+}
+section .container .value-img {
+    margin: 0 auto;
+    text-align: center;
+}
+section .container .value-img img {
+    width: 200px;
+    height: 200px;
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+    -moz-transition: 0.5s;
+    -ms-transition: 0.5s;
+    -o-transition: 0.5s;
+    margin-bottom: 80px;
+}
+section .container .value-img img:hover {
+    transform: translateY(-20px);
+    -webkit-transform: translateY(-20px);
+    -moz-transform: translateY(-20px);
+    -ms-transform: translateY(-20px);
+    -o-transform: translateY(-20px);
+}
+/* End Values */
+
+section .container .methodology div {
+    margin-right: 150px;
+}
+section .container .methodology div p {
+    font-size: 18px;
+    line-height: 26px;
+    color: var(--grey-color);
+}
+/* End Methodology */
+section .container .box > h1 {
+    font-size: 30px;
+    font-weight: bold;
+    color: var(--grey-color);
+    margin-bottom: 120px;
+}
+section .container .box .targets {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+section .container .box .targets .target {
+    position: relative;
+    text-align: center;
+    padding: 10px;
+    background-color: #E4E4E4;
+    width: 200px;
+    height: 300px;
+}
+section .container .box .targets .target h1 {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    font-size: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #02BDD4;
+    position: absolute;
+    top: -120px;
+    left: 50%;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    color: white;
+}
+section .container .box .targets .target p {
+    margin: 90px 0 30px;
+    font-size: 18px;
+    line-height: 26px;
+    color: var(--grey-color);
+}
+/* End Box */
+section .container .box-2 h1 {
+    font-size: 30px;
+    font-weight: bold;
+    color: var(--grey-color);
+    margin-bottom: 80px;
+}
+section .container .box-2 .images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+section .container .box-2 .images img {
+    width: 140px;
+    height: 140px;
+    margin: 5px;
+}
+/* End Box 2 */
+section .container .box-3 {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 150px;
+}
+section .container .box-3 .text h1 {
+    margin: 0 auto 40px;
+}
+section .container .box-3 .text p {
+    font-size: 18px;
+    line-height: 26px;
+    color: var(--grey-color);
+}
+section .container .box-3 .video iframe {
+    border-radius: 30px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    -ms-border-radius: 30px;
+    -o-border-radius: 30px;
+}
+/* End Box 3 */
+section .container .wataneya-btn a {
+    font-weight: bold;
+    font-size: 18px;
+    padding: 10px 20px;
+    background-color: #3EC1CE;
+    color: white;
+    box-shadow: 2px 2px 5px 2px rgb(0 0 0 / 18%);
+    transition: 0.5s ease-in-out;
+    border-radius: 85px 63px 158px 196px;
+}
+section .container .wataneya-btn a:hover {
+    color: black;
+}
+/* End Section */
+@keyframes up-and-down {
+    0%, 100% {
+        top: 40px;
+    }
+    50% {
+        top: 100px;
+    }
+}
+/* End Animation */
+@media (max-width: 768px) {
+    section .container .story .right iframe {
+        width: 100%;
+        height: 100%;
+    }
+    section .container .story .left .paragraph p {
+        width: 100%;
+        text-align: justify;
+        font-size: 14px;
+    }
+    section .container .vision div {
+        padding: 0;
+    }
+    section .container .vision div p {
+        width: auto;
+        text-align: center;
+        overflow: auto;
+        font-size: 14px;
+    }
+    section .container .mission .mission-right img {
+        width: 100%;
+        height: 100%;
+    }
+    section .container .mission div:last-child p {
+        width: auto;
+        overflow: auto;
+        align-self: center;
+        justify-self: center;
+        height: auto;
+        font-size: 14px;
+    }
+    section .container .values h1 {
+        margin-bottom: 0 auto 30px;
+    }
+    section .container .values .value-1 p {
+        font-size: 14px;
+        justify-self: center;
+        height: auto;
+        text-align: justify;
+    }
+    section .container .value-img img {
+        width: 60px;
+        height: 60px;
+    }
+    section .container .methodology div {
+        margin: 0;
+    }
+    section .container .methodology h1 {
+        margin-bottom: 30px;
+    }
+    section .container .methodology div p {
+        width: auto;
+        height: auto;
+        font-size: 14px;
+    }
+    section .container .box > h1 {
+        margin-bottom: 30px;
+    }
+    section .container .box .targets {
+        padding: 30px 0;
+    }
+    section .container .box .targets .target {
+        margin: 30px 0 30px;
+        width: 220px;
+        height: 289px;
+    }
+    section .container .box .targets .target p {
+        font-size: 14px;
+    }
+    section .container .box-3 {
+        flex-wrap: wrap;
+    }
+    section .container .box-3 .video {
+        width: 100%;
+    }
+    section .container .box-3 .video iframe {
+        width: fit-content;
+    }
+}
+@media (max-width: 1200px) {
+    section .container .story {
+        flex-direction: column-reverse;
+        text-align: center;
+    }
+    section .container .story .left {
+        margin-top: 100px;
+    }
+    section .container .story .left h1 {
+        margin: 0 auto 30px;
+    }
+    section .container .story .left .paragraph p {
+        align-self: center;
+        margin-bottom: 20px;
+    }
+    section .container .story .left .paragraph button {
+        align-self: center;
+    }
+    section .container .vision {
+        flex-direction: column;
+        margin-bottom: 80px;
+    }
+    section .container .vision h1 {
+        margin: 0 auto 30px;
+    }
+    section .container .mission {
+        flex-direction: column-reverse;
+        margin-bottom: 80px;
+    }
+    section .container .mission .mission-left h1 {
+        margin: 40px auto;
+    }
+    section .container .mission div:last-child p {
+    width: 90%;
+    }
+    section .container .values h1 {
+        margin: 0 auto 80px;
+    }
+    section .container .values div p {
+        width: 95%;
+    }
+    section .container .value-img {
+        margin-bottom: 80px;
+    }
+    section .container .value-img img {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 0;
+    }
+    section .container .methodology h1 {
+        margin: 0 auto 80px;
+    }
+    section .container .methodology div  {
+        margin: 0 auto;
+    }
+    section .container .methodology div p {
+        width: 100%;
+        font-size: 15px;
+    }
+    section .container .box .targets {
+        display: flex;
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: center;
+    }
+    section .container .box .targets .target {
+        margin-top: 50px;
+    }
+    section .container .box-3 {
+        flex-direction: column-reverse;
+    }
+    section .container .box-3 .video  {
+        text-align: center;
+    }
+}
+/* End Queries */

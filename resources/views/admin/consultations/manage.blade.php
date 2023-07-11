@@ -41,18 +41,25 @@
                                     
                                 </div>
                                 <h3>{{ $consultation->title }}</h3>
-                                <p style="color: black">{!! $consultation->content !!}</p>
+                                <pre style="color: black;background:none !important;border:0;font-size: 1.2rem !important">{!! $consultation->content !!}</pre>
 
                                 {{-- @php
                                     $file = json_decode($consultation->attachment);
                                 @endphp --}}
 
-                                @foreach(json_decode($consultation->attachment) as $file)
+                                {{-- @foreach(json_decode($consultation->attachment) as $file)
                                     <a href="{{ Storage::disk(config('voyager.storage.disk'))->url($file->download_link) ?: '' }}" target="_blank">
                                         {{ $file->original_name ?: '' }}
                                     </a>
                                     <br/>
-                                 @endforeach
+                                @endforeach --}}
+
+                                @if ($consultation->attachment)
+                                            <div>
+                                                <a target="_blank" href="{{ $consultation->attachment }}">{{ __('site.attachment') }}</a>
+        
+                                            </div>
+                                @endif
                                 
                                 
                             </div>
@@ -63,42 +70,113 @@
                         <div>
                             
                             @foreach ($consultation->replies as $reply)
-                                <?php
-                                    if (\Illuminate\Support\Str::startsWith($reply->consultant->user->avatar, 'http://') || \Illuminate\Support\Str::startsWith($reply->consultant->user->avatar, 'https://')) {
-                                        $user_avatar = $reply->consultant->user->avatar;
-                                    } else {
-                                        $user_avatar = Voyager::image($reply->consultant->user->avatar);
-                                    }
-                                ?>
-                                <div class="consultant-reply" style="margin-bottom:15px">
-                                    
-                                    <div class="consultant-reply-content" style="@if($reply->owner == 1) background:#dffcff @endif">
-                                        <div class="reply-user">
-                                            <img src="{{ $user_avatar }}" style="top:auto" class="avatar" alt="{{ $reply->consultant->user->name }} avatar">
-                                            <div>
-                                                <h4 style="margin:0">{{ ucwords($reply->consultant->user->name) }}</h4>
-                                                <p style="margin:0">{{ $reply->consultant->user->email }}</p>
+                                @if($reply->owner == 0)
+                                    <?php
+                                        if (\Illuminate\Support\Str::startsWith($reply->consultant->user->avatar, 'http://') || \Illuminate\Support\Str::startsWith($reply->consultant->user->avatar, 'https://')) {
+                                            $user_avatar = $reply->consultant->user->avatar;
+                                        } else {
+                                            $user_avatar = Voyager::image($reply->consultant->user->avatar);
+                                        }
+                                    ?>
+                                    <div class="consultant-reply" style="margin-bottom:15px">
+                                        
+                                        <div class="consultant-reply-content" style="@if($reply->owner == 1) background:#dffcff @elseif($reply->status == 'approved' && $reply->owner == 0)  background:white @elseif($reply->status == 'rejected'  && $reply->owner == 0)  background:#ffc4c4 @endif">
+                                            <div class="reply-user">
+                                                <img src="{{ $user_avatar }}" style="top:auto" class="avatar" alt="{{ $reply->consultant->user->name }} avatar">
+                                                <div>
+                                                    <h4 style="margin:0">{{ ucwords($reply->consultant->user->name) }}</h4>
+                                                    <p style="margin:0">{{ $reply->consultant->user->email }}</p>
+                                                </div>
+                                                
                                             </div>
+                                            <pre style="color: black;background:none !important;border:0;font-size: 1.2rem !important">{!! $reply->content !!}</pre>
+
+                                            @if ($reply->comment)
+                                                <div class="mt-3">
+                                                    
+                                                    <p style="color: #ff1e1e"><i class="fa-solid fa-circle-exclamation mx-2" style="font-size: 1.2rem"></i> {!! $reply->comment !!}</p>
+            
+                                                </div>
+                                            @endif
+
+                                            @if ($reply->meeting_url)
+                                                <div class="mt-3">
+                                                    {{-- <p style="color: #c"><i class="fa-solid fa-circle-info mx-2"></i>{{ __('site.The consultant request for a meeting at : ') . $reply->meeting_time}}</p> --}}
+                                                    <a href="{{ $reply->meeting_url }}" target="_blank" class="btn btn-primary @if($reply->meeting_time > now()->addMinutes(30) || $reply->meeting_time < now()->subMinutes(30)) disabled @endif" style="background: #098cff;padding:5px 10px !important;"><img src="{{ asset('img/zoom.png') }}" class="mx-1" style="height: 40px" alt=""><span class="mx-1">{{ __('site.start meeting') }}</span></a>
+                                                    <div style="color:black;font-size:0.9rem;color:#098cff">{{ $reply->meeting_time }}</div>
+                                                </div>
+                                            @endif
+
+                                            @if ($reply->attachment)
+                                                        <div>
+                                                            <a target="_blank" href="{{ $reply->attachment }}">{{ __('site.attachment') }}</a>
+                    
+                                                        </div>
+                                            @endif
+
+                                            @if ($reply->status == 'submitted' && $reply->owner == 0)
+                                                <div class="consultant-reply-actions">
+                                                    <button class="btn danger reject_btn id_{{ $reply->id }}"  id="reject_btn" style="    font-size: 2rem;
+                                                        width: 40px;
+                                                        height: 40px;
+                                                        display: flex;
+                                                        justify-content: center;
+                                                        align-items: center;
+                                                        padding-bottom: 15px;">×</button>
+
+                                                    <a href="{{ route('admin.consultations.reply.approve',$reply->id) }}" class="btn success"><i class="voyager-check"></i></a>
+                                                </div>
+                                                
+                                            @endif
                                             
                                         </div>
-                                        <p style="color: black">{!! $reply->content !!}</p>
-                                        @if ($reply->Checker_id == null)
-                                            <div class="consultant-reply-actions">
-                                                <button class="btn danger reject_btn"  id="reject_btn"><i class="voyager-x"></i></button>
-
-                                                <a href="" class="btn success"><i class="voyager-check"></i></a>
-                                            </div>
-                                        @endif
                                         
                                     </div>
-                                    
-                                </div>
+                                @else
+                                <?php
+                                        if (\Illuminate\Support\Str::startsWith($reply->user->avatar, 'http://') || \Illuminate\Support\Str::startsWith($reply->user->avatar, 'https://')) {
+                                            $user_avatar = $reply->user->avatar;
+                                        } else {
+                                            $user_avatar = Voyager::image($reply->user->avatar);
+                                        }
+                                    ?>
+                                    <div class="consultant-reply" style="margin-bottom:15px">
+                                        
+                                        <div class="consultant-reply-content" style="@if($reply->owner == 1) background:#dffcff @endif">
+                                            <div class="reply-user">
+                                                <img src="{{ $user_avatar }}" style="top:auto" class="avatar" alt="{{ $reply->user->name }} avatar">
+                                                <div>
+                                                    <h4 style="margin:0">{{ ucwords($reply->user->name) }}</h4>
+                                                    <p style="margin:0">{{ $reply->user->email }}</p>
+                                                </div>
+                                                
+                                            </div>
+                                            <pre style="color: black;background:none !important;border:0;font-size: 1.2rem !important">{!! $reply->content !!}</pre>
+
+                                            @if ($reply->attachment)
+                                                        <div>
+                                                            <a target="_blank" href="{{ $reply->attachment }}">{{ __('site.attachment') }}</a>
+                    
+                                                        </div>
+                                            @endif
+                                            @if ($reply->status == 'submitted' && $reply->owner == 0)
+                                                <div class="consultant-reply-actions">
+                                                    <button class="btn danger reject_btn id_{{ $reply->id }}"  id="reject_btn">×</button>
+
+                                                    <a href="{{ route('admin.consultations.reply.approve',$reply->id) }}" class="btn success"><i class="voyager-check"></i></a>
+                                                </div>
+                                            @endif
+                                            
+                                        </div>
+                                        
+                                    </div>
+                                @endif    
                                 
                             @endforeach
                             {{-- Single reject modal --}}
                             <div class="modal modal-danger fade" tabindex="-1" id="reject_modal" role="dialog">
                                 <div class="modal-dialog">
-                                    <form action="" id="reject_form" method="POST">
+                                    <form action="{{ route('admin.consultations.reply.reject') }}" id="reject_form" method="POST">
                                         @csrf
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -109,6 +187,7 @@
                                                 </h4>
                                             </div>
                                             <div class="modal-body" id="reject_body">
+                                                <input type="hidden" name="rejection_id" id="rejection_id">
                                                 <input type="text" class="form-control" placeholder="تعليق" name="comment">
                                             </div>
                                             <div class="modal-footer">
@@ -204,9 +283,15 @@
         var $rejectModal = $('#reject_modal');
 
         $rejectModal.appendTo('body');
-        $rejectBtn.click(function () {
-            $rejectModal.modal('show');
-        });
+        $rejectBtn.on('click',function (e) {
+                
+                var arr = ($(e.target).attr('class')).split('id_');
+                // console.log(e.target);
+                // console.log(arr[1]);
+                $('#rejection_id').val(arr[1]);
+                $rejectModal.modal('show');
+            });
     }
+    
 </script>
 @stop

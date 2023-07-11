@@ -368,16 +368,18 @@
                        
                     <div class="form signin-form">
                       
-                        <form method="POST" action="{{ route('verification.send') }}">
-                            @csrf
+                        
                             <div class="logo-container">
                                  <img width="100px" class="logo" src="{{asset('img/wataneya_logo_middle.png')}}" alt="">
                             </div>
                             {{-- <input type="hidden" name="token" value="{{ $request->route('token') }}"> --}}
                             <p style="text-align: right">من فضلك قم بتفعيل حسابك بالضغط على الرابط المرسل إلى بريدك الألكتروني ، إذا لم تصلك رسالة التفعيل علي بريدك الإلكتروني قم بالضغط على زر إعادة الإرسال
                             </p>
-                            <div class="text-right">
+                            <div class="text-right" style="display: flex;align-items:center">
+                                <form method="POST" action="{{ route('verification.send') }}">
+                                    @csrf
                                 <input class="btn mt-4" type="submit" value="إعادة إرسال">
+                                </form>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
                                     <button type="submit" class="underline text-gray-600 hover:text-gray-900 mr-4" style="display: inline-block;text-align:right;background : none;font-size:1.5rem">
@@ -392,7 +394,7 @@
                                 </div>
                             @endif
                             {{-- <a href="#" class="forgot">نسيت كلمة المرور</a> --}}
-                        </form>
+                        {{-- </form> --}}
                     </div>
                     {{-- <div class="form signup-form">
                          

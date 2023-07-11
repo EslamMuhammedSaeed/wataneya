@@ -29,9 +29,10 @@ class RepliesController extends Controller
     public function index($id)
     {
         $data= Consultation::find($id);
-        $reply= ConsultationReply::where('consultation_id', $data->id)->get();
+        $replies= ConsultationReply::where('consultation_id', $id)->get();
         $user=Auth::user();
-        return view('users.consultation_chat', compact('data','id','user','reply'));
+        // dd($replies);
+        return view('users.consultation_chat', compact('data','id','user','replies'));
     }
 
 /*     public function reply($id)
@@ -47,18 +48,30 @@ class RepliesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$id)
     {
+        $consultation = Consultation::find($id);
+
+        $saved_path = "";
+        // dd($request);
+        if($request->file('attachment')){
+            $path = 'public/replies/'.Carbon::now()->format('d-m-Y');
+            $file_name = str_replace(' ', '_', Auth::user()->name.'_reply');
+            $saved_path =  env('APP_URL').'/storage/replies/'.Carbon::now()->format('d-m-Y').'/'.$file_name.'.'.$request->attachment->getClientOriginalExtension();
+            $request->file('attachment')->storeAs($path, $file_name.'.'.$request->attachment->getClientOriginalExtension());
+
+        }
+        $reply = ConsultationReply::create([
+            'consultation_id' => $consultation->id,
+            'content' => $request->content,
+            'owner' => '1',
+            'user_id' => Auth::user()->id,
+            'status' =>'approved',
+            'attachment' => $saved_path,
+        ]);
+
+        return redirect()->back()->with('msg', __('site.sent successfully'));
         //$consultationid= Consultation::get()->id;
-        $consultation = new ConsultationReply;
-        $consultation->consultation_id = $request->id;
-        $consultation->content = $request->content;
-        $consultation->attachment = $request->attachment;
-        $consultation->status = 'submitted';
-        $consultation->user_id = Auth::user()->id;
-        $consultation->owner = '1';
-        $consultation->save();
-        return redirect()->back();
         //dd($consultation);
 
     }

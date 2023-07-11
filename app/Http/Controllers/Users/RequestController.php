@@ -17,6 +17,7 @@ use App\Models\CommonQuestion;
 use Illuminate\Support\Facades\DB;
 use TCG\Voyager\Events\BreadDataDeleted;
 use TCG\Voyager\Facades\Voyager;
+use Carbon\Carbon;
 use TCG\Voyager\Http\Controllers\Traits\BreadRelationshipParser;
 use Exception;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -27,37 +28,38 @@ class RequestController extends Controller
     public function index()
     {
         $user=Auth::user();
-        $userconsultations = Consultation::where('user_id', $user->id)->orderBy('id','desc')->simplePaginate(2);
-        //dd($userconsultations);
-        return view('users.consultation_main', compact('userconsultations'));
+        $userconsultations = Consultation::where('user_id', $user->id)->orderBy('id','desc')->paginate(5);
+        $tap = __('site.all consultations');
+        return view('users.consultation_main', compact('tap','userconsultations'));
     }
     public function newConsultations()
     {
         $user=Auth::user();
-        $userconsultations = Consultation::where('user_id', $user->id)->where('status', 'submitted')->orderBy('id','desc')->simplePaginate(2);
+        $userconsultations = Consultation::where('user_id', $user->id)->where('status', 'submitted')->orderBy('id','desc')->paginate(5);
+        $tap = __('site.new consultations');
         //dd($userconsultations);
-        return view('users.consultation_main', compact('userconsultations'));
+        return view('users.consultation_main', compact('tap','userconsultations'));
     }
     public function closedConsultations()
     {
         $user=Auth::user();
-        $userconsultations = Consultation::where('user_id', $user->id)->where('status', 'closed')->orderBy('id','desc')->simplePaginate(2);
-        //dd($userconsultations);
-        return view('users.consultation_main', compact('userconsultations'));
+        $userconsultations = Consultation::where('user_id', $user->id)->where('status', 'closed')->orderBy('id','desc')->paginate(5);
+        $tap = __('site.closed consultations');
+        return view('users.consultation_main', compact('tap','userconsultations'));
     }
     public function assignedConsultations()
     {
         $user=Auth::user();
-        $userconsultations = Consultation::where('user_id', $user->id)->where('status', 'assigned')->orderBy('id','desc')->simplePaginate(2);
-        //dd($userconsultations);
-        return view('users.consultation_main', compact('userconsultations'));
+        $userconsultations = Consultation::where('user_id', $user->id)->where('status', 'assigned')->orderBy('id','desc')->paginate(5);
+        $tap = __('site.assigned consultations');
+        return view('users.consultation_main', compact('tap','userconsultations'));
     }
     public function rejectedConsultations()
     {
         $user=Auth::user();
-        $userconsultations = Consultation::where('user_id', $user->id)->where('status', 'rejected')->orderBy('id','desc')->simplePaginate(2);
-        //dd($userconsultations);
-        return view('users.consultation_main', compact('userconsultations'));
+        $userconsultations = Consultation::where('user_id', $user->id)->where('status', 'rejected')->orderBy('id','desc')->paginate(5);
+        $tap = __('site.rejected consultations');
+        return view('users.consultation_main', compact('tap','userconsultations'));
     }
 
 
@@ -65,6 +67,8 @@ class RequestController extends Controller
     {
         $user=Auth::user();
         $phone="";
+        $categories = ConsultationCategory::get();
+
         if ($user->individual) {
             $phone= $user->individual->phone;
         }
@@ -78,7 +82,7 @@ class RequestController extends Controller
             $phone= $user->Orphanage->mobile;
         }
 
-        return view('users.consultation_request', compact('user', 'phone'));
+        return view('users.consultation_request', compact('user', 'phone','categories'));
     }
 
     /**
@@ -89,15 +93,30 @@ class RequestController extends Controller
      */
     public function store(Request $request)
     {
-        $consultation = new Consultation;
-        $consultation->title = $request->title;
-        $consultation->content = $request->content;
-        $consultation->attachment = $request->attachment;
-        $consultation->status = 'submitted';
-        $consultation->user_id = Auth::user()->id;
-        //dd($consultation);
-        $consultation->save();
-        return redirect()->back()->with('msg', 'تم إرسال طلب الاستشارة بنجاح');
+        $company_validated = $request->validate([
+            'title' => ['required', 'string'],
+            'category' => ['required', 'exists:consultation_categories,id'],
+            'content' => ['required', 'string'],
+            'attachment' => ['file'],
+        ]);
+        $saved_path = '';
+        if($request->file('attachment')){
+            $path = 'public/consultations/'.Carbon::now()->format('d-m-Y');
+            $file_name = str_replace(' ', '_', Auth::user()->name);
+            $saved_path =  env('APP_URL').'/storage/consultations/'.Carbon::now()->format('d-m-Y').'/'.$file_name.'.'.$request->attachment->getClientOriginalExtension();
+            $request->file('attachment')->storeAs($path, $file_name.'.'.$request->attachment->getClientOriginalExtension());
+
+        }
+        $consultation = Consultation::create([
+            'title' => $request->title,
+            'content' => $request->content,
+            'category_id' => $request->category,
+            'user_id' => Auth::user()->id,
+            'status' =>'submitted',
+            'attachment' => $saved_path,
+        ]);
+
+        return redirect()->back()->with('msg', __('site.sent successfully'));
     }
 
     public function status($id) {
@@ -111,6 +130,6 @@ class RequestController extends Controller
         //$withdraw->save();
         //DB::update('update consultations set status ?', [$withdraw]);
         //dd($withdraw);
-        return redirect()->back()->with('msg', 'تم سحب الاستشارة');;
+        return redirect()->back()->with('msg', __('site.consultation was closed successfully'));;
        }
 }

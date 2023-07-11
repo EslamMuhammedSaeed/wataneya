@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class ConsultationReply extends Model
 {
     use HasFactory;
+    protected $guarded = [];
+
     public function consultant()
     {
         return $this->belongsTo(Consultant::class);

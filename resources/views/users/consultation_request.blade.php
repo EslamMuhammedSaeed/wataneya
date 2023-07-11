@@ -14,6 +14,40 @@
             /* src: url(https://fonts.gstatic.com/s/lato/v16/S6uyw4BMUTPHjx4wXiWtFCc.woff2); */
         }
 
+        /* .custom-file-label::after {
+            content: "<?php echo __('site.add attachment'); ?>";
+        } */
+
+        .custom-file-button input[type="file"] {
+                margin-left: -2px !important;
+
+        }
+        .custom-file-button input[type="file"]::-webkit-file-upload-button {    
+            display: none;
+        }
+        .custom-file-button input[type="file"]::file-selector-button {    
+            display: none;
+        }
+
+            /* &:hover {
+                label {
+                    background-color: #dde0e3;
+                    cursor: pointer;
+                }
+            }
+        } */
+        .btn-orange {
+          color: #ffffffd4;
+          background-color: #e7a600;
+          outline-color: white;
+          border-radius: 4px;
+          border: none;
+          font-size: 1rem;
+          font-weight:bold;
+          padding:10px 20px !important;
+          
+        }
+
         .content-wrapper .h1 {
             width: 164px;
             height: 29px;
@@ -63,6 +97,9 @@
         h6 {
             font-family: 'Almarai', sans-serif !important;
         }
+        /* .custom-file-input.is-valid~.custom-file-label, .was-validated .custom-file-input:valid~.custom-file-label {
+            border-color: rgb(200, 200, 200) !important;
+        } */
 
         .sidebar-dark-success {
             background-color: #034939ec !important;
@@ -157,6 +194,58 @@
             margin-top: 10px;
         }
     </style>
+<style>
+.form-control.is-invalid, .was-validated .form-control:invalid {
+    border: 0 !important;
+    box-shadow: none;
+}
+.form-control:focus{
+    border: 1px solid rgb(92, 92, 92);
+}
+.form-control.is-valid, .was-validated .form-control:valid {
+    border-color: rgb(200, 200, 200);
+    /* padding-right: calc(1.5em + 0.75rem); */
+    background-image: none !important;
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+element.style {
+}
+.form-control.is-invalid, .was-validated .form-control:invalid {
+    border: 0 !important;
+    box-shadow: none;
+}
+.main-form .org-data .form-control {
+    background-color: #ECECEC;
+    border: 1px solid #D1D1D1;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+.form-custom{
+    padding: 8px;
+    display: block;
+    width: 100%;
+    background: #ECECEC;
+    border: 1px solid #D1D1D1;
+    box-sizing: border-box;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.form-custom:focus{
+    /* border: 3px solid rgba(0, 128, 0, 0.479) !important; */
+}
+input:focus,textarea:focus{
+ outline: 2px solid rgba(0, 128, 0, 0.24);
+}
+input.form-custom.error{
+    outline: 2px solid rgba(211, 1, 1, 0.664);
+}
+
+ </style>
+
 @endsection
 
 
@@ -164,7 +253,7 @@
     <!-- Content Wrapper. Contains page content -->
 
     @if (session('msg'))
-    <div class="alert alert-success">
+    <div class="alert alert-success mx-4 my-3">
         {{ session('msg') }}
     </div>
     @endif
@@ -173,10 +262,129 @@
 
         <div class="content">
 
-            <div class="container ">
+            <div class="container-fluid">
+
+                <form method="post" action="{{ url('users/consultation/request/store') }}" class="main-form was-validated px-5 py-5 " enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-container container-fluid bg-white px-3 py-3 shadow-sm" style="border-radius:15px; ">
+                        <div class="row w-100">
+                            <div class="mb-3 col-md-4">
+                            
+                                <label>{{ __('site.name') }}<small class="text-danger mx-2"> '{{ __('site.required') }}'</small></label>
+                                <input type="text" class="form-custom @error('name') error @enderror"  name="name" value="{{ $user->name }}" >
+                                <small>
+                                    @error('name')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </small>
+                            </div>
+                            <div class="mb-3 col-md-4">
+                            
+                                <label>{{ __('site.email') }}<small class="text-danger mx-2"> '{{ __('site.required') }}'</small></label>
+                                <input type="text" class="form-custom @error('email') error @enderror"  name="email" value="{{ $user->email }}" >
+                                <small>
+                                    @error('email')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </small>
+                            </div>
+
+                            <div class="mb-3 col-md-4">
+                            
+                                <label>{{ __('site.phone') }}<small class="text-danger mx-2"> '{{ __('site.required') }}'</small></label>
+                                <input type="text" class="form-custom @error('phone') error @enderror"  name="phone" value="{{ $phone }}" >
+                                <small>
+                                    @error('phone')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </small>
+                            </div>
+
+                            
+                        </div>
+                        <div class="row w-100" >
+                            <div class="mb-3 col-md-12">
+                            
+                                <label  class="org-name">{{ __('site.category') }}<small class="text-danger mr-2"> '{{ __('site.required') }}'</small></label>
+                                {{-- <input type="text" class="form-custom @error('category') error @enderror"  name="category" value="{{old('category')}}"> --}}
+                                <select class="form-custom @error('category') error @enderror" id="category" name="category" value="{{old('category')}}">
+                                    {{-- <option value="0" selected>{{ __('site.all') }}</option> --}}
+
+                                    @foreach ($categories as $category_item)
+                                        @if ( isset($category->id) && $category->id == $category_item->id)
+                                            <option value="{{ $category_item->id }}" selected>{{ $category_item->name }}</option>
+                                        @else
+                                            <option value="{{ $category_item->id }}">{{ $category_item->name }}</option>
+
+                                        @endif
+                                        {{-- <a class="dropdown-item" href="{{ route('users.consultation.index',['category'=>$item->name]) }}"></a> --}}
+                                    @endforeach
+                                    
+                                </select>
+                                <small>
+                                    @error('category')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </small>
+                            </div>
+                            <div class="mb-3 col-md-12">
+                            
+                                <label>{{ __('site.title') }}<small class="text-danger mx-2"> '{{ __('site.required') }}'</small></label>
+                                <input type="text" class="form-custom @error('title') error @enderror"  name="title" value="{{ old('title') }}" >
+                                <small>
+                                    @error('title')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </small>
+                            </div>
+                        </div>
+                        <div class="row w-100" >
+                            <div class="mb-3 col-md-12">
+                            
+                                <label>{{ __('site.content') }}<small class="text-danger mx-2"> '{{ __('site.required') }}'</small></label>
+                                <textarea class="form-control" rows="5" name="content" style="background: #ECECEC;" id="content">{{ old('content') }}</textarea>
+                                <small>
+                                    @error('content')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </small>
+                            </div>
+                        </div>
+                        <div class="row w-100">
+                            <div class="mb-3 col-md-12">
+                                {{-- <div>
+                                    <label >{{ __('site.attachment') }}</label>
+
+                                </div> --}}
+
+                                {{-- <div>
+                                    <input type="file" class="custom-file-input" id="attachment" name="attachment">
+                                    <label class="custom-file-label" style="background: #ECECEC;" for="customFile"></label>
+                                </div> --}}
+                                <div class="input-group custom-file-button">
+                                    <label class="input-group-text" for="inputGroupFile">{{ __('site.add attachment') }}</label>
+                                    <input type="file" class="form-control" id="inputGroupFile" name="attachment">
+                                </div>
+                                
+                                <small>
+                                    @error('attachment')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </small>
+                            </div>
+                        </div>
+                        <div class="row w-100 d-flex justify-content-end">
+                            <button type="submit" class="btn btn-orange" style="padding:10px 20px !important;margin-top: 20px !important">
+                                {{ __('site.send') }}
+                            </button>
+                        </div>
+                        
+                        
+                    </div>
+                </form>    
 
 
-                <div class="form w-50">
+                {{-- <div class="form w-50">
 
 
 
@@ -198,8 +406,7 @@
                         <input type="text" value="{{ $phone }}" id="inputPassword5" class="form-control">
                     </div>
 
-    {{-- <form method="POST" action="{{ Route('consultation.store') }}" class="main-form was-validated px-5" enctype="multipart/form-data">
-        @csrf --}}
+
                     <form method="POST" action="{{ url('users/consultation/request/store') }}">
                         @csrf
                     <div id="form">
@@ -227,41 +434,7 @@
                     </div>
 
 
-                    {{-- <div class="">
-
-                    <label for="inputPassword5" class="form-label"> ما هي الطريقة التي تفضل وصول الرد عن طريقها
-                    </label>
-                    <br>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                        <label class="form-check-label " for="flexRadioDefault1">
-
-                            البريد الالكتروني
-
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"
-                            checked>
-                        <label class="form-check-label " for="flexRadioDefault2">
-
-                            رسالة نصية على الهاتف المحمول (واتساب).
-
-                        </label>
-
-                        <div class="send w-100 my-5">
-                            <button class="btn w-100">
-                                ارسال
-                            </button>
-                        </div>
-
-
-
-                    </div>
-
-
-
-                </div> --}}
+                  
 
                     <div class="send w-100 my-5">
                         <button class="btn w-100">
@@ -271,11 +444,10 @@
                 </form>
 
 
-                </div>
+                </div> --}}
             </div>
         </div>
 
-    <!-- /.content-wrapper -->
 @endsection
 
 

@@ -22,7 +22,7 @@
     position: relative;
     background-color: white;
 }
-.content-wrapper .search::before {
+/* .content-wrapper .search::before {
     content: "";
     position: absolute;
     width: 6px;
@@ -40,7 +40,7 @@
     -moz-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
     -o-transform: translateY(-50%);
-}
+} */
 .content-wrapper .search .consulting {
     position: absolute;
     width: 189px;
@@ -166,9 +166,9 @@
     border-left: 1px solid #C4C4C4;
 }
 .evaluation table tbody tr td:first-child {
-    display: flex;
+    /* display: flex;
     justify-content: flex-end;
-    align-items: flex-end;
+    align-items: flex-end; */
 }
 .evaluation table tbody tr td:first-child a {
     text-decoration: underline;

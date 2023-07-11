@@ -4,8 +4,7 @@
 <!--start main section-->
 
 @section('css')
-    <link rel="stylesheet" href="{{ asset('css/section-4.css') }}">
-
+    <link rel="stylesheet" href="{{ asset('css/section.css') }}">
 
     <style>
         @font-face {
@@ -141,6 +140,104 @@
         .alert {
             margin-top: 10px;
         }
+
+        .header-evaluation {
+            padding: 10px 15px;
+            border-radius: 5px 5px 0 0;
+            height: auto !important;
+        }
+        .btn-orange {
+          color: #ffffffd4;
+          background-color: #e7a600;
+          outline-color: white;
+          border-radius: 4px;
+          border: none;
+          font-size: 0.9rem;
+          font-weight:bold;
+          padding:10px 20px !important;
+          
+        }
+        .btn-orange:hover {
+          color: #ffffffd4;
+          background-color: #e7a600;
+          opacity: 0.8;
+          
+        }
+        .btn-red {
+          color: #ffffffd4;
+          background-color: #dc3545;
+          outline-color: white;
+          border-radius: 4px;
+          border: none;
+          font-size: 0.9rem;
+          font-weight:bold;
+          padding:10px 20px !important;
+          
+        }
+        .btn-red:hover {
+          color: #ffffffd4;          
+        }
+        .page-item.active .page-link {
+            z-index: 3;
+            color: #fff;
+            background-color: #71b7c0;
+            border-color: #71b7c0;
+        }
+
+        .page-link {
+            position: relative;
+            display: block;
+            padding: 0.5rem 0.75rem;
+            margin-right: -1px;
+            line-height: 1.25;
+            color: #3e3e3e;
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+        }
+
+        .evaluation {
+            width: 100%;
+            margin-top: 20px;
+            height: auto !important;
+            border-radius: 5px 5px 5px 5px;
+            background-color: white;
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .table .thead-dark th {
+            color: #fff;
+            background-color: #71b7c0;
+            border: 0;
+            /* border-color: #71b7c0; */
+        }
+
+        /* .evaluation table tbody tr td:first-child {
+            display: block !important;
+
+        } */
+
+        .evaluation table tbody tr td:first-child {
+            /* display: flex; */
+            align-items: start !important;
+            justify-content: start !important;
+            /* border-color: #71b7c0; */
+        }
+
+        .evaluation table tbody tr td:first-child span {
+            width: 100%;
+        }
+
+        .evaluation table tbody tr td {
+            text-align: start;
+            height: 100%;
+            border-left: 0 !important;
+        }
+
+        .badge {
+            padding: 5px;
+            font-size: 0.9rem;
+        }
     </style>
 @endsection
 
@@ -148,70 +245,121 @@
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content">
-        <div class="container">
-            <div class="search">
-                <div class="consulting">
-                    <span>
+        <div class="container-fluid mt-4">
+            <div class="search  d-flex justify-content-space-between  px-3" style="justify-content: space-between; border-radius:5px;">
+                <div class="d-flex align-items-center justify-content-center my-3 p-2" style="font-size:0.8rem;background:#dedede;border-radius:3px;">
+                  {{ __('site.consultations') }}
+                  <i class="fa-solid fa-angle-left mx-2"></i>
+                  {{ $tap }}
+                    {{-- <span>
                         <p>الاستشارات</p>
                         <p><i class="fa-solid fa-angle-left"></i></p>
-                        <p>الاستشارات جديدة</p>
-                    </span>
+                        <p>{{ $tap }}</p>
+                    </span> --}}
+                   
                 </div>
-{{--                 <div class="ser">
-                    <label for="search">البحث :</label>
-                    <input type="text">
-                    <label for="search" class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></label>
-                </div> --}}
+                {{-- <a href="{{ url('/users/consultation/faq') }}" class="bg-success my-2 d-flex align-items-center p-2" style="color:white;border-radius:4px">
+                  <i class="fa-solid fa-circle-plus mx-1"></i>
+                      {{ __('site.new consultation') }}
+                </a> --}}
+                
+                {{--             <div class="ser">
+              <label for="search">البحث :</label>
+              <input type="text">
+              <label for="search" class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></label>
+            </div> --}}
             </div>
 
 
-            @foreach ($userconsultations as $item)
-                <div class="evaluation">
+            @foreach ($userconsultations as $consultation)
+                <div class="evaluation shadow-sm">
                     <div class="header-evaluation">
-                        <input type="checkbox" name="" id="">
-                        <label>التقيم المؤسسي</label>
+                        {{-- <input type="checkbox" name="" id=""> --}}
+                        <label>{{ $consultation->category->name }}</label>
                     </div>
 
-                    <table>
-                        <thead>
+                    <table class="table">
+                        <thead class="thead-dark">
                             <tr>
-                                <td>اسم المستخدم</td>
-                                <td>الاستشارة</td>
-                                <td>حالة الاستشارة</td>
-                                <td>الاجراءات</td>
-                                <td>تاريخ التحديث</td>
+                                <th>{{ __('site.title') }}</th>
+                                <th>{{ __('site.status') }}</th>
+                                <th>{{ __('site.updated at') }}</th>
+                                <th>{{ __('site.actions') }}</th>
                             </tr>
                         </thead>
 
                         <tbody>
                             <tr>
-                                <td><span>{{ $item->user->name}}</span></td>
-                                <td>
-                                    <span> {{ $item->title }} </span>
+                                <td style="width: 40%">
+                                    <span>
+                                        {{ \Illuminate\Support\Str::limit($consultation->title, $limit = 200, $end = '...') }}
+                                        {{-- {{ $consultation->title }}  --}}
+                                    </span>
 
                                 </td>
-                                <td>
-                                    <span> {{ $item->status }} </span>
+                                <td style="width: 20%">
+                                    @if ($consultation->status == 'submitted')
+                                        <span
+                                            class="badge badge-pill badge-warning">{{ __('site.' . $consultation->status) }}</span>
+                                    @elseif($consultation->status == 'approved')
+                                        <span
+                                            class="badge badge-pill badge-success">{{ __('site.' . $consultation->status) }}</span>
+                                    @elseif($consultation->status == 'rejected')
+                                        <span
+                                            class="badge badge-pill badge-danger">{{ __('site.' . $consultation->status) }}</span>
+                                    @elseif($consultation->status == 'closed')
+                                        <span
+                                            class="badge badge-pill badge-success">{{ __('site.' . $consultation->status) }}</span>
+                                    @elseif($consultation->status == 'assigned')
+                                        <?php $last_reply = $consultation->replies()->orderBy('created_at','desc')->first()?>
+                                      @if($last_reply)
+                                        @if ($last_reply->owner == 1)
+                                      <span
+                                          class="badge badge-pill badge-warning">{{ __('site.waiting for consultant reply') }}
+                                      </span>
+                                      @elseif ($last_reply->owner == 0 && $last_reply->status == 'rejected')
+                                      <span
+                                          class="badge badge-pill badge-danger">{{ __('site.your last reply was rejected') }}
+                                      </span>
+                                      @elseif ($last_reply->owner == 0 && $last_reply->status == 'submitted')
+                                      <span
+                                          class="badge badge-pill badge-warning">{{ __('site.your last reply was sent') }}
+                                      </span>
+                                      @elseif ($last_reply->owner == 0 && $last_reply->status == 'approved')
+                                      <span
+                                          class="badge badge-pill badge-warning">{{ __('site.your last reply was approved') }}
+                                      </span>
+                                      @endif
+                                      @endif
+                                        
+                                    @endif
                                 </td>
-                                <td>
-                                    <div>
-                                        <form method="GET" action="{{ url('consultants/consultation/chat') }}/{{ $item->id }}">
-                                            <button style="background-color: #41B669">
-                                                فتح الاستشارة</button>
-                                        </form>
-                                        @if ($item->status == 'assigned')
-                                            <form method="GET"
-                                                action="{{ url('consultants/consultation/main/status/'. $item->id) }}">
-                                                <button>
-                                                    <i class="fa-solid fa-trash-can"></i>
-                                                    غلق الاستشارة
-                                                </button>
-                                        @endif
+                                
+                                <td style="width: 20%">{{ $consultation->updated_at }}</td>
 
-                                        </form>
-                                    </div>
+                                <td style="width: 20%">
+                                  <div>
+
+                                      <a href="{{ url('consultants/consultation/chat/'.$consultation->id) }}" class="btn btn-orange" style="padding:5px 10px !important">
+                                              {{ __('site.details') }}
+                                      </a>
+                                      @if ($tap ==  __('site.new consultations'))
+                                          <a href="{{ url('consultants/consultation/reject/' . $consultation->id) }}" class="btn btn-red" style="padding:5px 10px !important">
+                                                  {{ __('site.reject') }}
+                                          </a>
+
+                                      @endif
+
+                                      @if ($tap ==  __('site.assigned consultations'))
+                                          <a href="{{ url('consultants/consultation/close/' . $consultation->id) }}" class="btn btn-red" style="padding:5px 10px !important">
+                                                  {{ __('site.close') }}
+                                          </a>
+
+                                      @endif
+
+
+                                  </div>
                                 </td>
-                                <td>{{ $item->updated_at }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -225,8 +373,12 @@
 
             <div class="d-flex justify-content-center">
                 {{ $userconsultations->links() }}
+                
             </div>
 
+            <div class="new-evaluation">
+                
+            </div>
         </div>
     </div>
 

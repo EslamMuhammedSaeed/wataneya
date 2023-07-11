@@ -320,6 +320,15 @@
             .alert li{
                 list-style-type: none;
             }
+            .blue-bg .box a {
+                cursor: pointer;
+                font-size: 16px;
+                font-weight: 500;
+                padding: 10px 20px;
+                color: #333;
+                background-color: #fff;
+                border: none;
+            }
             
         </style>
     </head>
@@ -329,12 +338,15 @@
                 <div class="blue-bg">
                     <div class="box signin">
                         <h2>تمتلك حساب بالفعل ؟</h2>
-                        <button class="signin-btn">تسجيل الدخول</button>
+                        <a href="{{ route('login') }}" class="signin-btn">تسجيل الدخول</a>
                         @if ($errors->any())
+
                             <div class="alert alert-danger my-3 shadow-sm">
                                 <ul class="mb-0">
                                     @foreach ($errors->all() as $error)
-                                        <li>{{$error}}</li>
+                                        @if(!strpos($error, 'least'))
+                                            <li>{{$error}}</li>
+                                        @endif
                                     @endforeach
                                 </ul>
                             </div>                        
@@ -342,12 +354,14 @@
                     </div>
                     <div class="box signup">
                         <h2>لا تملك حساب ؟</h2>
-                        <button class="signup-btn">إنشاء حساب</button>
+                        <a href="{{ route('register') }}" class="signup-btn">إنشاء حساب</a>
                         @if ($errors->any())
                             <div class="alert alert-danger my-3 shadow-sm">
                                 <ul class="mb-0">
                                     @foreach ($errors->all() as $error)
-                                        <li>{{$error}}</li>
+                                        @if(!strpos($error, 'least'))
+                                            <li>{{$error}}</li>
+                                        @endif
                                     @endforeach
                                 </ul>
                             </div>                        

@@ -12,7 +12,7 @@
                         @endif
                     </div>
                     {{-- <div class="title">{{Voyager::setting('admin.title', 'VOYAGER')}}</div> --}}
-                    <div class="title" style="font-size: 1.3em">وطنيــــــــــــــــة</div>
+                    <div class="title" style="font-size: 1.3em">ســـــــــنـــــــــــــــــــــــــــد</div>
 
                 </a>
             </div><!-- .navbar-header -->

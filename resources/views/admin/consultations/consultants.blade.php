@@ -15,14 +15,19 @@
 
 
 @section('content')
+{{ App::setLocale('ar'); }}
+
     <div class="page-content browse container-fluid">
         @include('voyager::alerts')
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-bordered">
                     <div class="panel-body">
-                        <h3>{{ $consultation->title }}</h3>
-                        <h4>{{ $consultation->content }}</h4>
+                        <h4>{{ $consultation->title }}</h3>
+                        <pre>{!! $consultation->content !!}</pre>
+                        @if($consultation->attachment)
+                            <a href="{{ $consultation->attachment }}">{{ __('site.attachment')}}</a>
+                        @endif
                         @if ($isServerSide)
                             <form method="get" class="form-search">
                                 <div id="search-input">
