@@ -146,7 +146,7 @@ input.form-custom.error{
         @endforeach
     </div>    
     @endif --}}
-     <form method="post" action="{{route('users.organisation.store')}}" class="main-form was-validated px-5" enctype="multipart/form-data">
+     <form method="post" action="{{route('users.organisation.update')}}" class="main-form was-validated px-5" enctype="multipart/form-data">
         @method('put')
         @csrf
          <div class="form-container container bg-white p-3" style="border-radius:15px; ">
@@ -156,11 +156,11 @@ input.form-custom.error{
                     <label for="imageUpload"></label>
                 </div>
                 <div class="avatar-preview">
-                    <div id="imagePreview" style="background-image: url({{asset('img/camera.jpg')}});">
+                    <div id="imagePreview" style="background-image: url({{ filter_var(Auth::user()->avatar, FILTER_VALIDATE_URL) ? Auth::user()->avatar : Voyager::image( Auth::user()->avatar ) }});">
                     </div>
                 </div>
                 <div class="text-center mt-2">
-                    <label class="ml-3" for="">أﺿﻒ صورة</label>
+                    {{-- <label class="ml-3" for="">أﺿﻒ صورة</label> --}}
                     <small class="ml-3">
                         @error('image')
                              <div class="alert alert-danger">{{ $message }}</div>
@@ -196,7 +196,7 @@ input.form-custom.error{
                         <div class="row">
                             <div class="mb-3 col-md-4">
                             
-                                <label  class="org-name">اﺳﻢ الجهة<small class="text-danger mr-2">'مطلوب'</small></label>
+                                <label  class="org-name">اﺳﻢ الجهة<small class="text-danger mx-2">'{{__( 'lang.field_required' )}}'</small></label>
                                 <input type="text" class="form-custom @error('name') error @enderror"  name="name" value="{{$organisation->name}}" placeholder="ادخل اسم الجهة" >
                                 <small>
                                     @error('name')
@@ -206,7 +206,7 @@ input.form-custom.error{
                             </div>
                             <div class="mb-3 col-md-4">
                             
-                                <label  class="org-name">مجال العمل<small class="text-danger mr-2">'مطلوب'</small></label>
+                                <label  class="org-name">مجال العمل<small class="text-danger mx-2">'{{__( 'lang.field_required' )}}'</small></label>
                                 <input type="text" class="form-custom @error('field') error @enderror"  name="field" value="{{$organisation->field}}" placeholder="ادخل مجال العمل" >
                                 <small>
                                     @error('field')
@@ -216,7 +216,7 @@ input.form-custom.error{
                             </div>
                             <div class="mb-3 col-md-4">
                             
-                                <label  class="org-name">نوع الجهة<small class="text-danger mr-2">'مطلوب'</small></label>
+                                <label  class="org-name">نوع الجهة<small class="text-danger mx-2">'{{__( 'lang.field_required' )}}'</small></label>
                                 {{-- <input type="text" class="form-custom @error('category') error @enderror"  name="category" value="{{$organisation->category}}"> --}}
                                 <select class="form-custom @error('category') error @enderror" id="category" name="category" value="{{$organisation->category}}">
                                     <option>جمعية</option>
@@ -234,7 +234,7 @@ input.form-custom.error{
                         </div>
                         <div class="row">
                             <div class="col-md-4 mb-3">
-                                <label  class="form-label">سنة الإشهار<small class="text-danger mr-2">'مطلوب'</small></label>
+                                <label  class="form-label">سنة الإشهار<small class="text-danger mx-2">'{{__( 'lang.field_required' )}}'</small></label>
                                 <input type="year" class="form-custom @error('year') error @enderror" name="year" value="{{$organisation->year}}" >
                                 <small>
                                     @error('year')
@@ -243,7 +243,7 @@ input.form-custom.error{
                                 </small>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label  class="form-label">الموقع الإلكترونى<small class="text-danger mr-2">'مطلوب'</small></label>
+                                <label  class="form-label">الموقع الإلكترونى<small class="text-danger mx-2">'{{__( 'lang.field_required' )}}'</small></label>
                                 <input type="text" class="form-custom @error('website') error @enderror" name="website" value="{{$organisation->website}}" >
                                 <small>
                                     @error('website')
@@ -252,7 +252,7 @@ input.form-custom.error{
                                 </small>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label  class="form-label">صفحة الفيس بوك<small class="text-danger mr-2">'مطلوب'</small></label>
+                                <label  class="form-label">صفحة الفيس بوك<small class="text-danger mx-2">'{{__( 'lang.field_required' )}}'</small></label>
                                 <input type="text" class="form-custom @error('facebook') error @enderror" name="facebook" value="{{$organisation->facebook}}" >
                                 <small>
                                     @error('facebook')
@@ -263,7 +263,7 @@ input.form-custom.error{
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label  class="form-label">رقم التليفون<small class="text-danger mr-2">'مطلوب'</small></label>
+                                <label  class="form-label">رقم التليفون<small class="text-danger mx-2">'{{__( 'lang.field_required' )}}'</small></label>
                                 <input type="text" class="form-custom @error('phone') error @enderror" name="phone" value="{{$organisation->phone}}" >
                                 <small>
                                     @error('phone')
@@ -272,7 +272,7 @@ input.form-custom.error{
                                 </small>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label  class="form-label">البريد الإلكترونى<small class="text-danger mr-2">'مطلوب'</small></label>
+                                <label  class="form-label">البريد الإلكترونى<small class="text-danger mx-2">'{{__( 'lang.field_required' )}}'</small></label>
                                 <input type="email" class="form-custom @error('email') error @enderror" name="email" value="{{$organisation->email}}" >
                                 <small>
                                     @error('email')
@@ -285,7 +285,7 @@ input.form-custom.error{
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label  class="form-label">الدولة<small class="text-danger mr-2">'مطلوب'</small></label>
+                                <label  class="form-label">الدولة<small class="text-danger mx-2">'{{__( 'lang.field_required' )}}'</small></label>
                                 <input type="text" class="form-custom @error('country') error @enderror" name="country" value="{{$organisation->country}}" >
                                 <small>
                                     @error('country')
@@ -294,7 +294,7 @@ input.form-custom.error{
                                 </small>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label  class="form-label">المحافظة<small class="text-danger mr-2">'مطلوب'</small></label>
+                                <label  class="form-label">المحافظة<small class="text-danger mx-2">'{{__( 'lang.field_required' )}}'</small></label>
                                 <input type="text" class="form-custom @error('governorate') error @enderror" name="governorate" value="{{$organisation->governorate}}" >
                                 <small>
                                     @error('governorate')
@@ -307,7 +307,7 @@ input.form-custom.error{
 
                         <div class="row">
                             <div class="col-md-12 mb-3">
-                                <label  class="form-label">العنوان<small class="text-danger mr-2">'مطلوب'</small></label>
+                                <label  class="form-label">العنوان<small class="text-danger mx-2">'{{__( 'lang.field_required' )}}'</small></label>
                                 <input type="text" class="form-custom @error('address') error @enderror" name="address" value="{{$organisation->address}}" >
                                 <small>
                                     @error('address')
@@ -321,7 +321,7 @@ input.form-custom.error{
 
                         <div class="row">
                             <div class="col-md-4 mb-3">
-                                <label  class="form-label">عدد العاملين<small class="text-danger mr-2">'مطلوب'</small></label>
+                                <label  class="form-label">عدد العاملين<small class="text-danger mx-2">'{{__( 'lang.field_required' )}}'</small></label>
                                 <input type="number" class="form-custom @error('employees_no') error @enderror" name="employees_no" value="{{$organisation->employees_no}}" >
                                 <small>
                                     @error('employees_no')
@@ -330,7 +330,7 @@ input.form-custom.error{
                                 </small>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label  class="form-label">النطاق الجغرافى<small class="text-danger mr-2">'مطلوب'</small></label>
+                                <label  class="form-label">النطاق الجغرافى<small class="text-danger mx-2">'{{__( 'lang.field_required' )}}'</small></label>
                                 <input type="text" class="form-custom @error('geo') error @enderror" name="geo" value="{{$organisation->geo}}" >
                                 <small>
                                     @error('geo')
@@ -339,7 +339,7 @@ input.form-custom.error{
                                 </small>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label  class="form-label">أفضل طريقة للتواصل<small class="text-danger mr-2">'مطلوب'</small></label>
+                                <label  class="form-label">أفضل طريقة للتواصل<small class="text-danger mx-2">'{{__( 'lang.field_required' )}}'</small></label>
                                 <input type="text" class="form-custom @error('communication_way') error @enderror" name="communication_way" value="{{$organisation->communication_way}}" >
                                 <small>
                                     @error('communication_way')
@@ -352,7 +352,7 @@ input.form-custom.error{
 
                         <div class="row">
                             <div class="col-md-4 mb-3">
-                                <label  class="form-label">اسم مسئول الاتصال<small class="text-danger mr-2">'مطلوب'</small></label>
+                                <label  class="form-label">اسم مسئول الاتصال<small class="text-danger mx-2">'{{__( 'lang.field_required' )}}'</small></label>
                                 <input type="text" class="form-custom @error('point_of_contact_name') error @enderror" name="point_of_contact_name" value="{{$organisation->point_of_contact_name}}" >
                                 <small>
                                     @error('point_of_contact_name')
@@ -361,7 +361,7 @@ input.form-custom.error{
                                 </small>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label  class="form-label">وظيفة مسئول الاتصال<small class="text-danger mr-2">'مطلوب'</small></label>
+                                <label  class="form-label">وظيفة مسئول الاتصال<small class="text-danger mx-2">'{{__( 'lang.field_required' )}}'</small></label>
                                 <input type="text" class="form-custom @error('point_of_contact_position') error @enderror" name="point_of_contact_position" value="{{$organisation->point_of_contact_position}}" >
                                 <small>
                                     @error('point_of_contact_position')
@@ -370,7 +370,7 @@ input.form-custom.error{
                                 </small>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label  class="form-label">البريد الإلكترونى لمسئول الاتصال<small class="text-danger mr-2">'مطلوب'</small></label>
+                                <label  class="form-label">البريد الإلكترونى لمسئول الاتصال<small class="text-danger mx-2">'{{__( 'lang.field_required' )}}'</small></label>
                                 <input type="email" class="form-custom @error('point_of_contact_email') error @enderror" name="point_of_contact_email" value="{{$organisation->point_of_contact_email}}" >
                                 <small>
                                     @error('point_of_contact_email')
@@ -379,7 +379,7 @@ input.form-custom.error{
                                 </small>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label  class="form-label">هاتف مسئول الاتصال<small class="text-danger mr-2">'مطلوب'</small></label>
+                                <label  class="form-label">هاتف مسئول الاتصال<small class="text-danger mx-2">'{{__( 'lang.field_required' )}}'</small></label>
                                 <input type="text" class="form-custom @error('point_of_contact_phone') error @enderror" name="point_of_contact_phone" value="{{$organisation->point_of_contact_phone}}" >
                                 <small>
                                     @error('point_of_contact_phone')
@@ -393,7 +393,7 @@ input.form-custom.error{
                         <div class="row">
                             
                             <div class="col-md-4 mb-3">
-                                <label  class="form-label">كيف عرفت عن وطنية؟<small class="text-danger mr-2">'مطلوب'</small></label>
+                                <label  class="form-label">كيف عرفت عن وطنية؟<small class="text-danger mx-2">'{{__( 'lang.field_required' )}}'</small></label>
                                 <input type="text" class="form-custom @error('about_wataneya') error @enderror" name="about_wataneya" value="{{$organisation->about_wataneya}}" >
                                 <small>
                                     @error('about_wataneya')
@@ -411,7 +411,7 @@ input.form-custom.error{
              
              
              <div class="button-holder mb-5 mt-4">
-                <input type="submit" class="btn btn-primary btn-block" value="حفظ">
+                <input type="submit" class="btn btn-primary btn-block" value="{{__('lang.save')}}">
              </div>
          </div>
      </form>

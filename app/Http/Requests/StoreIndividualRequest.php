@@ -26,15 +26,15 @@ class StoreIndividualRequest extends FormRequest
         return [
             //
                 //
-                'name'=>'required|max:255',
-                'job'=>'required|max:255',
-                'employer'=>'required|max:255',
+                'name'=>'required|string|max:255',
+                'job'=>'required|string|max:255',
+                'employer'=>'required|string|max:255',
             
-                'phone'=>'required',
+                'phone'=>'required|digits_between:7,11',
                
-                'country'=>'required|max:255',
+                'country'=>'required|string|max:255',
                 
-                'about_wataneya'=>'required|max:255',
+                'about_wataneya'=>'required|string|max:255',
         ];
     }
 }

@@ -44,8 +44,8 @@ class ConsultationRepliedByConsultant extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-        ->subject('Consultation Replied')
-        ->line('The Consultation: "'.$this->consultation->title.'" has been replied and the reply needs your approval');
+        ->subject('تم الرد على استشارة')
+        ->line('تم الرد على الاستشارة: "'.$this->consultation->title.'" و الرد ينتظر موافقتك.');
     }
 
     /**

@@ -62,7 +62,7 @@
                         <i class="fa fa-linkedin"></i>
                     </a>
                 </li>
-                <li class="phone-link"><a href="https://wataneya.org/ar/contact-us">{{ __('lang.contact_us') }}</a></li>
+                <li class="phone-link"><a href="{{ route('contact_us') }}">{{ __('lang.contact_us') }}</a></li>
             </ul>
         </div>
 

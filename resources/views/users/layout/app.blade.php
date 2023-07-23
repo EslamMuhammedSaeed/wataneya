@@ -50,6 +50,10 @@
             .alert-dismissible .close{
                     right: auto !important;
             }
+            .dropdown-menu {
+                /* left: 0 !important; */
+                left: auto !important;
+            }
            
             
         </style> 
@@ -118,7 +122,7 @@
           font-weight: bold;
         }
         .dropdown-menu {
-            left: 0 !important;
+            /* left: 0 !important; */
             right: auto !important;
         }
         [dir="rtl"] .voyager .navbar .navbar-nav .dropdown-menu, [dir="rtl"] .voyager .navbar.navbar-default .navbar-nav .dropdown-menu {
@@ -216,11 +220,19 @@
       <ul class="navbar-nav nav-end-items" style="margin: 0 20px">
 
 
+        @php
+    
+              $lang = app()->getLocale() == 'ar' ? 'EN' : 'العربية';
+              $language = app()->getLocale() == 'ar' ? 'en' : 'ar';
+              $locale = app()->getLocale();
+              
+        @endphp
         <li class="nav-item dropdown">
-          <a class="nav-link" data-toggle="dropdown" href="#">
-              <i class="far fa-flag "></i>
+          <a class="nav-link text-bold"  href="{{ LaravelLocalization::getLocalizedURL($language, null, [],true) }}">
+              {{ $lang }}
           </a>
-          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          
+          {{-- <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
               @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
 
                   <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [],true) }}">
@@ -228,7 +240,7 @@
                   </a>
                   
               @endforeach
-          </div>
+          </div> --}}
         </li> 
 
         <!-- Notifications Dropdown Menu -->
@@ -237,11 +249,11 @@
             <i class="far fa-bell" style="font-size: 20px"></i>
             {{-- <span class="badge badge-warning navbar-badge" style="background-color: #79d700;color:white;font-size:11px">15</span> --}}
           </a>
-          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          {{-- <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
 
             <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-          </div>
+          </div> --}}
         </li>
         {{-- <li class="nav-item">
           <a class="nav-link"  href="#" role="button">
@@ -255,11 +267,11 @@
                 {{-- <span class="user-name mx-2" style="color:rgb(133, 133, 133);">{{Auth::user()->name}}</span> --}}
               </a>
               <div class="dropdown-menu drop2 text-center">
-                <a class="dropdown-item" href="#" style="font-size: 15px">{{Auth::user()->name}}</a>
+                <a class="dropdown-item" href="{{route('users.edit')  }}" style="font-size: 15px">{{Auth::user()->name}}</a>
                 <form action="/logout" method="post">
                   @csrf
                   <div class="input-logout text-white " id="navbardrop"  >
-                    <input type="submit" value="تسجيل الخروج" style="color :rgb(133, 133, 133) ; border:0;font-size:15px;width:100%">
+                    <input type="submit" value="{{ __('lang.logout') }}" style="color :rgb(133, 133, 133) ; border:0;font-size:15px;width:100%">
 
                   </div>
                 </form>

@@ -27,7 +27,7 @@ class StoreOrphanageRequest extends FormRequest
             //
             // 'user_id'=>'unique:orphanages',
             'name'=>'required|max:255',
-            'mobile'=>'required|max:255',
+            'phone'=>'required|digits_between:7,11',
             'country'=>'required|max:255',
             'governorate'=>'required',
             'license_number'=>'required',

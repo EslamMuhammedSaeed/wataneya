@@ -1186,13 +1186,15 @@
                     </div>
                 </div>
                 <div class="container change">
-                    <div class="text"><img src="{{ asset('img/611bcb73e85fe.svg') }}" alt="شكل هاشتاج">
-                        <h1 class="title-HasTag">#{{ $campaigns[0]->$title }}</h1>
-                        <p class="p-HasTag">{{ $campaigns[0]->$description }}</p>
-                        <a class="a-HasTag" href="{{ $campaigns[0]->link }}">{{ __('lang.more') }}</a>
-                    </div><img class="img-HasTag" src="{{ asset('storage/' . $campaigns[0]->image) }}" alt="هاشتاج">
-                    <div class="img-HasTag2"></div>
-                    <div class="img-HasTag3"></div>
+                    @if(isset($campaigns[0]))
+                        <div class="text"><img src="{{ asset('img/611bcb73e85fe.svg') }}" alt="شكل هاشتاج">
+                            <h1 class="title-HasTag">#{{ $campaigns[0]->$title }}</h1>
+                            <p class="p-HasTag">{{ $campaigns[0]->$description }}</p>
+                            <a class="a-HasTag" href="{{ $campaigns[0]->link }}">{{ __('lang.more') }}</a>
+                        </div><img class="img-HasTag" src="{{ asset('storage/' . $campaigns[0]->image) }}" alt="هاشتاج">
+                        <div class="img-HasTag2"></div>
+                        <div class="img-HasTag3"></div>
+                    @endif
                 </div>
             </section>
 

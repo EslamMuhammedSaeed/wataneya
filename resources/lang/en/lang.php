@@ -13,7 +13,7 @@ return [
     'Knowledge creation' => 'Knowledge creation',
     // 'slogan' => 'A Quality of Life for Every Orphan',
     'slogan' => 'For Every Orphan',
-
+    'field_required' => 'required',
     'fullName' => 'Full Name',
     'organizationOrCompany' => 'organization/Company',
     'verifyYourEmail'=>'We need to confirm your email address. To complete the subscription process, please click the link in the email we just sent you.',

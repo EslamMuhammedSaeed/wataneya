@@ -6,7 +6,8 @@
 @if ($level === 'error')
 # @lang('Whoops!')
 @else
-# @lang('site.Hello!')
+{{-- # @lang('site.Hello!') --}}
+# مرحبا
 @endif
 @endif
 
@@ -43,8 +44,9 @@
 @if (! empty($salutation))
 {{ $salutation }}
 @else
-@lang('site.Regards'),<br>
-@lang('site.'.config('app.name'))
+{{-- @lang('site.Regards'),<br> --}}
+{{-- @lang('site.'.config('app.name')) --}}
+وطنية
 @endif
 
 {{-- Subcopy --}}

@@ -146,7 +146,7 @@ input.form-custom.error{
         @endforeach
     </div>    
     @endif --}}
-     <form method="post" action="{{route('users.orphanage.store')}}" class="main-form was-validated px-5" enctype="multipart/form-data">
+     <form method="post" action="{{route('users.orphanage.update')}}" class="main-form was-validated px-5" enctype="multipart/form-data">
         @csrf
         <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}">
          <div class="form-container container bg-white p-3" style="border-radius:15px; ">
@@ -156,11 +156,11 @@ input.form-custom.error{
                     <label for="imageUpload"></label>
                 </div>
                 <div class="avatar-preview">
-                    <div id="imagePreview" style="background-image: url({{asset('img/camera.jpg')}});">
+                    <div id="imagePreview" style="background-image: url({{ filter_var(Auth::user()->avatar, FILTER_VALIDATE_URL) ? Auth::user()->avatar : Voyager::image( Auth::user()->avatar ) }});">
                     </div>
                 </div>
                 <div class="text-center mt-2">
-                    <label class="ml-3" for="">أﺿﻒ صورة</label>
+                    {{-- <label class="ml-3" for="">أﺿﻒ صورة</label> --}}
                     <small class="ml-3">
                         @error('image')
                              <div class="alert alert-danger">{{ $message }}</div>
@@ -197,7 +197,7 @@ input.form-custom.error{
                         <div class="row">
                             <div class="mb-3 col-md-4">
                             
-                                <label  class="org-name">اﺳﻢ الجمعية<small class="text-danger mr-2">'مطلوب'</small></label>
+                                <label  class="org-name">اﺳﻢ الجمعية<small class="text-danger mx-2">'{{__( 'lang.field_required' )}}'</small></label>
                                 <input type="text" class="form-custom @error('name') error @enderror"  name="name" value="{{$orphanage->name}}">
                                 <small>
                                     @error('name')
@@ -207,7 +207,7 @@ input.form-custom.error{
                             </div>
                             <div class="mb-3 col-md-4">
                             
-                                <label  class="org-name">رقم الترخيص<small class="text-danger mr-2">'مطلوب'</small></label>
+                                <label  class="org-name">رقم الترخيص<small class="text-danger mx-2">'{{__( 'lang.field_required' )}}'</small></label>
                                 <input type="text" class="form-custom @error('license_number') error @enderror"  name="license_number" value="{{$orphanage->license_number}}">
                                 <small>
                                     @error('license_number')
@@ -218,7 +218,7 @@ input.form-custom.error{
 
                             <div class="mb-3 col-md-4">
                             
-                                <label  class="org-name">رقم الموبايل<small class="text-danger mr-2">'مطلوب'</small></label>
+                                <label  class="org-name">رقم الموبايل<small class="text-danger mx-2">'{{__( 'lang.field_required' )}}'</small></label>
                                 <input type="text" class="form-custom @error('mobile') error @enderror"  name="mobile" value="{{$orphanage->mobile}}">
                                 <small>
                                     @error('mobile')
@@ -230,7 +230,7 @@ input.form-custom.error{
                         </div>
                         <div class="row">
                             <div class="col-md-4 mb-3">
-                                <label  class="form-label">الدولة<small class="text-danger mr-2">'مطلوب'</small></label>
+                                <label  class="form-label">الدولة<small class="text-danger mx-2">'{{__( 'lang.field_required' )}}'</small></label>
                                 <input type="text" class="form-custom @error('country') error @enderror" name="country" value="{{$orphanage->country}}" >
                                 <small>
                                     @error('country')
@@ -239,7 +239,7 @@ input.form-custom.error{
                                 </small>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label  class="form-label">المحافظة<small class="text-danger mr-2">'مطلوب'</small></label>
+                                <label  class="form-label">المحافظة<small class="text-danger mx-2">'{{__( 'lang.field_required' )}}'</small></label>
                                 <input type="text" class="form-custom @error('governorate') error @enderror" name="governorate" value="{{$orphanage->governorate}}" >
                                 <small>
                                     @error('governorate')
@@ -262,7 +262,7 @@ input.form-custom.error{
              
              
              {{-- <div class="button-holder mb-5 mt-4">
-                <input type="submit" class="btn btn-primary btn-block" value="حفظ">
+                <input type="submit" class="btn btn-primary btn-block" value="{{__('lang.save')}}">
              </div> --}}
          </div>
 
@@ -465,7 +465,7 @@ input.form-custom.error{
              
              
              {{-- <div class="button-holder mb-5 mt-4">
-                <input type="submit" class="btn btn-primary btn-block" value="حفظ">
+                <input type="submit" class="btn btn-primary btn-block" value="{{__('lang.save')}}">
              </div> --}}
          </div>
 
@@ -529,7 +529,7 @@ input.form-custom.error{
              
              
              {{-- <div class="button-holder mb-5 mt-4">
-                <input type="submit" class="btn btn-primary btn-block" value="حفظ">
+                <input type="submit" class="btn btn-primary btn-block" value="{{__('lang.save')}}">
              </div> --}}
         </div>
 
@@ -695,7 +695,7 @@ input.form-custom.error{
              
              
              <div class="button-holder mb-5 mt-4">
-                <input type="submit" class="btn btn-primary btn-block" value="حفظ">
+                <input type="submit" class="btn btn-primary btn-block" value="{{__('lang.save')}}">
              </div>
         </div>
      </form>

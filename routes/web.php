@@ -262,6 +262,7 @@ Route::group([
             return redirect()->route('dashboard');
         })->name('categorize');
         Route::get('/edit',function(){
+            
             if(Auth::user()->category == 'orphanage'){
                 return redirect()->route('users.orphanage.edit');
             }else if(Auth::user()->category == 'individual'){

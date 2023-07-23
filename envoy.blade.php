@@ -1,7 +1,7 @@
 @servers(['main' => ['sanad9637@sanadorphans.org']])
 
 @setup
-    $repository = 'git@gitlab.com:eslam.muhammed.saeed/cayesh_main.git';
+    $repository = 'git@github.com:EslamMuhammedSaeed/wataneya.git';
     $releases_dir = 'releases';
     $release = date('YmdHis');
     $new_release_dir = $releases_dir .'/'. $release;
@@ -24,24 +24,28 @@
 
 @task('run_composer')
     echo "Starting deployment ({{ $release }})"
+    echo 'Linking .env file'
+    ln -nfs ~/.env ~/{{ $new_release_dir }}
     cd {{ $new_release_dir }}
-    composer install --ignore-platform-reqs --prefer-dist -q -o
+    echo "Starting composer"
+    composer install
+    echo "finishing composer"
 @endtask
 
 @task('update_symlinks')
-    {{-- echo "Linking storage directory"
+    echo "Linking storage directory"
     rm -rf {{ $new_release_dir }}/storage
-    ln -nfs {{ $app_dir }}/storage {{ $new_release_dir }}/storage
+    ln -nfs ~/storage {{ $new_release_dir }}/storage
 
-    echo 'Linking .env file'
-    ln -nfs {{ $app_dir }}/.env {{ $new_release_dir }}/.env
 
     echo 'Linking current release'
-    ln -nfs {{ $new_release_dir }} {{ $app_dir }}/current
+    ln -nfs {{ $new_release_dir }} ~/current
+    echo 'going to current'
+    cd ~/current
 
-    cd {{ $app_dir }}/current
+    ln -nfs ~/{{ $new_release_dir }}/public/assets ~/public_html/assets
+    ln -nfs ~/{{ $new_release_dir }}/public/img ~/public_html/img
+    ln -nfs ~/{{ $new_release_dir }}/public/css ~/public_html/css
     php artisan storage:link
-    php artisan migrate --}}
-
-
+    php artisan migrate
 @endtask

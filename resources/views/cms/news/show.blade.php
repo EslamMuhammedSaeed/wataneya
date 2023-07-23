@@ -22,6 +22,9 @@
 
 @section('content')
     <style>
+        .slider-banner-image{
+            opacity: 1 !important;
+        }
         .slick-slide {
             float: left !important;
         }
@@ -101,8 +104,8 @@
                                 @if ($images)
                                     @php $images = array_slice($images, 0, 3); @endphp
                                     @php $main_image = $images[0]; @endphp
-                                    <div class="slider-banner-image">
-                                        <img src="@if (!filter_var($main_image, FILTER_VALIDATE_URL)) {{ Voyager::image($main_image) }}@else{{ $main_image }} @endif" alt="{{ $news_item->title }}">
+                                    <div class="slider-banner-image" style="opacity: 1">
+                                        <img id="main-image" src="@if (!filter_var($main_image, FILTER_VALIDATE_URL)) {{ Voyager::image($main_image) }}@else{{ $main_image }} @endif" alt="{{ $news_item->title }}">
                                     </div>
                                     {{-- @forelse($images as $image)
                                         <div class="slider-banner-image">
@@ -123,7 +126,7 @@
                                 @forelse($images as $image)
                                     <div class="thumbnail-image">
                                         <div class="thumbImg">
-                                            <img width="100px" src="@if (!filter_var($image, FILTER_VALIDATE_URL)) {{ Voyager::image($image) }}@else{{ $image }} @endif" alt="{{ $news_item->title }}">
+                                            <img width="100px" src="@if (!filter_var($image, FILTER_VALIDATE_URL)) {{ Voyager::image($image) }}@else{{ $image }} @endif" alt="{{ $news_item->title }}" onclick="changeImage('{{ Voyager::image($image) }}')">
                                         </div>
                                     </div>
                                 @empty
@@ -149,4 +152,10 @@
             </div>
         </div>
     </div>
+    <script>
+        function changeImage(image_src){
+            $('#main-image').attr("src",image_src);
+            $('#main-image').parent().css("opacity", "1 !important")
+        }
+    </script>
 @endsection

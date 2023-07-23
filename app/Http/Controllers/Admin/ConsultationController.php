@@ -7,6 +7,7 @@ use App\Models\Consultant;
 use App\Models\Consultation;
 use App\Models\ConsultationCategory;
 use App\Models\ConsultationReply;
+use App\Notifications\ConsultationAssigned;
 use App\Notifications\ConsultationReplied;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -17,6 +18,7 @@ use TCG\Voyager\Http\Controllers\Traits\BreadRelationshipParser;
 use Exception;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Redirect;
 use TCG\Voyager\Database\Schema\SchemaManager;
 use TCG\Voyager\Events\BreadDataAdded;
@@ -856,6 +858,7 @@ class ConsultationController extends \TCG\Voyager\Http\Controllers\VoyagerBaseCo
     }
 
     public function assignConsultant(Consultation $consultation,$consultants_id){
+        // dd('here');
         $consultant = Consultant::find($consultants_id);
         if($consultation->status == 'rejected'){
             $rejected = 1;
@@ -876,9 +879,11 @@ class ConsultationController extends \TCG\Voyager\Http\Controllers\VoyagerBaseCo
         ]);
 
         if($rejected == 1){
+            $consultant->user->notify(new ConsultationAssigned($consultation));
             return redirect()->route('admin.consultations.rejected')->with(['status'=>'تم التعيين']);
 
         }
+        $consultant->user->notify(new ConsultationAssigned($consultation));
         
         return redirect()->route('admin.consultations.new')->with(['status'=>'تم التعيين']);
         

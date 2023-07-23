@@ -14,6 +14,7 @@ use App\Models\Consultation;
 use App\Models\ConsultationCategory;
 use App\Models\CommonQuestion;
 use App\Models\ConsultationReply;
+use App\Notifications\ConsultationRepliedByUser;
 use Illuminate\Support\Facades\DB;
 use TCG\Voyager\Events\BreadDataDeleted;
 use TCG\Voyager\Facades\Voyager;
@@ -69,6 +70,7 @@ class RepliesController extends Controller
             'status' =>'approved',
             'attachment' => $saved_path,
         ]);
+        $consultation->consultant->user->notify(new ConsultationRepliedByUser($consultation));
 
         return redirect()->back()->with('msg', __('site.sent successfully'));
         //$consultationid= Consultation::get()->id;

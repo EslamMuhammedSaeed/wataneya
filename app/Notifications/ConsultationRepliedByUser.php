@@ -7,20 +7,20 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class ConsultationRejectedByConsultant extends Notification
+class ConsultationRepliedByUser extends Notification
 {
     use Queueable;
-    public $consultation;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
+    public $consultation;
     public function __construct($consultation)
     {
         //
         $this->consultation=$consultation;
-
     }
 
     /**
@@ -43,8 +43,8 @@ class ConsultationRejectedByConsultant extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-        ->subject('تم رفض استشارة')
-        ->line('تم رفض الاستشارة: "'.$this->consultation->title.'" بواسطة المستشار.');
+            ->subject('تم الرد على استشارة')
+            ->line('تم الرد على الاستشارة: "'.$this->consultation->title);
     }
 
     /**

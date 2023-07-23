@@ -11,6 +11,7 @@ return [
     'Consultation' => 'الاستشارات الفنية',
     'Learning and development' => 'برامج التعلم والتطوير',
     'Knowledge creation' => 'الإنتاج المعرفي',
+    'field_required' => 'مطلوب',
     // 'slogan' => 'حيـــــاة كريمـــــة لكــــل يتيـــــم',
     'slogan' => 'لكــــل يتيـــــم',
     'fullName' => 'الاسم بالكامل',

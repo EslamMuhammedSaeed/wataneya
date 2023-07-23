@@ -168,7 +168,7 @@ input.form-custom.error{
                     </div>
                 </div>
                 <div class="text-center mt-2">
-                    <label class="ml-3" for="">أﺿﻒ صورة</label>
+                    {{-- <label class="ml-3" for="">أﺿﻒ صورة</label> --}}
                     <small class="ml-3">
                         @error('image')
                              <div class="alert alert-danger">{{ $message }}</div>
@@ -204,7 +204,7 @@ input.form-custom.error{
                         <div class="row">
                             <div class="mb-3 col-md-4">
                             
-                                <label  class="org-name">الاسم<small class="text-danger mr-2">'مطلوب'</small></label>
+                                <label  class="org-name">الاسم<small class="text-danger mx-2">'{{__( 'lang.field_required' )}}'</small></label>
                                 <input type="text" class="form-custom @error('name') error @enderror"  name="name" value="{{old('name')}}" >
                                 <small>
                                     @error('name')
@@ -214,7 +214,7 @@ input.form-custom.error{
                             </div>
                             <div class="mb-3 col-md-4">
                             
-                                <label  class="org-name"> المسمى الوظيفى<small class="text-danger mr-2">'مطلوب'</small></label>
+                                <label  class="org-name"> المسمى الوظيفى<small class="text-danger mx-2">'{{__( 'lang.field_required' )}}'</small></label>
                                 <input type="text" class="form-custom @error('job') error @enderror"  name="job" value="{{old('job')}}" >
                                 <small>
                                     @error('job')
@@ -224,7 +224,7 @@ input.form-custom.error{
                             </div>
                             <div class="mb-3 col-md-4">
                             
-                                <label  class="org-name">جهة العمل<small class="text-danger mr-2">'مطلوب'</small></label>
+                                <label  class="org-name">جهة العمل<small class="text-danger mx-2">'{{__( 'lang.field_required' )}}'</small></label>
                                 <input type="text" class="form-custom @error('employer') error @enderror"  name="employer" value="{{old('employer')}}">
                                 <small>
                                     @error('employer')
@@ -237,7 +237,7 @@ input.form-custom.error{
                         
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label  class="form-label">رقم التليفون<small class="text-danger mr-2">'مطلوب'</small></label>
+                                <label  class="form-label">رقم التليفون<small class="text-danger mx-2">'{{__( 'lang.field_required' )}}'</small></label>
                                 <input type="text" class="form-custom @error('phone') error @enderror" name="phone" value="{{old('phone')}}" >
                                 <small>
                                     @error('phone')
@@ -246,7 +246,7 @@ input.form-custom.error{
                                 </small>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label  class="form-label">الدولة<small class="text-danger mr-2">'مطلوب'</small></label>
+                                <label  class="form-label">الدولة<small class="text-danger mx-2">'{{__( 'lang.field_required' )}}'</small></label>
                                 <input type="text" class="form-custom @error('country') error @enderror" name="country" value="{{old('country')}}" >
                                 <small>
                                     @error('country')
@@ -264,7 +264,7 @@ input.form-custom.error{
                         <div class="row">
                             
                             <div class="col-md-4 mb-3">
-                                <label  class="form-label">كيف عرفت عن وطنية؟<small class="text-danger mr-2">'مطلوب'</small></label>
+                                <label  class="form-label">كيف عرفت عن وطنية؟<small class="text-danger mx-2">'{{__( 'lang.field_required' )}}'</small></label>
                                 <input type="text" class="form-custom @error('about_wataneya') error @enderror" name="about_wataneya" value="{{old('about_wataneya')}}" >
                                 <small>
                                     @error('about_wataneya')
@@ -282,7 +282,7 @@ input.form-custom.error{
              
              
              <div class="button-holder mb-5 mt-4">
-                <input type="submit" class="btn btn-primary btn-block" value="حفظ">
+                <input type="submit" class="btn btn-primary btn-block" value="{{__('lang.save')}}">
              </div>
          </div>
      </form>
